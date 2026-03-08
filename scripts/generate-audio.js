@@ -28,13 +28,17 @@ const SPEED = 1.0;
 const OUTPUT_DIR = path.join(__dirname, "../audio");
 // ────────────────────────────────────────────────────────────────────────────
 
-// Load chapters data (strip the JS wrapper to get JSON)
+// Load chapters data by executing the JS file in a sandbox
 function loadChapters() {
   const raw = fs.readFileSync(path.join(__dirname, "../data/chapters.js"), "utf8");
-  // Extract the array from CHAPTERS_DATA = [...]
-  const match = raw.match(/const CHAPTERS_DATA = (\[[\s\S]*?\]);\s*\/\/ Vocab/);
-  if (!match) throw new Error("Could not parse chapters.js — make sure CHAPTERS_DATA array is present");
-  return JSON.parse(match[1]);
+  const sandbox = { window: {} };
+  const fn = new Function("window", raw);
+  fn(sandbox.window);
+  const chapters = sandbox.window.CHAPTERS;
+  if (!chapters || !Array.isArray(chapters)) {
+    throw new Error("Could not parse chapters.js — make sure window.CHAPTERS is set at the bottom of the file");
+  }
+  return chapters;
 }
 
 // Extract all {{word|meaning}} pairs from story text
@@ -52,7 +56,7 @@ function extractVocab(story) {
 async function generateAudio(word, outputPath) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
-      text: word,
+      input: word,
       voice: VOICE,
       speed: SPEED,
       response_format: "mp3"
