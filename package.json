@@ -1,0 +1,11 @@
+{
+  "name": "storylex",
+  "version": "1.0.0",
+  "description": "Vocab reader with Kokoro TTS audio",
+  "scripts": {
+    "generate-audio": "node scripts/generate-audio.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
