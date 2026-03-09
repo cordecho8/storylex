@@ -9,21 +9,21 @@
 //   - Node.js 18+
 //
 // This script:
-//   1. Reads all chapters from data/chapters.js
+//   1. Reads all chapters from data/chapters.js (both stories)
 //   2. Extracts every unique vocab word (from {{word|meaning}} markers)
 //   3. Calls your local Kokoro API to generate MP3s
 //   4. Saves them to audio/[word].mp3
+//   5. Skips words that already have audio files
 //
 // After running, commit the audio/ folder to git — Netlify serves them statically.
 
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
 const http = require("http");
 
 // ── Config ──────────────────────────────────────────────────────────────────
 const KOKORO_URL = "http://localhost:8880"; // Change port if needed
-const VOICE = "af_heart";                  // Kokoro voice — see their docs for options
+const VOICE = "af_heart";                  // Kokoro voice
 const SPEED = 1.0;
 const OUTPUT_DIR = path.join(__dirname, "../audio");
 // ────────────────────────────────────────────────────────────────────────────
@@ -50,6 +50,11 @@ function extractVocab(story) {
     vocab.push(m[1].trim());
   }
   return vocab;
+}
+
+// Sanitize a word into a safe filename
+function wordToFilename(word) {
+  return word.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_\-]/gi, "") + ".mp3";
 }
 
 // Call Kokoro TTS API
@@ -103,7 +108,20 @@ async function main() {
   console.log("📖 Loading chapters...");
   const chapters = loadChapters();
 
-  // Collect all unique vocab words across all chapters
+  // Group chapters by story for a nice summary
+  const stories = {};
+  for (const ch of chapters) {
+    const sid = ch.story_id || "story1";
+    if (!stories[sid]) stories[sid] = { title: ch.story_title || sid, count: 0 };
+    stories[sid].count++;
+  }
+
+  console.log(`\n📚 Found ${chapters.length} chapters across ${Object.keys(stories).length} stories:`);
+  for (const [sid, s] of Object.entries(stories)) {
+    console.log(`   • ${s.title} (${s.count} chapters)`);
+  }
+
+  // Collect all unique vocab words across ALL chapters and stories
   const allWords = new Set();
   for (const ch of chapters) {
     const words = extractVocab(ch.story);
@@ -111,7 +129,7 @@ async function main() {
   }
 
   const words = [...allWords];
-  console.log(`🔤 Found ${words.length} unique vocab words across ${chapters.length} chapters\n`);
+  console.log(`\n🔤 Found ${words.length} unique vocab words total\n`);
 
   // Check Kokoro is running
   console.log(`🐳 Checking Kokoro at ${KOKORO_URL}...`);
@@ -131,8 +149,7 @@ async function main() {
   let generated = 0, skipped = 0, failed = 0;
 
   for (const word of words) {
-    // Sanitize filename: lowercase, replace spaces with underscores
-    const filename = word.replace(/\s+/g, "_").replace(/[^a-z0-9_\-]/gi, "") + ".mp3";
+    const filename = wordToFilename(word);
     const outputPath = path.join(OUTPUT_DIR, filename);
 
     if (fs.existsSync(outputPath)) {
@@ -161,7 +178,7 @@ async function main() {
   if (failed > 0) console.log(`❌ Failed:    ${failed}`);
   console.log("─────────────────────────────────");
   console.log("\n🚀 Now commit the audio/ folder and push to Git!");
-  console.log("   git add audio/ && git commit -m 'Add vocab audio' && git push");
+  console.log("   git add audio/ data/chapters.js && git commit -m 'Add story 2 + audio' && git push");
 }
 
 main().catch(err => {
