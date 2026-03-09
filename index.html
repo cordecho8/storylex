@@ -62,6 +62,9 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Lock page-level scroll bounce on iOS — only inner containers should bounce */
+    html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+
     /* Subtle SVG noise texture on bg */
     body {
       font-family: 'Inter', sans-serif;
@@ -123,7 +126,7 @@
     .sidebar-logo-text { font-family: 'Lora', serif; font-size: 16px; font-weight: 500; color: var(--accent); letter-spacing: 0.3px; }
     .sidebar-logo-dot { display: none; }
     .sidebar-label { font-size: 10px; letter-spacing: 0.8px; font-weight: 500; color: var(--muted); margin-top: 3px; }
-    .chapter-list { flex: 1; overflow-y: auto; padding: 0; }
+    .chapter-list { flex: 1; overflow-y: auto; padding: 0; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
     .ch-item { display: flex; align-items: center; gap: 10px; padding: 11px 16px 11px 20px; cursor: pointer; transition: background 0.12s; border-bottom: 1px solid var(--border); position: relative; }
     .ch-item:hover { background: var(--surface2); }
     .story-chapters .ch-item:last-child { border-bottom: none; }
@@ -155,7 +158,13 @@
     .story-chapters { overflow: hidden; max-height: 0; transition: max-height 0.28s cubic-bezier(.4,0,.2,1); }
     .story-group.open .story-chapters { max-height: 1200px; }
 
-    .main { overflow-y: auto; padding: 28px 36px; }
+    .main {
+      overflow-y: auto;
+      padding: 28px 36px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      scroll-behavior: smooth;
+    }
     .empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px; text-align: center; color: var(--muted); }
     .empty-icon { font-size: 40px; opacity: 0.2; margin-bottom: 4px; }
     .empty h3 { font-family: 'Lora', serif; font-size: 22px; color: var(--text); font-weight: 500; }
@@ -237,6 +246,7 @@
       font-size: var(--story-size);
       line-height: 2.05;
       color: var(--text);
+      padding: 0 6px;
     }
     .story-text p {
       margin-bottom: 0;
@@ -292,14 +302,14 @@
     .vocab-chip .meaning {
       display: block;
       font-family: 'Inter', sans-serif;
-      font-size: 11.5px;
+      font-size: 12.5px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
       text-align: left;
-      letter-spacing: 0.1px;
-      margin-bottom: 1px;
-      opacity: 0.85;
+      letter-spacing: 0.05px;
+      margin-bottom: 0px;
+      opacity: 1;
       white-space: nowrap;
     }
     /* Wrapper to stack meaning above word */
@@ -309,6 +319,7 @@
       align-items: flex-start;
       vertical-align: bottom;
       line-height: inherit;
+      gap: 0;
     }
     .vocab-chip .chip-text { display: inline; }
     /* SRS state: tiny dot */
@@ -472,11 +483,6 @@
     .btn-ghost { background: none; color: var(--muted); border: 1px solid var(--border); }
     .btn-ghost:hover { background: var(--surface2); color: var(--text); }
 
-    .tooltip { position: fixed; z-index: 300; background: #1c1b18; color: white; padding: 6px 11px; border-radius: 8px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.1s; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
-    .tooltip.show { opacity: 1; }
-    .tooltip .tw { font-weight: 600; color: #fef3c0; }
-    .tooltip .tm { color: #d1fae5; margin-left: 4px; }
-
     .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 90; }
 
     /* ── TOUCH / MOBILE GLOBAL ───────────────────────────────────────────── */
@@ -521,7 +527,7 @@
       .ch-meta-row { gap: 8px; }
 
       /* Reading well: less padding on mobile */
-      .story-box { padding: 22px 20px 26px; }
+      .story-box { padding: 22px 16px 26px; }
       /* Drop cap too large on mobile */
       .story-text p:first-child::first-letter { font-size: 2.8em; }
 
@@ -531,8 +537,8 @@
       .tab { font-size: 12px; padding: 10px 14px; flex-shrink: 0; }
 
       /* Story text */
-      .story-text { font-size: 15px; line-height: 2.0; }
-      .story-box { padding: 0; }
+      .story-text { font-size: 15px; line-height: 2.0; padding: 0 4px; }
+      .story-box { padding: 18px 14px 24px; }
 
       /* Vocab table: hide due-date column (col 3) on small screens, keep bookmark/review */
       .vtable th:nth-child(3), .vtable td:nth-child(3) { display: none; }
@@ -1060,8 +1066,6 @@
   </main>
 </div>
 
-<div class="tooltip" id="tooltip"><span class="tw" id="tipW"></span><span class="tm" id="tipM"></span></div>
-
 <!-- MOBILE WORD POPUP (floating, same style as desktop) -->
 <div id="mobileSheet">
   <div id="mobileSheetOverlay"></div>
@@ -1415,13 +1419,6 @@ function playWord(word, el) {
   };
   a.play().catch(()=>{});
 }
-
-// ── TOOLTIP ───────────────────────────────────────────────────────────────────
-const tooltip=document.getElementById('tooltip');
-function showTip(w,m,e){ document.getElementById('tipW').textContent=w; document.getElementById('tipM').textContent=m; tooltip.classList.add('show'); moveTip(e); }
-function moveTip(e){ let x=e.clientX-tooltip.offsetWidth/2,y=e.clientY-42; if(x<6)x=6; if(y<6)y=e.clientY+12; tooltip.style.left=x+'px'; tooltip.style.top=y+'px'; }
-function hideTip(){ tooltip.classList.remove('show'); }
-document.addEventListener('mousemove',e=>{ if(tooltip.classList.contains('show'))moveTip(e); });
 
 // ── WORD POPUP ────────────────────────────────────────────────────────────────
 let popupWord = null, popupMeaning = null, popupChId = null, popupChTitle = null;
@@ -1928,13 +1925,9 @@ function renderTab(ch,vocab) {
       // Any click/tap → straight to popup
       c.onclick=e=>{
         e.stopPropagation();
-        hideTip();
         progMarkWord(ch.id, c.dataset.w);
         showWordPopup(c.dataset.w, c.dataset.m, ch.id, ch.title, c);
       };
-
-      c.onmouseenter=e=>{ if(!wordPopup.classList.contains('show')) showTip(c.dataset.w,c.dataset.m,e); };
-      c.onmouseleave=hideTip;
     });
     // Mark chapter as read when user scrolls to bottom of story
     const storyBox = body.querySelector('.story-box');
@@ -2553,7 +2546,7 @@ document.getElementById('globalVocabBtn').onclick = () => {
   closeSidebar();
 };
 
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeSidebar(); hideTip(); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeSidebar(); hideWordPopup(); hideMobileSheet(); } });
 
 init();
 
