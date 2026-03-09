@@ -209,10 +209,11 @@
     }
 
     /* Underline tabs — cleaner, editorial feel */
-    .tabs { display: flex; gap: 0; background: none; padding: 0; border-radius: 0; width: 100%; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .tabs { display: flex; gap: 0; background: none; padding: 0; border-radius: 0; width: 100%; margin-bottom: 0; border-bottom: 1px solid var(--border); }
     .tab { flex: none; padding: 8px 16px; border-radius: 0; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; color: var(--muted); border: none; background: none; font-family: 'Inter', sans-serif; white-space: nowrap; text-align: center; border-bottom: 2px solid transparent; margin-bottom: -1px; letter-spacing: 0.1px; }
     .tab:hover { color: var(--text); }
     .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+    #tabBody { animation: tabFadeIn 0.18s ease both; margin-top: 22px; }
 
     /* ── READING WELL ────────────────────────────────────────────────────── */
     .story-box {
@@ -261,12 +262,15 @@
     /* ── TAB FADE + CARD TRANSITIONS ────────────────────────────────────── */
     @keyframes tabFadeIn  { from { opacity:0; transform: translateY(5px); } to { opacity:1; transform: translateY(0); } }
     @keyframes cardReveal { from { opacity:0; transform: translateY(8px) scale(0.98); } to { opacity:1; transform: translateY(0) scale(1); } }
-    #tabBody { animation: tabFadeIn 0.18s ease both; }
 
     /* ── FONT SIZE TOGGLE ────────────────────────────────────────────────── */
-    .font-controls { display: flex; align-items: center; gap: 2px; margin-left: auto; }
-    .font-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: none; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; font-weight: 600; line-height: 1; }
-    .font-btn:hover { background: var(--surface2); color: var(--text); }
+    .font-controls {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 0 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .font-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-family: 'Inter', sans-serif; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; font-weight: 600; line-height: 1; touch-action: manipulation; }
+    .font-btn:hover, .font-btn:active { background: var(--surface2); color: var(--text); }
     .font-btn.sz-sm { font-size: 11px; }
     .font-btn.sz-lg { font-size: 15px; }
 
@@ -527,8 +531,8 @@
       .story-text { font-size: 15px; line-height: 2.0; }
       .story-box { padding: 0; }
 
-      /* Vocab table: hide due-date column on small screens */
-      .vtable th:last-child, .vtable td:last-child { display: none; }
+      /* Vocab table: hide due-date column (col 3) on small screens, keep bookmark/review */
+      .vtable th:nth-child(3), .vtable td:nth-child(3) { display: none; }
 
       /* Bottom sheet: taller on short phones */
       #mobileSheetPanel { padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px); }
@@ -1688,10 +1692,11 @@ function renderMain() {
         <button class="tab${activeTab==='vocab'?' active':''}" data-t="vocab">词汇</button>
         <button class="tab${activeTab==='practice'?' active':''}" data-t="practice">练习</button>
         <button class="tab${activeTab==='bookmarks'?' active':''}" data-t="bookmarks">🔖</button>
-        <div class="font-controls" id="fontControls" style="display:none">
-          <button class="font-btn sz-sm" id="fontDn" title="Smaller">A−</button>
-          <button class="font-btn sz-lg" id="fontUp" title="Larger">A+</button>
-        </div>
+      </div>
+      <div class="font-controls" id="fontControls" style="display:${activeTab==='read'?'flex':'none'}">
+        <span style="font-size:11px;color:var(--muted);font-weight:500;margin-right:4px">字号</span>
+        <button class="font-btn sz-sm" id="fontDn" title="Smaller">A−</button>
+        <button class="font-btn sz-lg" id="fontUp" title="Larger">A+</button>
       </div>
       <div id="tabBody"></div>
     </div>`;
@@ -1710,6 +1715,7 @@ function renderMain() {
     const fc = document.getElementById('fontControls');
     if(fc) fc.style.display = activeTab==='read' ? 'flex' : 'none';
   }
+  // Already set correctly in HTML via template literal, but call to sync after tab switches
 
   main.querySelectorAll('.tab').forEach(t=>{
     t.onclick=()=>{
