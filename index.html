@@ -274,7 +274,7 @@
     .font-btn.sz-sm { font-size: 11px; }
     .font-btn.sz-lg { font-size: 15px; }
 
-    /* ── VOCAB CHIP — word with ruby-style meaning above ────────────────── */
+    /* ── VOCAB CHIP — Chinese annotation above, underlined English word ──── */
     .vocab-chip {
       display: inline;
       position: relative;
@@ -288,11 +288,7 @@
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /* The English word text */
-    .vocab-chip .chip-text {
-      display: inline;
-    }
-    /* Chinese meaning — sits just above the word, left-aligned to avoid padding */
+    /* Chinese meaning — sits just above the word */
     .vocab-chip .meaning {
       display: block;
       font-family: 'Inter', sans-serif;
@@ -306,7 +302,7 @@
       opacity: 0.85;
       white-space: nowrap;
     }
-    /* Wrapper to stack meaning above word — left-aligned, no centering */
+    /* Wrapper to stack meaning above word */
     .vocab-chip .chip-inner {
       display: inline-flex;
       flex-direction: column;
@@ -314,16 +310,7 @@
       vertical-align: bottom;
       line-height: inherit;
     }
-    /* Speaker icon — SVG, visible on hover */
-    .vocab-chip .snd {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; margin-left: 3px;
-      opacity: 0; line-height: 1;
-      cursor: pointer; transition: opacity 0.1s; vertical-align: middle;
-      color: var(--muted);
-    }
-    .vocab-chip:hover .snd { opacity: 0.6; }
-    .vocab-chip .snd:hover { opacity: 1 !important; color: var(--accent); }
+    .vocab-chip .chip-text { display: inline; }
     /* SRS state: tiny dot */
     .vocab-chip::after { content:''; display:inline-block; width:3px; height:3px; border-radius:50%; margin-left:2px; vertical-align:middle; opacity:0; }
     .vocab-chip.srs-learning::after { background: #6899c4; opacity:0.8; }
@@ -675,11 +662,13 @@
     }
     .wp-word-col { flex: 1; min-width: 0; }
     .wp-word {
-      font-family: 'Lora', serif; font-size: 19px; font-weight: 500;
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
       color: var(--text); line-height: 1.2; margin-bottom: 3px;
+      letter-spacing: 0.3px;
     }
     .wp-meaning {
       font-size: 12px; color: var(--muted); line-height: 1.4;
+      font-family: 'Inter', sans-serif; letter-spacing: 0.2px;
     }
     .wp-play-btn {
       width: 32px; height: 32px; border-radius: 50%;
@@ -1440,25 +1429,105 @@ const wordPopup = document.getElementById('wordPopup');
 
 function isMobileDevice() { return window.innerWidth <= 700; }
 
-function showWordPopup(word, meaning, chId, chTitle, targetEl) {
-  popupWord = word; popupMeaning = meaning; popupChId = chId; popupChTitle = chTitle;
-  if(isMobileDevice()) {
-    showMobileSheet(word, meaning, chId, chTitle, targetEl);
-    return;
+// ── SYLLABIFICATION + IPA via Free Dictionary API ────────────────────────────
+// Uses https://api.dictionaryapi.dev — free, no key required
+// Results cached in memory (per session) to avoid repeat fetches
+
+const ipaCache = {};
+
+// Fallback syllabifier for when API is unavailable
+function syllabify(word) {
+  const w = word.toLowerCase();
+  const vowels = 'aeiouy';
+  const result = [];
+  let syllable = '';
+  let prevVowel = false;
+  for(let i = 0; i < w.length; i++) {
+    const ch = w[i];
+    const isVowel = vowels.includes(ch);
+    syllable += ch;
+    if(isVowel && !prevVowel && syllable.length > 1 && i < w.length - 2) {
+      const next = w[i+1];
+      const afterNext = w[i+2];
+      if(next && !vowels.includes(next) && afterNext && vowels.includes(afterNext)) {
+        result.push(syllable); syllable = '';
+      }
+    }
+    prevVowel = isVowel;
   }
-  document.getElementById('wpWord').textContent = word;
-  document.getElementById('wpMeaning').textContent = meaning;
-  updatePopupBookmarkState();
-  wordPopup.classList.add('show');
-  positionPopup(targetEl);
+  if(syllable) result.push(syllable);
+  return result.length > 1 ? result.join('·') : word;
 }
 
-// ── MOBILE WORD POPUP ─────────────────────────────────────────────────────────
-function showMobileSheet(word, meaning, chId, chTitle, targetEl) {
+// Fetch from Free Dictionary API, cache result, update popup when ready
+async function fetchWordData(word) {
+  const key = word.toLowerCase();
+  if(ipaCache[key]) return ipaCache[key];
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(key)}`);
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
+    const entry = data[0];
+    // Get IPA — prefer UK phonetic (text with /.../ or [...])
+    let ipa = '';
+    if(entry.phonetics && entry.phonetics.length) {
+      // Prefer entries that have both text and audio, then any with text
+      const withText = entry.phonetics.filter(p => p.text);
+      if(withText.length) ipa = withText[0].text;
+    }
+    if(!ipa && entry.phonetic) ipa = entry.phonetic;
+    // Get syllabified word — API doesn't give syllables directly, use our fallback
+    // but wrap IPA in brackets if not already
+    if(ipa && !ipa.startsWith('[') && !ipa.startsWith('/')) ipa = '[' + ipa + ']';
+    const result = { syllables: syllabify(word), ipa };
+    ipaCache[key] = result;
+    return result;
+  } catch(e) {
+    const result = { syllables: syllabify(word), ipa: '' };
+    ipaCache[key] = result;
+    return result;
+  }
+}
+
+function showWordPopup(word, meaning, chId, chTitle, targetEl) {
+  popupWord = word; popupMeaning = meaning; popupChId = chId; popupChTitle = chTitle;
+
+  // Show popup immediately with syllables + meaning as placeholder
+  const syllables = syllabify(word);
+  if(isMobileDevice()) {
+    _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, meaning);
+  } else {
+    document.getElementById('wpWord').textContent = syllables;
+    document.getElementById('wpMeaning').textContent = meaning;
+    updatePopupBookmarkState();
+    wordPopup.classList.add('show');
+    positionPopup(targetEl);
+  }
+
+  // Fetch real IPA and update in place
+  fetchWordData(word).then(({ syllables: syl, ipa }) => {
+    if(popupWord !== word) return; // user moved on
+    const ipaText = ipa || meaning;
+    if(isMobileDevice()) {
+      const msWord = document.getElementById('msWord');
+      const msMeaning = document.getElementById('msMeaning');
+      if(msWord) msWord.textContent = syl;
+      if(msMeaning) msMeaning.textContent = ipaText;
+    } else {
+      const wpWord = document.getElementById('wpWord');
+      const wpMeaning = document.getElementById('wpMeaning');
+      if(wpWord) wpWord.textContent = syl;
+      if(wpMeaning) wpMeaning.textContent = ipaText;
+    }
+  });
+}
+
+
+function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipaOrMeaning) {
   const sheet = document.getElementById('mobileSheet');
   const panel = document.getElementById('mobileSheetPanel');
-  document.getElementById('msWord').textContent = word;
-  document.getElementById('msMeaning').textContent = meaning;
+  document.getElementById('msWord').textContent = syllables || word;
+  document.getElementById('msMeaning').textContent = ipaOrMeaning || meaning;
   updateMobileSheetState();
   sheet.classList.add('show');
   // Position near the tapped word, just like desktop popup
@@ -1856,20 +1925,8 @@ function renderTab(ch,vocab) {
       // Bookmark state
       if(bkIsBookmarked(c.dataset.w)) c.classList.add('bookmarked');
 
-      // Click on speaker icon → audio only, don't open popup
-      const snd = c.querySelector('.snd');
-      if(snd) {
-        snd.onclick=e=>{
-          e.stopPropagation();
-          hideTip();
-          playWord(c.dataset.w, c);
-          progMarkWord(ch.id, c.dataset.w);
-        };
-      }
-
-      // Click anywhere on chip → show popup
+      // Any click/tap → straight to popup
       c.onclick=e=>{
-        if(e.target.classList.contains('snd') || e.target.closest('.snd')) return;
         e.stopPropagation();
         hideTip();
         progMarkWord(ch.id, c.dataset.w);
@@ -2217,8 +2274,7 @@ function wireGradeButtons(vocabList, v) {
 
 // ── HTML BUILDERS ─────────────────────────────────────────────────────────────
 function buildReadHTML(story) {
-  const sndSvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
-  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-inner"><span class="meaning">${esc(m.trim())}</span><span class="chip-text">${esc(w.trim())}</span></span><span class="snd" data-w="${esc(w.trim())}">${sndSvg}</span></span>`)}</p>`).join('');
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-inner"><span class="meaning">${esc(m.trim())}</span><span class="chip-text">${esc(w.trim())}</span></span></span>`)}</p>`).join('');
 }
 
 function buildRecallHTML(story) {
