@@ -281,7 +281,6 @@
       cursor: pointer;
       transition: border-color 0.12s, background 0.12s;
       color: inherit;
-      /* ruby emulation: use vertical-align baseline so inline chars work */
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
@@ -289,36 +288,38 @@
     .vocab-chip .chip-text {
       display: inline;
     }
-    /* Chinese meaning — small, sits just above the word like ruby text */
+    /* Chinese meaning — sits just above the word, left-aligned to avoid padding */
     .vocab-chip .meaning {
       display: block;
       font-family: 'Inter', sans-serif;
-      font-size: 9.5px;
+      font-size: 11.5px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
-      text-align: center;
+      text-align: left;
       letter-spacing: 0.1px;
       margin-bottom: 1px;
       opacity: 0.85;
       white-space: nowrap;
     }
-    /* Wrapper to stack meaning above word */
+    /* Wrapper to stack meaning above word — left-aligned, no centering */
     .vocab-chip .chip-inner {
       display: inline-flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       vertical-align: bottom;
       line-height: inherit;
     }
-    /* Speaker icon — compact, subtle */
+    /* Speaker icon — SVG, visible on hover */
     .vocab-chip .snd {
-      display: inline-block; font-size: 9px; margin-left: 1px;
-      opacity: 0; line-height: 1; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; margin-left: 3px;
+      opacity: 0; line-height: 1;
       cursor: pointer; transition: opacity 0.1s; vertical-align: middle;
+      color: var(--muted);
     }
-    .vocab-chip:hover .snd { opacity: 0.45; }
-    .vocab-chip .snd:hover { opacity: 1 !important; }
+    .vocab-chip:hover .snd { opacity: 0.6; }
+    .vocab-chip .snd:hover { opacity: 1 !important; color: var(--accent); }
     /* SRS state: tiny dot */
     .vocab-chip::after { content:''; display:inline-block; width:3px; height:3px; border-radius:50%; margin-left:2px; vertical-align:middle; opacity:0; }
     .vocab-chip.srs-learning::after { background: #6899c4; opacity:0.8; }
@@ -586,7 +587,7 @@
     .ms-action:hover { background: var(--border); }
     .ms-action.srs { background: var(--accent-light); color: var(--accent); margin-top: 2px; }
     .ms-action.srs:hover { background: var(--accent); color: white; }
-    .ms-action-icon { font-size: 16px; width: 22px; text-align: center; }
+    .ms-action-icon { display: flex; align-items: center; justify-content: center; width: 22px; }
     .ms-action.active { background: var(--accent-light); color: var(--accent); }
 
     /* ── WORD ACTION POPUP ───────────────────────────────────────────────── */
@@ -678,7 +679,7 @@
     .wp-action.active { color: var(--accent); border-color: var(--accent-light); background: var(--accent-light); }
     .wp-action.srs-action { }
     .wp-action.srs-action:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent-light); }
-    .wp-action-icon { font-size: 15px; line-height: 1; }
+    .wp-action-icon { display: flex; align-items: center; justify-content: center; line-height: 1; }
 
     /* ── BOOKMARK TAB ────────────────────────────────────────────────────── */
     .bookmarks-wrap { max-width: 700px; }
@@ -1039,16 +1040,22 @@
     <div class="ms-handle"></div>
     <div class="ms-word-row">
       <div class="ms-word" id="msWord"></div>
-      <button class="wp-play-btn" id="msPlayBtn">🔊</button>
+      <button class="wp-play-btn" id="msPlayBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
     </div>
     <div class="ms-meaning" id="msMeaning"></div>
     <div class="ms-actions">
       <button class="ms-action" id="msBookmark">
-        <span class="ms-action-icon" id="msBkIcon">🔖</span>
+        <span class="ms-action-icon" id="msBkIcon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </span>
         <span id="msBkLabel">收藏</span>
       </button>
       <button class="ms-action srs" id="msSrs">
-        <span class="ms-action-icon">☆</span>
+        <span class="ms-action-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
         <span>加入复习</span>
       </button>
     </div>
@@ -1060,16 +1067,22 @@
       <div class="wp-word" id="wpWord"></div>
       <div class="wp-meaning" id="wpMeaning"></div>
     </div>
-    <button class="wp-play-btn" id="wpPlayBtn">🔊</button>
+    <button class="wp-play-btn" id="wpPlayBtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    </button>
   </div>
   <div class="wp-divider"></div>
   <div class="wp-actions">
     <button class="wp-action" id="wpBookmark">
-      <span class="wp-action-icon" id="wpBkIcon">🔖</span>
+      <span class="wp-action-icon" id="wpBkIcon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </span>
       <span id="wpBkLabel">收藏</span>
     </button>
     <button class="wp-action srs-action" id="wpSrs">
-      <span class="wp-action-icon">☆</span>
+      <span class="wp-action-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </span>
       <span>加入复习</span>
     </button>
   </div>
@@ -1424,8 +1437,16 @@ function hideMobileSheet() {
 function updateMobileSheetState() {
   if(!popupWord) return;
   const isBk = bkIsBookmarked(popupWord);
-  document.getElementById('msBkLabel').textContent = isBk ? '已收藏 ✓' : '收藏';
-  document.getElementById('msBookmark').classList.toggle('active', isBk);
+  const label = document.getElementById('msBkLabel');
+  const icon = document.getElementById('msBkIcon');
+  const btn = document.getElementById('msBookmark');
+  if(label) label.textContent = isBk ? '已收藏' : '收藏';
+  if(icon) {
+    const svg = icon.querySelector('svg');
+    if(svg) svg.style.fill = isBk ? 'var(--accent)' : 'none';
+    if(svg) svg.style.stroke = isBk ? 'var(--accent)' : 'currentColor';
+  }
+  if(btn) btn.classList.toggle('active', isBk);
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -1507,8 +1528,16 @@ function hideWordPopup() { wordPopup.classList.remove('show'); }
 function updatePopupBookmarkState() {
   if(!popupWord) return;
   const isBk = bkIsBookmarked(popupWord);
-  document.getElementById('wpBkLabel').textContent = isBk ? '已收藏 ✓' : '收藏';
-  document.getElementById('wpBookmark').classList.toggle('active', isBk);
+  const label = document.getElementById('wpBkLabel');
+  const icon = document.getElementById('wpBkIcon');
+  const btn = document.getElementById('wpBookmark');
+  if(label) label.textContent = isBk ? '已收藏' : '收藏';
+  if(icon) {
+    const svg = icon.querySelector('svg');
+    if(svg) svg.style.fill = isBk ? 'var(--accent)' : 'none';
+    if(svg) svg.style.stroke = isBk ? 'var(--accent)' : 'currentColor';
+  }
+  if(btn) btn.classList.toggle('active', isBk);
 }
 
 document.getElementById('wpPlayBtn').onclick = (e) => {
@@ -1609,6 +1638,9 @@ function selectChapter(id) {
   const ch = chapters.find(c=>c.id===id);
   if (ch) openStoryId = ch.story_id || 'story1';
   renderSidebar(); renderMain();
+  // Scroll to top of main content
+  const mainEl = document.getElementById('main');
+  if(mainEl) mainEl.scrollTop = 0;
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
@@ -1733,18 +1765,7 @@ function renderTab(ch,vocab) {
       // Bookmark state
       if(bkIsBookmarked(c.dataset.w)) c.classList.add('bookmarked');
 
-      // Click on the word text area → show popup only
-      const chipText = c.querySelector('.chip-text');
-      if(chipText) {
-        chipText.onclick=e=>{
-          e.stopPropagation();
-          hideTip();
-          progMarkWord(ch.id, c.dataset.w);
-          showWordPopup(c.dataset.w, c.dataset.m, ch.id, ch.title, c);
-        };
-      }
-
-      // Click on speaker icon → play audio only
+      // Click on speaker icon → audio only, don't open popup
       const snd = c.querySelector('.snd');
       if(snd) {
         snd.onclick=e=>{
@@ -1755,11 +1776,12 @@ function renderTab(ch,vocab) {
         };
       }
 
-      // Also allow clicking the outer chip (not text or snd) for popup fallback
+      // Click anywhere on chip → show popup
       c.onclick=e=>{
         if(e.target.classList.contains('snd') || e.target.closest('.snd')) return;
-        if(e.target.classList.contains('chip-text') || e.target.closest('.chip-text')) return;
         e.stopPropagation();
+        hideTip();
+        progMarkWord(ch.id, c.dataset.w);
         showWordPopup(c.dataset.w, c.dataset.m, ch.id, ch.title, c);
       };
 
@@ -2119,7 +2141,8 @@ function wireGradeButtons(vocabList, v) {
 
 // ── HTML BUILDERS ─────────────────────────────────────────────────────────────
 function buildReadHTML(story) {
-  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-inner"><span class="meaning">${esc(m.trim())}</span><span class="chip-text">${esc(w.trim())}</span></span><span class="snd" data-w="${esc(w.trim())}">🔊</span></span>`)}</p>`).join('');
+  const sndSvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-inner"><span class="meaning">${esc(m.trim())}</span><span class="chip-text">${esc(w.trim())}</span></span><span class="snd" data-w="${esc(w.trim())}">${sndSvg}</span></span>`)}</p>`).join('');
 }
 
 function buildRecallHTML(story) {
