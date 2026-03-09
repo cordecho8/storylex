@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-  <title>StoryLex — 沈先生的首席合约</title>
+  <title>StoryLex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -40,10 +40,11 @@
     .sidebar { background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.25s ease; }
     .sidebar-top { padding: 16px 14px 10px; border-bottom: 1px solid var(--border); }
     .sidebar-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; color: var(--muted); }
-    .chapter-list { flex: 1; overflow-y: auto; padding: 6px; }
-    .ch-item { display: flex; align-items: flex-start; gap: 8px; padding: 9px 10px; border-radius: 8px; cursor: pointer; transition: background 0.12s; border: 1px solid transparent; margin-bottom: 2px; }
+    .chapter-list { flex: 1; overflow-y: auto; padding: 0; }
+    .ch-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 14px 8px 28px; border-radius: 0; cursor: pointer; transition: background 0.12s; border: none; border-bottom: 1px solid var(--border); margin-bottom: 0; }
     .ch-item:hover { background: var(--surface2); }
-    .ch-item.active { background: var(--accent-light); border-color: #b5d5c5; }
+    .story-chapters .ch-item:last-child { border-bottom: none; }
+    .ch-item.active { background: var(--accent-light); border-left: 3px solid var(--accent); padding-left: 25px; }
     .ch-num { font-size: 10px; font-weight: 700; color: var(--muted); padding-top: 2px; min-width: 22px; }
     .ch-item.active .ch-num { color: var(--accent); }
     .ch-info { flex: 1; min-width: 0; }
@@ -54,6 +55,19 @@
     .sidebar-footer { padding: 10px; border-top: 1px solid var(--border); }
     .all-srs-btn { width: 100%; padding: 9px; border: none; background: var(--accent-light); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: var(--accent); cursor: pointer; transition: all 0.12s; }
     .all-srs-btn:hover { background: var(--accent); color: white; }
+
+    /* Story accordion */
+    .story-group { border-bottom: 1px solid var(--border); }
+    .story-group:last-child { border-bottom: none; }
+    .story-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px 10px 12px; cursor: pointer; user-select: none; transition: background 0.12s; gap: 8px; }
+    .story-header:hover { background: var(--surface2); }
+    .story-header-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .story-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .story-meta { font-size: 10px; color: var(--muted); }
+    .story-chevron { font-size: 10px; color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
+    .story-group.open .story-chevron { transform: rotate(180deg); }
+    .story-chapters { overflow: hidden; max-height: 0; transition: max-height 0.28s cubic-bezier(.4,0,.2,1); }
+    .story-group.open .story-chapters { max-height: 1200px; }
 
     .main { overflow-y: auto; padding: 28px 40px; }
     .empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 14px; text-align: center; color: var(--muted); }
@@ -275,7 +289,7 @@
 <div id="gate">
   <div class="gate-card">
     <div class="gate-logo"><div class="gate-logo-dot"></div>StoryLex</div>
-    <div class="gate-sub">沈先生的首席合约</div>
+    <div class="gate-sub">故事词汇学习 · Story Vocab</div>
     <div class="gate-label">Enter your access code</div>
     <div class="gate-input-wrap">
       <input
@@ -311,19 +325,19 @@
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-top">
-      <div class="sidebar-label">沈先生的首席合约 · 12 Chapters</div>
+      <div class="sidebar-label">StoryLex · 故事库</div>
     </div>
     <div class="chapter-list" id="chapterList"></div>
     <div class="sidebar-footer">
-      <button class="all-srs-btn" id="allSrsBtn">🧠 Review All Due Cards</button>
+      <button class="all-srs-btn" id="allSrsBtn">Review All Due Cards · 复习</button>
     </div>
   </aside>
 
   <main class="main" id="main">
     <div class="empty">
-      <div class="empty-icon">📖</div>
-      <h3>Select a chapter</h3>
-      <p>Choose from 12 chapters to start reading and practising.</p>
+      <div class="empty-icon" style="font-size:48px;opacity:.3">册</div>
+      <h3>选择章节</h3>
+      <p>从左侧故事库中选择章节，开始阅读与练习。</p>
     </div>
   </main>
 </div>
@@ -431,7 +445,7 @@ function bootGate() {
 }
 
 bootGate();
-</script>
+
 // ── SRS ENGINE (SM-2 simplified) ─────────────────────────────────────────────
 const SRS_KEY = 'sl_srs_v2';
 function srsLoad() { try { return JSON.parse(localStorage.getItem(SRS_KEY)||'{}'); } catch(e) { return {}; } }
@@ -439,7 +453,8 @@ function srsSave(d) { try { localStorage.setItem(SRS_KEY, JSON.stringify(d)); } 
 
 function srsGrade(word, g) {
   const data = srsLoad();
-  let c = data[word] || { interval:0, ease:2.5, due:0, reps:0 };
+  let c = data[word] || { interval:0, ease:2.5, due:0, reps:0, introduced:false };
+  c.introduced = true; // mark as entered into SRS system
   if (g===0) { c.interval=1; c.ease=Math.max(1.3,c.ease-0.2); c.reps=0; }
   else if (g===1) { c.interval=c.reps===0?1:Math.max(1,Math.round(c.interval*1.2)); c.ease=Math.max(1.3,c.ease-0.15); c.reps++; }
   else { c.interval=c.reps===0?1:c.reps===1?3:Math.round(c.interval*c.ease); c.ease=Math.min(3.0,c.ease+0.1); c.reps++; }
@@ -449,12 +464,15 @@ function srsGrade(word, g) {
 
 function isDue(word) {
   const c = srsLoad()[word];
-  return !c || c.due <= Date.now();
+  // A word is only "due" if it has been studied at least once AND is past its due date
+  if (!c || !c.introduced) return false;
+  return c.due <= Date.now();
 }
 
 function wordState(word) {
   const c = srsLoad()[word];
-  if (!c||!c.reps) return 'new';
+  if (!c || !c.introduced) return 'new';
+  if (!c.reps) return 'new';
   if (c.due<=Date.now()) return 'due';
   if (c.reps>=3) return 'known';
   return 'learning';
@@ -462,19 +480,22 @@ function wordState(word) {
 
 function nextDueLabel(word) {
   const c = srsLoad()[word];
-  if (!c||c.due<=Date.now()) return 'Due now';
+  if (!c || !c.introduced) return '—';
+  if (c.due<=Date.now()) return 'Due now';
   const d = Math.round((c.due-Date.now())/86400000);
   return d<1?'< 1 day':`${d} day${d!==1?'s':''}`;
 }
 
 // ── APP STATE ─────────────────────────────────────────────────────────────────
-let chapters=[], activeId=null, activeTab='read';
+let chapters=[], activeId=null, activeTab='read', openStoryId=null;
 let currentAudio=null, currentPlayingEl=null;
-let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='due', srsAllMode=false;
+let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='all', srsAllMode=false;
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init() {
   if (window.CHAPTERS) chapters=[...window.CHAPTERS];
+  // Auto-open the first story group
+  if (chapters.length) openStoryId = chapters[0].story_id || 'story1';
   renderSidebar();
   if (chapters.length) selectChapter(chapters[0].id);
   checkAudio();
@@ -533,18 +554,65 @@ document.addEventListener('mousemove',e=>{ if(tooltip.classList.contains('show')
 // ── SIDEBAR ───────────────────────────────────────────────────────────────────
 function renderSidebar() {
   const list=document.getElementById('chapterList'); list.innerHTML='';
-  chapters.forEach((ch,i)=>{
-    const vocab=parseVocab(ch.story);
-    const due=vocab.filter(v=>isDue(v.word.toLowerCase())).length;
-    const el=document.createElement('div');
-    el.className='ch-item'+(ch.id===activeId?' active':'');
-    el.innerHTML=`<div class="ch-num">Ch.${String(i+1).padStart(2,'0')}</div><div class="ch-info"><div class="ch-name">${esc(ch.title)}</div><span class="ch-badge">${vocab.length} words</span>${due>0?`<span class="ch-due">${due} due</span>`:''}</div>`;
-    el.onclick=()=>{ selectChapter(ch.id); closeSidebar(); };
-    list.appendChild(el);
+
+  // Group chapters by story
+  const storyMap = new Map();
+  chapters.forEach((ch, i) => {
+    const sid = ch.story_id || 'story1';
+    if (!storyMap.has(sid)) storyMap.set(sid, { title: ch.story_title || sid, chapters: [] });
+    storyMap.get(sid).chapters.push({ ch, globalIdx: i });
+  });
+
+  storyMap.forEach((story, sid) => {
+    const isOpen = openStoryId === sid;
+    const totalWords = story.chapters.reduce((n, {ch}) => n + parseVocab(ch.story).length, 0);
+    const dueWords = story.chapters.reduce((n, {ch}) => {
+      return n + parseVocab(ch.story).filter(v => isDue(v.word.toLowerCase())).length;
+    }, 0);
+
+    const group = document.createElement('div');
+    group.className = 'story-group' + (isOpen ? ' open' : '');
+
+    const header = document.createElement('div');
+    header.className = 'story-header';
+    header.innerHTML = `
+      <div class="story-header-left">
+        <div class="story-name">${esc(story.title)}</div>
+        <div class="story-meta">${story.chapters.length} 章 · ${totalWords} 词${dueWords > 0 ? ` · <span style="color:var(--orange)">${dueWords} 待复习</span>` : ''}</div>
+      </div>
+      <span class="story-chevron">▼</span>`;
+    header.onclick = () => {
+      openStoryId = isOpen ? null : sid;
+      renderSidebar();
+    };
+
+    const chList = document.createElement('div');
+    chList.className = 'story-chapters';
+
+    story.chapters.forEach(({ ch, globalIdx }) => {
+      const vocab = parseVocab(ch.story);
+      const due = vocab.filter(v => isDue(v.word.toLowerCase())).length;
+      // Chapter number within this story
+      const chNumInStory = story.chapters.findIndex(x => x.ch.id === ch.id) + 1;
+      const el = document.createElement('div');
+      el.className = 'ch-item' + (ch.id === activeId ? ' active' : '');
+      el.innerHTML = `<div class="ch-num">${String(chNumInStory).padStart(2,'0')}</div><div class="ch-info"><div class="ch-name">${esc(ch.title)}</div><span class="ch-badge">${vocab.length} 词</span>${due > 0 ? `<span class="ch-due">${due} 待</span>` : ''}</div>`;
+      el.onclick = () => { selectChapter(ch.id); closeSidebar(); };
+      chList.appendChild(el);
+    });
+
+    group.appendChild(header);
+    group.appendChild(chList);
+    list.appendChild(group);
   });
 }
 
-function selectChapter(id) { activeId=id; activeTab='read'; srsAllMode=false; renderSidebar(); renderMain(); }
+function selectChapter(id) {
+  activeId=id; activeTab='read'; srsAllMode=false;
+  const ch = chapters.find(c=>c.id===id);
+  if (ch) openStoryId = ch.story_id || 'story1';
+  renderSidebar(); renderMain();
+}
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 function renderMain() {
@@ -565,14 +633,14 @@ function renderMain() {
   main.innerHTML=`
     <div class="chapter-view">
       <div class="chapter-header">
-        <div class="ch-eyebrow">Chapter ${chIdx+1} · ${vocab.length} vocabulary words</div>
+        <div class="ch-eyebrow">${esc(ch.story_title||'')} · ${vocab.length} vocabulary words</div>
         <div class="ch-title">${esc(ch.title)}</div>
       </div>
       <div class="tabs">
-        <button class="tab${activeTab==='read'?' active':''}" data-t="read">📖 Read</button>
-        <button class="tab${activeTab==='recall'?' active':''}" data-t="recall">✏️ Recall</button>
-        <button class="tab${activeTab==='vocab'?' active':''}" data-t="vocab">📋 Vocab</button>
-        <button class="tab${activeTab==='practice'?' active':''}" data-t="practice">🧠 Practice</button>
+        <button class="tab${activeTab==='read'?' active':''}" data-t="read">Read 阅读</button>
+        <button class="tab${activeTab==='recall'?' active':''}" data-t="recall">Recall 默写</button>
+        <button class="tab${activeTab==='vocab'?' active':''}" data-t="vocab">Vocab 词汇</button>
+        <button class="tab${activeTab==='practice'?' active':''}" data-t="practice">Practice 练习</button>
       </div>
       <div id="tabBody"></div>
     </div>`;
@@ -605,23 +673,26 @@ function renderTab(ch,vocab) {
 // ── SRS SESSION ───────────────────────────────────────────────────────────────
 function buildSrsSession(vocabList, wrap) {
   const due=vocabList.filter(v=>isDue(v.word.toLowerCase()));
+  // "due" = only words already in the SRS system that are past due date
+  // "all" = all words including unintroduced ones (study new words)
   const queue=srsFilter==='due'?due:vocabList;
 
   const dueCount=due.length;
   const knownCount=vocabList.filter(v=>wordState(v.word.toLowerCase())==='known').length;
   const learnCount=vocabList.filter(v=>wordState(v.word.toLowerCase())==='learning').length;
+  const newCount=vocabList.filter(v=>wordState(v.word.toLowerCase())==='new').length;
 
   wrap.innerHTML=`
     <div class="srs-stats">
-      <div class="srs-stat s-due"><div class="v">${dueCount}</div><div class="l">Due</div></div>
-      <div class="srs-stat s-learn"><div class="v">${learnCount}</div><div class="l">Learning</div></div>
-      <div class="srs-stat s-known"><div class="v">${knownCount}</div><div class="l">Known</div></div>
-      <div class="srs-stat"><div class="v">${vocabList.length}</div><div class="l">Total</div></div>
+      <div class="srs-stat s-due"><div class="v">${dueCount}</div><div class="l">待复习</div></div>
+      <div class="srs-stat s-learn"><div class="v">${learnCount}</div><div class="l">学习中</div></div>
+      <div class="srs-stat s-known"><div class="v">${knownCount}</div><div class="l">已掌握</div></div>
+      <div class="srs-stat"><div class="v">${newCount}</div><div class="l">未学习</div></div>
     </div>
     <div class="srs-filter">
-      <span class="srs-fl">Show:</span>
-      <button class="srs-fb${srsFilter==='due'?' active':''}" id="fbDue">Due only</button>
-      <button class="srs-fb${srsFilter==='all'?' active':''}" id="fbAll">All words</button>
+      <span class="srs-fl">显示:</span>
+      <button class="srs-fb${srsFilter==='due'?' active':''}" id="fbDue">待复习</button>
+      <button class="srs-fb${srsFilter==='all'?' active':''}" id="fbAll">全部词汇</button>
     </div>
     <div id="cardArea"></div>`;
 
@@ -629,7 +700,7 @@ function buildSrsSession(vocabList, wrap) {
   document.getElementById('fbAll').onclick=()=>{ srsFilter='all'; renderMain(); };
 
   if(queue.length===0) {
-    document.getElementById('cardArea').innerHTML=`<div class="srs-done"><div class="di">🎉</div><h3>All caught up!</h3><p>No cards due right now. Come back later to keep reviewing.</p><button class="btn btn-primary" onclick="srsFilter='all';renderMain()">Review all ${vocabList.length} words anyway</button></div>`;
+    document.getElementById('cardArea').innerHTML=`<div class="srs-done"><div class="di">🎉</div><h3>今日已完成</h3><p>暂无待复习卡片。点击下方学习新词汇。</p><button class="btn btn-primary" onclick="srsFilter='all';renderMain()">学习全部 ${vocabList.length} 个词</button></div>`;
     return;
   }
 
@@ -642,7 +713,7 @@ function renderCard(vocabList) {
   const area=document.getElementById('cardArea');
   if(!area) return;
   if(srsIdx>=srsQueue.length) {
-    area.innerHTML=`<div class="srs-done"><div class="di">✅</div><h3>Session complete!</h3><p>Reviewed ${srsQueue.length} words.</p><button class="btn btn-ghost" onclick="renderMain()">Start over</button></div>`;
+    area.innerHTML=`<div class="srs-done"><div class="di">✅</div><h3>本轮完成</h3><p>已复习 ${srsQueue.length} 个词。</p><button class="btn btn-ghost" onclick="renderMain()">再来一轮</button></div>`;
     renderSidebar(); return;
   }
 
