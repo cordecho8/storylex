@@ -286,36 +286,30 @@
 
     /* ── VOCAB CHIP ────────────────────────────────────────────────────────── */
     .vocab-chip {
-      display: inline-flex;
-      align-items: flex-end;
+      display: inline;
       position: relative;
       background: none;
+      border-bottom: 1.5px solid var(--yellow-border);
       border-radius: 0;
       padding: 0;
       cursor: pointer;
-      transition: background 0.12s;
+      transition: border-color 0.12s, background 0.12s;
       color: inherit;
-      vertical-align: bottom;
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /*
-      chip-inner: inline-block so position:relative works as anchor.
-      It takes up ONLY the space of the English word — no extra height.
-    */
+    /* chip-inner sizes to the English word only */
     .vocab-chip .chip-inner {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      vertical-align: bottom;
-      line-height: 1;
+      display: inline-block;
+      position: relative;
+      line-height: inherit;
     }
-    /*
-      Chinese annotation in normal flow — sits directly above the English word.
-      Never overlaps adjacent lines. margin-bottom controls the gap.
-    */
+    /* annotation floats above — absolutely positioned so it never widens the chip */
     .vocab-chip .meaning {
-      display: block;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      margin-bottom: 2px;
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       font-weight: 500;
@@ -324,12 +318,9 @@
       white-space: nowrap;
       pointer-events: none;
       letter-spacing: 0.05px;
-      margin-bottom: 2px;
     }
     .vocab-chip .chip-text {
-      display: block;
-      line-height: 1.4;
-      border-bottom: 1.5px solid var(--yellow-border);
+      display: inline;
     }
     /* SRS dot */
     .vocab-chip::after {
@@ -339,7 +330,7 @@
     }
     .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
     .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
-    .vocab-chip.bookmarked .chip-text { border-bottom-color: var(--accent); }
+    .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
     .vocab-chip.bookmarked .meaning { color: var(--accent); }
     .vocab-chip.bookmarked:hover { background: var(--accent-light); }
 
