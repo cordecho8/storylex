@@ -286,15 +286,16 @@
 
     /* ── VOCAB CHIP ────────────────────────────────────────────────────────── */
     .vocab-chip {
-      display: inline;
+      display: inline-flex;
+      align-items: flex-end;
       position: relative;
       background: none;
-      border-bottom: 1.5px solid var(--yellow-border);
       border-radius: 0;
       padding: 0;
       cursor: pointer;
-      transition: border-color 0.12s, background 0.12s;
+      transition: background 0.12s;
       color: inherit;
+      vertical-align: bottom;
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
@@ -303,30 +304,33 @@
       It takes up ONLY the space of the English word — no extra height.
     */
     .vocab-chip .chip-inner {
-      display: inline-block;
-      position: relative;
-      line-height: inherit;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      vertical-align: bottom;
+      line-height: 1;
     }
     /*
-      Chinese annotation: absolutely positioned above the baseline.
-      bottom:100% puts its bottom flush with the top of the English word,
-      then margin-bottom pulls it closer. Adjust this one value to taste.
+      Chinese annotation in normal flow — sits directly above the English word.
+      Never overlaps adjacent lines. margin-bottom controls the gap.
     */
     .vocab-chip .meaning {
-      position: absolute;
-      bottom: 100%;
-      left: 0;
-      margin-bottom: 1px;          /* ← controls gap to English word */
+      display: block;
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
       white-space: nowrap;
       pointer-events: none;
       letter-spacing: 0.05px;
+      margin-bottom: 2px;
     }
-    .vocab-chip .chip-text { display: inline; }
+    .vocab-chip .chip-text {
+      display: block;
+      line-height: 1.4;
+      border-bottom: 1.5px solid var(--yellow-border);
+    }
     /* SRS dot */
     .vocab-chip::after {
       content: ''; display: inline-block;
@@ -335,7 +339,7 @@
     }
     .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
     .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
-    .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
+    .vocab-chip.bookmarked .chip-text { border-bottom-color: var(--accent); }
     .vocab-chip.bookmarked .meaning { color: var(--accent); }
     .vocab-chip.bookmarked:hover { background: var(--accent-light); }
 
@@ -614,8 +618,7 @@
     .ms-handle { display: none; }
     .ms-word-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px 8px; }
     .ms-word { font-family: 'Lora', serif; font-size: 18px; font-weight: 500; flex: 1; line-height: 1.2; }
-    .ms-meaning { font-size: 12px; color: var(--muted); padding: 0 14px 4px; line-height: 1.4; }
-    .ms-ipa { font-size: 11.5px; color: var(--accent); padding: 0 14px 10px; border-bottom: 1px solid var(--border); line-height: 1.4; min-height: 14px; }
+    .ms-meaning { font-size: 12px; color: var(--muted); padding: 0 14px 10px; border-bottom: 1px solid var(--border); line-height: 1.4; }
     .ms-actions { padding: 6px 8px 8px; display: flex; gap: 6px; }
     .ms-action {
       flex: 1;
@@ -684,11 +687,6 @@
     .wp-meaning {
       font-size: 12px; color: var(--muted); line-height: 1.4;
       font-family: 'Inter', sans-serif; letter-spacing: 0.2px;
-    }
-    .wp-ipa {
-      font-size: 11.5px; color: var(--accent); line-height: 1.4;
-      font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
-      margin-top: 2px; min-height: 15px;
     }
     .wp-play-btn {
       width: 32px; height: 32px; border-radius: 50%;
@@ -1091,7 +1089,6 @@
       </button>
     </div>
     <div class="ms-meaning" id="msMeaning"></div>
-    <div class="ms-ipa" id="msIpa"></div>
     <div class="ms-actions">
       <button class="ms-action" id="msBookmark">
         <span class="ms-action-icon" id="msBkIcon">
@@ -1113,7 +1110,6 @@
     <div class="wp-word-col">
       <div class="wp-word" id="wpWord"></div>
       <div class="wp-meaning" id="wpMeaning"></div>
-      <div class="wp-ipa" id="wpIpa"></div>
     </div>
     <button class="wp-play-btn" id="wpPlayBtn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
@@ -1498,16 +1494,13 @@ async function fetchWordData(word) {
     if(!res.ok) throw new Error('not found');
     const data = await res.json();
     const entry = data[0];
-    // Extract IPA — prefer UK, fall back to first available
     let ipa = '';
-    const phonetics = (entry.phonetics || []).filter(p => p.text?.trim());
-    if(phonetics.length) {
-      const uk = phonetics.find(p => (p.audio || '').includes('-uk'));
-      const chosen = uk || phonetics[0];
-      ipa = chosen.text.trim();
+    if(entry.phonetics && entry.phonetics.length) {
+      const withText = entry.phonetics.filter(p => p.text);
+      if(withText.length) ipa = withText[0].text;
     }
-    if(!ipa && entry.phonetic) ipa = entry.phonetic.trim();
-    if(ipa && !ipa.startsWith('/') && !ipa.startsWith('[')) ipa = '/' + ipa + '/';
+    if(!ipa && entry.phonetic) ipa = entry.phonetic;
+    if(ipa && !ipa.startsWith('[') && !ipa.startsWith('/')) ipa = '/' + ipa + '/';
     const result = { syllables: syllabify(word), ipa };
     ipaCache[key] = result;
     return result;
@@ -1521,43 +1514,42 @@ async function fetchWordData(word) {
 function showWordPopup(word, meaning, chId, chTitle, targetEl) {
   popupWord = word; popupMeaning = meaning; popupChId = chId; popupChTitle = chTitle;
 
+  // Show popup immediately with syllables + meaning as placeholder
   const syllables = syllabify(word);
-
   if(isMobileDevice()) {
-    _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, '');
+    _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, meaning);
   } else {
     document.getElementById('wpWord').textContent = syllables;
     document.getElementById('wpMeaning').textContent = meaning;
-    document.getElementById('wpIpa').textContent = '';
     updatePopupBookmarkState();
     wordPopup.classList.add('show');
     positionPopup(targetEl);
   }
 
-  // Fetch real syllables + IPA and update in place
+  // Fetch real IPA and update in place
   fetchWordData(word).then(({ syllables: syl, ipa }) => {
     if(popupWord !== word) return; // user moved on
+    const ipaText = ipa || meaning;
     if(isMobileDevice()) {
       const msWord = document.getElementById('msWord');
-      const msIpa  = document.getElementById('msIpa');
+      const msMeaning = document.getElementById('msMeaning');
       if(msWord) msWord.textContent = syl;
-      if(msIpa)  msIpa.textContent  = ipa || '';
+      if(msMeaning) msMeaning.textContent = ipaText;
     } else {
       const wpWord = document.getElementById('wpWord');
-      const wpIpa  = document.getElementById('wpIpa');
+      const wpMeaning = document.getElementById('wpMeaning');
       if(wpWord) wpWord.textContent = syl;
-      if(wpIpa)  wpIpa.textContent  = ipa || '';
+      if(wpMeaning) wpMeaning.textContent = ipaText;
     }
   });
 }
 
 
-function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipa) {
+function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipaOrMeaning) {
   const sheet = document.getElementById('mobileSheet');
   const panel = document.getElementById('mobileSheetPanel');
-  document.getElementById('msWord').textContent    = syllables || word;
-  document.getElementById('msMeaning').textContent = meaning;
-  document.getElementById('msIpa').textContent     = ipa || '';
+  document.getElementById('msWord').textContent = syllables || word;
+  document.getElementById('msMeaning').textContent = ipaOrMeaning || meaning;
   updateMobileSheetState();
   sheet.classList.add('show');
   // Position near the tapped word, just like desktop popup
