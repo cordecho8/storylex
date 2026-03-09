@@ -244,7 +244,7 @@
     .story-text {
       font-family: 'Lora', serif;
       font-size: var(--story-size);
-      line-height: 2.05;
+      line-height: 2.6;
       color: var(--text);
       padding: 0 6px;
     }
@@ -284,7 +284,7 @@
     .font-btn.sz-sm { font-size: 11px; }
     .font-btn.sz-lg { font-size: 15px; }
 
-    /* ── VOCAB CHIP — Chinese annotation above, underlined English word ──── */
+    /* ── VOCAB CHIP ────────────────────────────────────────────────────────── */
     .vocab-chip {
       display: inline;
       position: relative;
@@ -298,35 +298,43 @@
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /* Chinese meaning — sits just above the word */
+    /*
+      chip-inner: inline-block so position:relative works as anchor.
+      It takes up ONLY the space of the English word — no extra height.
+    */
+    .vocab-chip .chip-inner {
+      display: inline-block;
+      position: relative;
+      line-height: inherit;
+    }
+    /*
+      Chinese annotation: absolutely positioned above the baseline.
+      bottom:100% puts its bottom flush with the top of the English word,
+      then margin-bottom pulls it closer. Adjust this one value to taste.
+    */
     .vocab-chip .meaning {
-      display: block;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      margin-bottom: 1px;          /* ← controls gap to English word */
       font-family: 'Inter', sans-serif;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
-      text-align: left;
-      letter-spacing: 0.05px;
-      margin-bottom: 0px;
-      opacity: 1;
       white-space: nowrap;
-    }
-    /* Wrapper to stack meaning above word */
-    .vocab-chip .chip-inner {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      vertical-align: bottom;
-      line-height: inherit;
-      gap: 0;
+      pointer-events: none;
+      letter-spacing: 0.05px;
     }
     .vocab-chip .chip-text { display: inline; }
-    /* SRS state: tiny dot */
-    .vocab-chip::after { content:''; display:inline-block; width:3px; height:3px; border-radius:50%; margin-left:2px; vertical-align:middle; opacity:0; }
-    .vocab-chip.srs-learning::after { background: #6899c4; opacity:0.8; }
-    .vocab-chip.srs-known::after { background: var(--green); opacity:0.8; }
-    /* Bookmarked state */
+    /* SRS dot */
+    .vocab-chip::after {
+      content: ''; display: inline-block;
+      width: 3px; height: 3px; border-radius: 50%;
+      margin-left: 2px; vertical-align: middle; opacity: 0;
+    }
+    .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
+    .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
     .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
     .vocab-chip.bookmarked .meaning { color: var(--accent); }
     .vocab-chip.bookmarked:hover { background: var(--accent-light); }
@@ -537,7 +545,7 @@
       .tab { font-size: 12px; padding: 10px 14px; flex-shrink: 0; }
 
       /* Story text */
-      .story-text { font-size: 15px; line-height: 2.0; padding: 0 4px; }
+      .story-text { font-size: 15px; line-height: 2.5; padding: 0 4px; }
       .story-box { padding: 18px 14px 24px; }
 
       /* Vocab table: hide due-date column (col 3) on small screens, keep bookmark/review */
@@ -606,7 +614,8 @@
     .ms-handle { display: none; }
     .ms-word-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px 8px; }
     .ms-word { font-family: 'Lora', serif; font-size: 18px; font-weight: 500; flex: 1; line-height: 1.2; }
-    .ms-meaning { font-size: 12px; color: var(--muted); padding: 0 14px 10px; border-bottom: 1px solid var(--border); line-height: 1.4; }
+    .ms-meaning { font-size: 12px; color: var(--muted); padding: 0 14px 4px; line-height: 1.4; }
+    .ms-ipa { font-size: 11.5px; color: var(--accent); padding: 0 14px 10px; border-bottom: 1px solid var(--border); line-height: 1.4; min-height: 14px; }
     .ms-actions { padding: 6px 8px 8px; display: flex; gap: 6px; }
     .ms-action {
       flex: 1;
@@ -675,6 +684,11 @@
     .wp-meaning {
       font-size: 12px; color: var(--muted); line-height: 1.4;
       font-family: 'Inter', sans-serif; letter-spacing: 0.2px;
+    }
+    .wp-ipa {
+      font-size: 11.5px; color: var(--accent); line-height: 1.4;
+      font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
+      margin-top: 2px; min-height: 15px;
     }
     .wp-play-btn {
       width: 32px; height: 32px; border-radius: 50%;
@@ -1077,6 +1091,7 @@
       </button>
     </div>
     <div class="ms-meaning" id="msMeaning"></div>
+    <div class="ms-ipa" id="msIpa"></div>
     <div class="ms-actions">
       <button class="ms-action" id="msBookmark">
         <span class="ms-action-icon" id="msBkIcon">
@@ -1098,6 +1113,7 @@
     <div class="wp-word-col">
       <div class="wp-word" id="wpWord"></div>
       <div class="wp-meaning" id="wpMeaning"></div>
+      <div class="wp-ipa" id="wpIpa"></div>
     </div>
     <button class="wp-play-btn" id="wpPlayBtn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
@@ -1119,6 +1135,16 @@
     </button>
   </div>
 </div>
+
+<!-- Preloaded IPA cache — generated by scripts/preload-ipa.js -->
+<!-- If the file doesn't exist yet, falls back to live API fetch silently -->
+<script>
+  window.IPA_CACHE = {};
+  fetch('data/ipa-cache.json')
+    .then(r => r.ok ? r.json() : {})
+    .then(d => { window.IPA_CACHE = d || {}; })
+    .catch(() => {});
+</script>
 
 <script src="data/chapters.js"></script>
 <script src="codes.js"></script>
@@ -1456,26 +1482,32 @@ function syllabify(word) {
   return result.length > 1 ? result.join('·') : word;
 }
 
-// Fetch from Free Dictionary API, cache result, update popup when ready
+// Fetch from preloaded cache first, then live API, then fallback syllabifier
 async function fetchWordData(word) {
   const key = word.toLowerCase();
+  // 1. In-memory session cache (already fetched this session)
   if(ipaCache[key]) return ipaCache[key];
+  // 2. Preloaded cache from data/ipa-cache.json (built by preload-ipa.js)
+  if(window.IPA_CACHE && window.IPA_CACHE[key]) {
+    ipaCache[key] = window.IPA_CACHE[key];
+    return ipaCache[key];
+  }
+  // 3. Live API fetch (fallback for words not in preloaded cache)
   try {
     const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(key)}`);
     if(!res.ok) throw new Error('not found');
     const data = await res.json();
     const entry = data[0];
-    // Get IPA — prefer UK phonetic (text with /.../ or [...])
+    // Extract IPA — prefer UK, fall back to first available
     let ipa = '';
-    if(entry.phonetics && entry.phonetics.length) {
-      // Prefer entries that have both text and audio, then any with text
-      const withText = entry.phonetics.filter(p => p.text);
-      if(withText.length) ipa = withText[0].text;
+    const phonetics = (entry.phonetics || []).filter(p => p.text?.trim());
+    if(phonetics.length) {
+      const uk = phonetics.find(p => (p.audio || '').includes('-uk'));
+      const chosen = uk || phonetics[0];
+      ipa = chosen.text.trim();
     }
-    if(!ipa && entry.phonetic) ipa = entry.phonetic;
-    // Get syllabified word — API doesn't give syllables directly, use our fallback
-    // but wrap IPA in brackets if not already
-    if(ipa && !ipa.startsWith('[') && !ipa.startsWith('/')) ipa = '[' + ipa + ']';
+    if(!ipa && entry.phonetic) ipa = entry.phonetic.trim();
+    if(ipa && !ipa.startsWith('/') && !ipa.startsWith('[')) ipa = '/' + ipa + '/';
     const result = { syllables: syllabify(word), ipa };
     ipaCache[key] = result;
     return result;
@@ -1489,42 +1521,43 @@ async function fetchWordData(word) {
 function showWordPopup(word, meaning, chId, chTitle, targetEl) {
   popupWord = word; popupMeaning = meaning; popupChId = chId; popupChTitle = chTitle;
 
-  // Show popup immediately with syllables + meaning as placeholder
   const syllables = syllabify(word);
+
   if(isMobileDevice()) {
-    _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, meaning);
+    _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, '');
   } else {
     document.getElementById('wpWord').textContent = syllables;
     document.getElementById('wpMeaning').textContent = meaning;
+    document.getElementById('wpIpa').textContent = '';
     updatePopupBookmarkState();
     wordPopup.classList.add('show');
     positionPopup(targetEl);
   }
 
-  // Fetch real IPA and update in place
+  // Fetch real syllables + IPA and update in place
   fetchWordData(word).then(({ syllables: syl, ipa }) => {
     if(popupWord !== word) return; // user moved on
-    const ipaText = ipa || meaning;
     if(isMobileDevice()) {
       const msWord = document.getElementById('msWord');
-      const msMeaning = document.getElementById('msMeaning');
+      const msIpa  = document.getElementById('msIpa');
       if(msWord) msWord.textContent = syl;
-      if(msMeaning) msMeaning.textContent = ipaText;
+      if(msIpa)  msIpa.textContent  = ipa || '';
     } else {
       const wpWord = document.getElementById('wpWord');
-      const wpMeaning = document.getElementById('wpMeaning');
+      const wpIpa  = document.getElementById('wpIpa');
       if(wpWord) wpWord.textContent = syl;
-      if(wpMeaning) wpMeaning.textContent = ipaText;
+      if(wpIpa)  wpIpa.textContent  = ipa || '';
     }
   });
 }
 
 
-function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipaOrMeaning) {
+function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipa) {
   const sheet = document.getElementById('mobileSheet');
   const panel = document.getElementById('mobileSheetPanel');
-  document.getElementById('msWord').textContent = syllables || word;
-  document.getElementById('msMeaning').textContent = ipaOrMeaning || meaning;
+  document.getElementById('msWord').textContent    = syllables || word;
+  document.getElementById('msMeaning').textContent = meaning;
+  document.getElementById('msIpa').textContent     = ipa || '';
   updateMobileSheetState();
   sheet.classList.add('show');
   // Position near the tapped word, just like desktop popup

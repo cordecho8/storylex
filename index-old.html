@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Sage English</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f4f0; --surface: #ffffff; --surface2: #f0efe9; --border: #e4e2da;
+      --text: #1c1b18; --muted: #7c7a72;
+      --accent: #2a6049; --accent-light: #e0ede7; --accent-hover: #1e4a37;
+      --yellow: #fef3c0; --yellow-border: #f5c842; --yellow-active: #fde68a;
+      --blue-bg: #eff6ff; --blue-border: #93c5fd;
+      --green: #16a34a; --green-light: #dcfce7;
+      --red: #dc2626; --red-light: #fee2e2;
+      --orange: #ea580c; --orange-light: #ffedd5;
+      --shadow-lg: 0 8px 40px rgba(0,0,0,.12);
+      --sw: 280px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; }
+
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 54px; background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 16px;
+    }
+    .hd-left { display: flex; align-items: center; gap: 10px; }
+    .menu-btn { display: none; width: 36px; height: 36px; border-radius: 8px; background: var(--surface2); border: none; cursor: pointer; font-size: 18px; align-items: center; justify-content: center; color: var(--text); flex-shrink: 0; }
+    .logo { font-family: 'Lora', serif; font-size: 19px; font-weight: 500; color: var(--accent); display: flex; align-items: center; gap: 7px; }
+    .logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .kokoro-status { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #d1d5db; }
+    .status-dot.ok { background: #22c55e; }
+
+    .layout { display: grid; grid-template-columns: var(--sw) 1fr; height: calc(100vh - 54px); margin-top: 54px; }
+
+    .sidebar { background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.25s ease; }
+    .sidebar-top { padding: 16px 14px 10px; border-bottom: 1px solid var(--border); }
+    .sidebar-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; color: var(--muted); }
+    .chapter-list { flex: 1; overflow-y: auto; padding: 0; }
+    .ch-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 14px 8px 28px; border-radius: 0; cursor: pointer; transition: background 0.12s; border: none; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+    .ch-item:hover { background: var(--surface2); }
+    .story-chapters .ch-item:last-child { border-bottom: none; }
+    .ch-item.active { background: var(--accent-light); border-left: 3px solid var(--accent); padding-left: 25px; }
+    .ch-num { font-size: 10px; font-weight: 700; color: var(--muted); padding-top: 2px; min-width: 22px; }
+    .ch-item.active .ch-num { color: var(--accent); }
+    .ch-info { flex: 1; min-width: 0; }
+    .ch-name { font-size: 12px; font-weight: 500; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ch-badge { display: inline-block; margin-top: 3px; font-size: 10px; padding: 1px 5px; border-radius: 20px; background: var(--surface2); color: var(--muted); }
+    .ch-item.active .ch-badge { background: var(--accent); color: white; }
+    .ch-due { display: inline-block; margin-top: 3px; margin-left: 3px; font-size: 10px; padding: 1px 5px; border-radius: 20px; background: var(--orange-light); color: var(--orange); }
+    .sidebar-footer { padding: 10px; border-top: 1px solid var(--border); }
+    .all-srs-btn { width: 100%; padding: 9px; border: none; background: var(--accent-light); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: var(--accent); cursor: pointer; transition: all 0.12s; }
+    .all-srs-btn:hover { background: var(--accent); color: white; }
+
+    /* Story accordion */
+    .story-group { border-bottom: 1px solid var(--border); }
+    .story-group:last-child { border-bottom: none; }
+    .story-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px 10px 12px; cursor: pointer; user-select: none; transition: background 0.12s; gap: 8px; }
+    .story-header:hover { background: var(--surface2); }
+    .story-header-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .story-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .story-meta { font-size: 10px; color: var(--muted); }
+    .story-chevron { font-size: 10px; color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
+    .story-group.open .story-chevron { transform: rotate(180deg); }
+    .story-chapters { overflow: hidden; max-height: 0; transition: max-height 0.28s cubic-bezier(.4,0,.2,1); }
+    .story-group.open .story-chapters { max-height: 1200px; }
+
+    .main { overflow-y: auto; padding: 28px 40px; }
+    .empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 14px; text-align: center; color: var(--muted); }
+    .empty-icon { font-size: 48px; opacity: 0.35; }
+    .empty h3 { font-family: 'Lora', serif; font-size: 20px; color: var(--text); }
+    .empty p { font-size: 13px; max-width: 280px; line-height: 1.7; }
+
+    .chapter-view { max-width: 700px; }
+    .chapter-header { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+    .ch-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--accent); margin-bottom: 5px; }
+    .ch-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 500; line-height: 1.35; }
+
+    .tabs { display: flex; gap: 3px; background: var(--surface2); padding: 3px; border-radius: 9px; width: 100%; margin-bottom: 20px; }
+    .tab { flex: 1; padding: 6px 8px; border-radius: 7px; font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.12s; color: var(--muted); border: none; background: none; font-family: 'Inter', sans-serif; white-space: nowrap; text-align: center; }
+    .tab.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+
+    .story-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; margin-bottom: 20px; }
+    .story-text { font-family: 'Lora', serif; font-size: 16px; line-height: 2.1; color: var(--text); }
+    .story-text p { margin-bottom: 1.3em; }
+    .story-text p:last-child { margin-bottom: 0; }
+
+    .vocab-chip { display: inline; background: var(--yellow); border-bottom: 2px solid var(--yellow-border); border-radius: 3px; padding: 1px 3px 0; cursor: pointer; transition: background 0.12s; white-space: nowrap; }
+    .vocab-chip:hover, .vocab-chip:active { background: var(--yellow-active); }
+    .vocab-chip .meaning { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: #92610a; margin-left: 2px; }
+    .vocab-chip .snd { font-size: 10px; margin-left: 1px; opacity: 0.5; }
+    .vocab-blank { display: inline-block; background: var(--blue-bg); border-bottom: 2px solid var(--blue-border); border-radius: 3px; padding: 1px 12px 0; cursor: pointer; min-width: 54px; min-height: 21px; transition: background 0.12s; white-space: nowrap; }
+    .vocab-blank:hover, .vocab-blank:active { background: #dbeafe; }
+    .vocab-blank .wr { display: none; font-size: 13px; font-weight: 600; color: #1d4ed8; font-family: 'Inter', sans-serif; }
+    .vocab-blank.revealed .wr { display: inline; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+    .vocab-chip.playing, .vocab-blank.playing, .srs-play.playing { animation: pulse 0.5s 2; }
+    .vocab-row.playing td { background: var(--yellow) !important; }
+
+    .vtable { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); font-size: 14px; }
+    .vtable thead tr { background: var(--surface2); border-bottom: 1px solid var(--border); }
+    .vtable th { padding: 9px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; color: var(--muted); }
+    .vtable tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
+    .vtable tbody tr:last-child { border-bottom: none; }
+    .vtable tbody tr:hover { background: var(--surface2); }
+    .vtable td { padding: 9px 14px; vertical-align: middle; }
+    .td-word { font-family: 'Lora', serif; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 7px; }
+    .play-btn { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-light); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 9px; transition: all 0.12s; flex-shrink: 0; }
+    .play-btn:hover { background: var(--accent); color: white; }
+
+    /* SRS */
+    .srs-wrap { max-width: 700px; }
+    .srs-stats { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .srs-stat { flex: 1; min-width: 70px; padding: 10px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
+    .srs-stat .v { font-size: 22px; font-weight: 600; font-family: 'Lora', serif; }
+    .srs-stat .l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-top: 2px; }
+    .srs-stat.s-due .v { color: var(--orange); }
+    .srs-stat.s-known .v { color: var(--green); }
+    .srs-stat.s-learn .v { color: #3b82f6; }
+
+    .srs-filter { display: flex; gap: 6px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+    .srs-fl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .srs-fb { padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-family: 'Inter', sans-serif; font-size: 11px; cursor: pointer; transition: all 0.12s; color: var(--muted); }
+    .srs-fb.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .srs-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; text-align: center; margin-bottom: 14px; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+    .srs-ch { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+    .srs-word { font-family: 'Lora', serif; font-size: 36px; font-weight: 500; }
+    .srs-ctx { font-family: 'Lora', serif; font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 460px; }
+    .srs-ctx .bw { color: var(--accent); font-weight: 500; }
+    .srs-meaning { font-size: 22px; color: var(--accent); font-weight: 500; padding: 10px 20px; background: var(--accent-light); border-radius: 8px; }
+    .srs-play { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; font-size: 16px; color: white; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
+    .srs-play:hover { background: var(--accent-hover); transform: scale(1.05); }
+    .srs-prog { font-size: 12px; color: var(--muted); }
+
+    .srs-reveal { width: 100%; padding: 14px; background: var(--text); color: white; border: none; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 10px; }
+    .srs-reveal:hover { opacity: 0.85; }
+
+    .srs-grades { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; width: 100%; }
+    .srs-g { padding: 12px 6px; border-radius: 10px; border: none; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.12s; text-align: center; }
+    .srs-g .gl { display: block; font-size: 10px; opacity: 0.7; margin-top: 2px; }
+    .srs-g.again { background: var(--red-light); color: var(--red); }
+    .srs-g.again:hover { background: var(--red); color: white; }
+    .srs-g.hard { background: var(--orange-light); color: var(--orange); }
+    .srs-g.hard:hover { background: var(--orange); color: white; }
+    .srs-g.good { background: var(--green-light); color: var(--green); }
+    .srs-g.good:hover { background: var(--green); color: white; }
+
+    .srs-done { text-align: center; padding: 48px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
+    .srs-done .di { font-size: 48px; margin-bottom: 12px; }
+    .srs-done h3 { font-family: 'Lora', serif; font-size: 22px; margin-bottom: 8px; }
+    .srs-done p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+
+    .hint-bar { font-size: 13px; color: var(--muted); margin-bottom: 14px; padding: 9px 12px; background: var(--blue-bg); border-radius: 8px; border-left: 3px solid var(--blue-border); }
+    .vtitle { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+
+    .btn { padding: 8px 16px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.12s; border: none; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-ghost { background: none; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--surface2); color: var(--text); }
+
+    .tooltip { position: fixed; z-index: 300; background: #1c1b18; color: white; padding: 6px 11px; border-radius: 8px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.1s; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+    .tooltip.show { opacity: 1; }
+    .tooltip .tw { font-weight: 600; color: #fef3c0; }
+    .tooltip .tm { color: #d1fae5; margin-left: 4px; }
+
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 90; }
+
+    @media (max-width: 700px) {
+      .menu-btn { display: flex; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: fixed; top: 54px; left: 0; bottom: 0; width: var(--sw); z-index: 95; transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.open { display: block; }
+      .main { padding: 20px 16px 80px; }
+      .srs-card { padding: 22px 16px; min-height: 170px; }
+      .srs-word { font-size: 28px; }
+      .ch-title { font-size: 20px; }
+      .story-box { padding: 16px 14px; }
+      .story-text { font-size: 15px; }
+      .tab { font-size: 10px; padding: 5px 4px; }
+      .srs-g { padding: 10px 4px; font-size: 12px; }
+      .srs-g .gl { font-size: 9px; }
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* ── ACCESS GATE ─────────────────────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0e0e0c;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+    #gate.hidden { display: none; }
+
+    .gate-card {
+      width: 100%; max-width: 360px; padding: 0 24px;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      animation: gateIn 0.55s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes gateIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .gate-logo {
+      font-family: 'Lora', serif;
+      font-size: 28px; font-weight: 500;
+      color: #f5f4f0;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .gate-logo-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #2a6049;
+      box-shadow: 0 0 12px #2a604988;
+    }
+    .gate-sub {
+      font-size: 12px; color: #555550; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 40px;
+    }
+
+    .gate-label {
+      width: 100%;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.2px;
+      text-transform: uppercase; color: #555550;
+      margin-bottom: 8px;
+    }
+
+    .gate-input-wrap {
+      width: 100%; position: relative; margin-bottom: 10px;
+    }
+    .gate-input {
+      width: 100%;
+      background: #1a1a17; border: 1px solid #2e2e29;
+      border-radius: 10px; padding: 14px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px; font-weight: 500; letter-spacing: 4px;
+      color: #f5f4f0; text-align: center; text-transform: uppercase;
+      outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+      caret-color: #2a6049;
+    }
+    .gate-input::placeholder { letter-spacing: 2px; font-size: 13px; color: #3a3a35; font-weight: 400; }
+    .gate-input:focus { border-color: #2a6049; box-shadow: 0 0 0 3px #2a604922; }
+    .gate-input.error { border-color: #dc2626; box-shadow: 0 0 0 3px #dc262622; animation: shake 0.35s ease; }
+    .gate-input.success { border-color: #16a34a; box-shadow: 0 0 0 3px #16a34a22; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60% { transform: translateX(-6px); }
+      40%,80% { transform: translateX(6px); }
+    }
+
+    .gate-btn {
+      width: 100%; padding: 14px;
+      background: #2a6049; border: none; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.5px; color: white; cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-bottom: 16px;
+    }
+    .gate-btn:hover { background: #1e4a37; }
+    .gate-btn:active { transform: scale(0.98); }
+    .gate-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .gate-error {
+      font-size: 12px; color: #ef4444;
+      min-height: 18px; text-align: center;
+      margin-bottom: 8px; transition: opacity 0.2s;
+    }
+
+    .gate-footer {
+      font-size: 11px; color: #38382f; text-align: center; margin-top: 8px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ACCESS GATE OVERLAY -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo"><div class="gate-logo-dot"></div>Sage English</div>
+    <div class="gate-sub">故事词汇学习 · Story Vocab</div>
+    <div class="gate-label">Enter your access code</div>
+    <div class="gate-input-wrap">
+      <input
+        id="gateInput"
+        class="gate-input"
+        type="text"
+        maxlength="8"
+        placeholder="XXXXXXXX"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+    </div>
+    <div class="gate-error" id="gateError"></div>
+    <button class="gate-btn" id="gateBtn">Unlock Access →</button>
+    <div class="gate-footer">Each code is for one reader only.<br>Purchase a code at sageenglish.study.</div>
+  </div>
+</div>
+
+<header>
+  <div class="hd-left">
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <div class="logo"><div class="logo-dot"></div>Sage English</div>
+  </div>
+  <div class="kokoro-status">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusLabel">checking…</span>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="overlay"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-label">Sage English · 故事库</div>
+    </div>
+    <div class="chapter-list" id="chapterList"></div>
+    <div class="sidebar-footer">
+      <button class="all-srs-btn" id="allSrsBtn">复习待学词汇</button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="empty">
+      <div class="empty-icon" style="font-size:48px;opacity:.3">册</div>
+      <h3>选择章节</h3>
+      <p>从左侧故事库中选择章节，开始阅读与练习。</p>
+    </div>
+  </main>
+</div>
+
+<div class="tooltip" id="tooltip"><span class="tw" id="tipW"></span><span class="tm" id="tipM"></span></div>
+
+<script src="data/chapters.js"></script>
+<script src="codes.js"></script>
+<script>
+// ── ACCESS GATE ───────────────────────────────────────────────────────────────
+// Auth state is stored in localStorage so the user stays logged in
+// across sessions unless they manually clear their browser data.
+const AUTH_KEY = 'se_auth_v1';
+
+function isAuthed() {
+  try { return !!localStorage.getItem(AUTH_KEY); } catch(e) { return false; }
+}
+
+function saveAuth(code) {
+  try { localStorage.setItem(AUTH_KEY, code); } catch(e) {}
+}
+
+function validateCode(input) {
+  const clean = input.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  // Must be 4 letters + 4 digits, ending in 88, no 4s anywhere
+  if (!/^[A-Z]{4}[0-9]{4}$/.test(clean)) return false;
+  if (/4/.test(clean)) return false;
+  if (!clean.endsWith('88')) return false;
+  return (typeof VALID_CODES !== 'undefined') && VALID_CODES.includes(clean);
+}
+
+function bootGate() {
+  const gate = document.getElementById('gate');
+
+  // Already authenticated — hide gate immediately and launch app
+  if (isAuthed()) {
+    gate.classList.add('hidden');
+    return;
+  }
+
+  // Show gate, wire up interactions
+  const input = document.getElementById('gateInput');
+  const btn   = document.getElementById('gateBtn');
+  const err   = document.getElementById('gateError');
+
+  // Auto-format: uppercase + strip non-alphanumeric as user types
+  input.addEventListener('input', () => {
+    const pos = input.selectionStart;
+    input.value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    input.setSelectionRange(pos, pos);
+    input.classList.remove('error');
+    err.textContent = '';
+  });
+
+  // Submit on Enter
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') attemptUnlock();
+  });
+
+  btn.addEventListener('click', attemptUnlock);
+
+  function attemptUnlock() {
+    const code = input.value.trim().toUpperCase();
+
+    if (code.length === 0) {
+      showError('Please enter your access code.');
+      return;
+    }
+    if (code.length !== 8) {
+      showError('Code must be 8 characters (4 letters + 4 numbers).');
+      shakeInput();
+      return;
+    }
+    if (!validateCode(code)) {
+      showError('Invalid code. Please check and try again.');
+      shakeInput();
+      return;
+    }
+
+    // Valid — save and launch
+    input.classList.add('success');
+    err.style.color = '#16a34a';
+    err.textContent = 'Code accepted! Loading…';
+    btn.disabled = true;
+
+    saveAuth(code);
+
+    setTimeout(() => {
+      gate.style.transition = 'opacity 0.4s ease';
+      gate.style.opacity = '0';
+      setTimeout(() => { gate.classList.add('hidden'); gate.style.opacity = ''; }, 400);
+    }, 600);
+  }
+
+  function showError(msg) {
+    err.style.color = '#ef4444';
+    err.textContent = msg;
+  }
+
+  function shakeInput() {
+    input.classList.remove('error');
+    void input.offsetWidth; // force reflow to restart animation
+    input.classList.add('error');
+  }
+}
+
+bootGate();
+
+// ── SRS ENGINE (SM-2 simplified) ─────────────────────────────────────────────
+const SRS_KEY = 'se_srs_v2';
+function srsLoad() { try { return JSON.parse(localStorage.getItem(SRS_KEY)||'{}'); } catch(e) { return {}; } }
+function srsSave(d) { try { localStorage.setItem(SRS_KEY, JSON.stringify(d)); } catch(e) {} }
+
+function srsGrade(word, g) {
+  const data = srsLoad();
+  let c = data[word] || { interval:0, ease:2.5, due:0, reps:0, introduced:false };
+  c.introduced = true; // mark as entered into SRS system
+  if (g===0) { c.interval=1; c.ease=Math.max(1.3,c.ease-0.2); c.reps=0; }
+  else if (g===1) { c.interval=c.reps===0?1:Math.max(1,Math.round(c.interval*1.2)); c.ease=Math.max(1.3,c.ease-0.15); c.reps++; }
+  else { c.interval=c.reps===0?1:c.reps===1?3:Math.round(c.interval*c.ease); c.ease=Math.min(3.0,c.ease+0.1); c.reps++; }
+  c.due = Date.now() + c.interval*86400000;
+  data[word]=c; srsSave(data); return c;
+}
+
+function isDue(word) {
+  const c = srsLoad()[word];
+  // A word is only "due" if it has been studied at least once AND is past its due date
+  if (!c || !c.introduced) return false;
+  return c.due <= Date.now();
+}
+
+function wordState(word) {
+  const c = srsLoad()[word];
+  if (!c || !c.introduced) return 'new';
+  if (!c.reps) return 'new';
+  if (c.due<=Date.now()) return 'due';
+  if (c.reps>=3) return 'known';
+  return 'learning';
+}
+
+function nextDueLabel(word) {
+  const c = srsLoad()[word];
+  if (!c || !c.introduced) return '—';
+  if (c.due<=Date.now()) return 'Due now';
+  const d = Math.round((c.due-Date.now())/86400000);
+  return d<1?'< 1 day':`${d} day${d!==1?'s':''}`;
+}
+
+// ── APP STATE ─────────────────────────────────────────────────────────────────
+let chapters=[], activeId=null, activeTab='read', openStoryId=null;
+let currentAudio=null, currentPlayingEl=null;
+let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='all', srsAllMode=false;
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function init() {
+  if (window.CHAPTERS) chapters=[...window.CHAPTERS];
+  // Auto-open the first story group
+  if (chapters.length) openStoryId = chapters[0].story_id || 'story1';
+  renderSidebar();
+  if (chapters.length) selectChapter(chapters[0].id);
+  checkAudio();
+  document.getElementById('menuBtn').onclick=toggleSidebar;
+  document.getElementById('overlay').onclick=closeSidebar;
+  document.getElementById('allSrsBtn').onclick=()=>{ srsAllMode=true; activeId=null; activeTab='practice'; renderMain(); closeSidebar(); };
+}
+
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
+
+// ── VOCAB PARSING ─────────────────────────────────────────────────────────────
+function parseVocab(story) {
+  const seen=new Set(), list=[];
+  const re=/\{\{([^|]+)\|([^}]+)\}\}/g; let m;
+  while((m=re.exec(story))!==null){ const w=m[1].trim(); if(!seen.has(w.toLowerCase())){ seen.add(w.toLowerCase()); list.push({word:w,meaning:m[2].trim()}); } }
+  return list;
+}
+
+function allVocabList() {
+  const seen=new Set(), list=[];
+  chapters.forEach(ch=>{ parseVocab(ch.story).forEach(v=>{ if(!seen.has(v.word.toLowerCase())){ seen.add(v.word.toLowerCase()); list.push({...v,chId:ch.id,chTitle:ch.title}); } }); });
+  return list;
+}
+
+function getContext(story, word) {
+  const re=new RegExp(`\\{\\{${word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\|[^}]+\\}\\}`,'i');
+  const parts=story.split('\n');
+  for(const p of parts){ if(re.test(p)){ return p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>w.trim().toLowerCase()===word.toLowerCase()?'__B__':w.trim()).trim(); } }
+  return '';
+}
+
+// ── AUDIO ─────────────────────────────────────────────────────────────────────
+function af(w){ return 'audio/'+w.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_-]/gi,'')+ '.mp3'; }
+
+function playWord(word, el) {
+  if(currentAudio){ currentAudio.pause(); currentAudio.currentTime=0; }
+  if(currentPlayingEl){ currentPlayingEl.classList.remove('playing'); currentPlayingEl=null; }
+  const a=new Audio(af(word)); currentAudio=a; currentPlayingEl=el;
+  a.onplay=()=>el&&el.classList.add('playing');
+  a.onended=()=>{ el&&el.classList.remove('playing'); currentAudio=null; currentPlayingEl=null; };
+  a.onerror=()=>{
+    el&&el.classList.remove('playing'); currentAudio=null; currentPlayingEl=null;
+    if('speechSynthesis' in window){ const u=new SpeechSynthesisUtterance(word); u.lang='en-US'; u.rate=0.9; el&&(u.onstart=()=>el.classList.add('playing')); el&&(u.onend=()=>el.classList.remove('playing')); speechSynthesis.speak(u); }
+  };
+  a.play().catch(()=>{});
+}
+
+// ── TOOLTIP ───────────────────────────────────────────────────────────────────
+const tooltip=document.getElementById('tooltip');
+function showTip(w,m,e){ document.getElementById('tipW').textContent=w; document.getElementById('tipM').textContent=m; tooltip.classList.add('show'); moveTip(e); }
+function moveTip(e){ let x=e.clientX-tooltip.offsetWidth/2,y=e.clientY-42; if(x<6)x=6; if(y<6)y=e.clientY+12; tooltip.style.left=x+'px'; tooltip.style.top=y+'px'; }
+function hideTip(){ tooltip.classList.remove('show'); }
+document.addEventListener('mousemove',e=>{ if(tooltip.classList.contains('show'))moveTip(e); });
+
+// ── SIDEBAR ───────────────────────────────────────────────────────────────────
+function renderSidebar() {
+  const list=document.getElementById('chapterList'); list.innerHTML='';
+
+  // Group chapters by story
+  const storyMap = new Map();
+  chapters.forEach((ch, i) => {
+    const sid = ch.story_id || 'story1';
+    if (!storyMap.has(sid)) storyMap.set(sid, { title: ch.story_title || sid, chapters: [] });
+    storyMap.get(sid).chapters.push({ ch, globalIdx: i });
+  });
+
+  storyMap.forEach((story, sid) => {
+    const isOpen = openStoryId === sid;
+    const totalWords = story.chapters.reduce((n, {ch}) => n + parseVocab(ch.story).length, 0);
+    const dueWords = story.chapters.reduce((n, {ch}) => {
+      return n + parseVocab(ch.story).filter(v => isDue(v.word.toLowerCase())).length;
+    }, 0);
+
+    const group = document.createElement('div');
+    group.className = 'story-group' + (isOpen ? ' open' : '');
+
+    const header = document.createElement('div');
+    header.className = 'story-header';
+    header.innerHTML = `
+      <div class="story-header-left">
+        <div class="story-name">${esc(story.title)}</div>
+        <div class="story-meta">${story.chapters.length} 章 · ${totalWords} 词${dueWords > 0 ? ` · <span style="color:var(--orange)">${dueWords} 待复习</span>` : ''}</div>
+      </div>
+      <span class="story-chevron">▼</span>`;
+    header.onclick = () => {
+      openStoryId = isOpen ? null : sid;
+      renderSidebar();
+    };
+
+    const chList = document.createElement('div');
+    chList.className = 'story-chapters';
+
+    story.chapters.forEach(({ ch, globalIdx }) => {
+      const vocab = parseVocab(ch.story);
+      const due = vocab.filter(v => isDue(v.word.toLowerCase())).length;
+      // Chapter number within this story
+      const chNumInStory = story.chapters.findIndex(x => x.ch.id === ch.id) + 1;
+      const el = document.createElement('div');
+      el.className = 'ch-item' + (ch.id === activeId ? ' active' : '');
+      el.innerHTML = `<div class="ch-num">${String(chNumInStory).padStart(2,'0')}</div><div class="ch-info"><div class="ch-name">${esc(ch.title)}</div><span class="ch-badge">${vocab.length} 词</span>${due > 0 ? `<span class="ch-due">${due} 待</span>` : ''}</div>`;
+      el.onclick = () => { selectChapter(ch.id); closeSidebar(); };
+      chList.appendChild(el);
+    });
+
+    group.appendChild(header);
+    group.appendChild(chList);
+    list.appendChild(group);
+  });
+}
+
+function selectChapter(id) {
+  activeId=id; activeTab='read'; srsAllMode=false;
+  const ch = chapters.find(c=>c.id===id);
+  if (ch) openStoryId = ch.story_id || 'story1';
+  renderSidebar(); renderMain();
+}
+
+// ── MAIN ──────────────────────────────────────────────────────────────────────
+function renderMain() {
+  const main=document.getElementById('main');
+
+  // All-chapters SRS
+  if(srsAllMode || (!activeId && activeTab==='practice')) {
+    main.innerHTML='<div class="srs-wrap" id="srsWrap"></div>';
+    buildSrsSession(allVocabList(), document.getElementById('srsWrap'));
+    return;
+  }
+
+  const ch=chapters.find(c=>c.id===activeId);
+  if(!ch) return;
+  const vocab=parseVocab(ch.story);
+  const chIdx=chapters.indexOf(ch);
+
+  main.innerHTML=`
+    <div class="chapter-view">
+      <div class="chapter-header">
+        <div class="ch-eyebrow">${esc(ch.story_title||'')} · ${vocab.length} vocabulary words</div>
+        <div class="ch-title">${esc(ch.title)}</div>
+      </div>
+      <div class="tabs">
+        <button class="tab${activeTab==='read'?' active':''}" data-t="read">Read 阅读</button>
+        <button class="tab${activeTab==='recall'?' active':''}" data-t="recall">Recall 默写</button>
+        <button class="tab${activeTab==='vocab'?' active':''}" data-t="vocab">Vocab 词汇</button>
+        <button class="tab${activeTab==='practice'?' active':''}" data-t="practice">Practice 练习</button>
+      </div>
+      <div id="tabBody"></div>
+    </div>`;
+
+  main.querySelectorAll('.tab').forEach(t=>{
+    t.onclick=()=>{ activeTab=t.dataset.t; main.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.t===activeTab)); renderTab(ch,vocab); };
+  });
+  renderTab(ch,vocab);
+}
+
+function renderTab(ch,vocab) {
+  const body=document.getElementById('tabBody');
+  if(activeTab==='read') {
+    body.innerHTML=`<div class="story-box"><div class="story-text">${buildReadHTML(ch.story)}</div></div>`;
+    body.querySelectorAll('.vocab-chip').forEach(c=>{ c.onclick=e=>{e.stopPropagation();playWord(c.dataset.w,c);}; c.onmouseenter=e=>showTip(c.dataset.w,c.dataset.m,e); c.onmouseleave=hideTip; });
+  } else if(activeTab==='recall') {
+    body.innerHTML=`<div class="hint-bar">Click any <span style="background:var(--blue-bg);border-bottom:2px solid var(--blue-border);padding:1px 8px;border-radius:3px;">blank</span> to reveal and hear the word.</div><div class="story-box"><div class="story-text">${buildRecallHTML(ch.story)}</div></div>`;
+    body.querySelectorAll('.vocab-blank').forEach(b=>{ b.onclick=()=>{ b.classList.add('revealed'); playWord(b.dataset.w,b); const r=b.getBoundingClientRect(); showTip(b.dataset.w,b.dataset.m,{clientX:r.left+30,clientY:r.top}); setTimeout(hideTip,2000); }; });
+  } else if(activeTab==='vocab') {
+    body.innerHTML=`<div class="vtitle">${vocab.length} words · click any row to play</div><table class="vtable"><thead><tr><th>Word</th><th>Meaning</th><th>Next Review</th></tr></thead><tbody>${vocab.map(v=>`<tr class="vocab-row" data-w="${esc(v.word)}"><td><div class="td-word"><button class="play-btn" data-w="${esc(v.word)}">▶</button>${esc(v.word)}</div></td><td>${esc(v.meaning)}</td><td style="font-size:11px;color:var(--muted)">${nextDueLabel(v.word.toLowerCase())}</td></tr>`).join('')}</tbody></table>`;
+    body.querySelectorAll('.play-btn').forEach(b=>{ b.onclick=e=>{e.stopPropagation();playWord(b.dataset.w,b.closest('tr'));}; });
+    body.querySelectorAll('.vocab-row').forEach(r=>{ r.onclick=()=>playWord(r.dataset.w,r); });
+  } else {
+    body.innerHTML='<div class="srs-wrap" id="srsWrap"></div>';
+    const chVocab=vocab.map(v=>({...v,chId:ch.id,chTitle:ch.title}));
+    buildSrsSession(chVocab, document.getElementById('srsWrap'));
+  }
+}
+
+// ── SRS SESSION ───────────────────────────────────────────────────────────────
+function buildSrsSession(vocabList, wrap) {
+  const due=vocabList.filter(v=>isDue(v.word.toLowerCase()));
+  // "due" = only words already in the SRS system that are past due date
+  // "all" = all words including unintroduced ones (study new words)
+  const queue=srsFilter==='due'?due:vocabList;
+
+  const dueCount=due.length;
+  const knownCount=vocabList.filter(v=>wordState(v.word.toLowerCase())==='known').length;
+  const learnCount=vocabList.filter(v=>wordState(v.word.toLowerCase())==='learning').length;
+  const newCount=vocabList.filter(v=>wordState(v.word.toLowerCase())==='new').length;
+
+  wrap.innerHTML=`
+    <div class="srs-stats">
+      <div class="srs-stat s-due"><div class="v">${dueCount}</div><div class="l">待复习</div></div>
+      <div class="srs-stat s-learn"><div class="v">${learnCount}</div><div class="l">学习中</div></div>
+      <div class="srs-stat s-known"><div class="v">${knownCount}</div><div class="l">已掌握</div></div>
+      <div class="srs-stat"><div class="v">${newCount}</div><div class="l">未学习</div></div>
+    </div>
+    <div class="srs-filter">
+      <span class="srs-fl">显示:</span>
+      <button class="srs-fb${srsFilter==='due'?' active':''}" id="fbDue">待复习</button>
+      <button class="srs-fb${srsFilter==='all'?' active':''}" id="fbAll">全部词汇</button>
+    </div>
+    <div id="cardArea"></div>`;
+
+  document.getElementById('fbDue').onclick=()=>{ srsFilter='due'; renderMain(); };
+  document.getElementById('fbAll').onclick=()=>{ srsFilter='all'; renderMain(); };
+
+  if(queue.length===0) {
+    document.getElementById('cardArea').innerHTML=`<div class="srs-done"><div class="di">🎉</div><h3>今日已完成</h3><p>暂无待复习卡片。点击下方学习新词汇。</p><button class="btn btn-primary" onclick="srsFilter='all';renderMain()">学习全部 ${vocabList.length} 个词</button></div>`;
+    return;
+  }
+
+  srsQueue=[...queue].sort(()=>Math.random()-0.5);
+  srsIdx=0; srsRevealed=false;
+  renderCard(vocabList);
+}
+
+function renderCard(vocabList) {
+  const area=document.getElementById('cardArea');
+  if(!area) return;
+  if(srsIdx>=srsQueue.length) {
+    area.innerHTML=`<div class="srs-done"><div class="di">✅</div><h3>本轮完成</h3><p>已复习 ${srsQueue.length} 个词。</p><button class="btn btn-ghost" onclick="renderMain()">再来一轮</button></div>`;
+    renderSidebar(); return;
+  }
+
+  const v=srsQueue[srsIdx];
+  const prog=`${srsIdx+1} / ${srsQueue.length}`;
+  const ch=chapters.find(c=>c.id===v.chId);
+  const ctx=ch?getContext(ch.story,v.word):'';
+
+  if(!srsRevealed) {
+    area.innerHTML=`
+      <div class="srs-card">
+        <div class="srs-ch">${esc(v.chTitle||'')}</div>
+        <div class="srs-meaning">${esc(v.meaning)}</div>
+        <div class="srs-prog">${prog}</div>
+      </div>
+      <button class="srs-reveal" id="revBtn">Reveal English word →</button>`;
+    document.getElementById('revBtn').onclick=()=>{ srsRevealed=true; playWord(v.word,null); renderCard(vocabList); };
+  } else {
+    const ctxHtml=ctx?ctx.replace('__B__',`<span class="bw">${esc(v.word)}</span>`):'';
+    area.innerHTML=`
+      <div class="srs-card">
+        <div class="srs-ch">${esc(v.chTitle||'')}</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="srs-word">${esc(v.word)}</div>
+          <button class="srs-play" id="srsPlayBtn">🔊</button>
+        </div>
+        <div class="srs-meaning">${esc(v.meaning)}</div>
+        ${ctxHtml?`<div class="srs-ctx">${ctxHtml}</div>`:''}
+        <div class="srs-prog">${prog}</div>
+      </div>
+      <div class="srs-grades">
+        <button class="srs-g again" id="gAgain">Again<span class="gl">Didn't know</span></button>
+        <button class="srs-g hard" id="gHard">Hard<span class="gl">Struggled</span></button>
+        <button class="srs-g good" id="gGood">Got it!<span class="gl">Knew it</span></button>
+      </div>`;
+
+    document.getElementById('srsPlayBtn').onclick=()=>playWord(v.word,document.getElementById('srsPlayBtn'));
+    const grade=g=>{ srsGrade(v.word.toLowerCase(),g); srsIdx++; srsRevealed=false; renderCard(vocabList); renderSidebar(); };
+    document.getElementById('gAgain').onclick=()=>grade(0);
+    document.getElementById('gHard').onclick=()=>grade(1);
+    document.getElementById('gGood').onclick=()=>grade(2);
+  }
+}
+
+// ── HTML BUILDERS ─────────────────────────────────────────────────────────────
+function buildReadHTML(story) {
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}">${esc(w.trim())}<span class="meaning">(${esc(m.trim())})</span><span class="snd">🔊</span></span>`)}</p>`).join('');
+}
+
+function buildRecallHTML(story) {
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-blank" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="wr">${esc(w.trim())}</span></span>`)}</p>`).join('');
+}
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── STATUS ────────────────────────────────────────────────────────────────────
+function checkAudio() {
+  const dot=document.getElementById('statusDot'), label=document.getElementById('statusLabel');
+  if(!chapters.length){ label.textContent='no chapters'; return; }
+  const vocab=parseVocab(chapters[0].story);
+  if(!vocab.length) return;
+  const a=new Audio(af(vocab[0].word));
+  a.oncanplaythrough=()=>{ dot.classList.add('ok'); label.textContent='audio ready'; };
+  a.onerror=()=>{ label.textContent='run generate-audio.js'; };
+  a.load();
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeSidebar(); hideTip(); } });
+
+init();
+</script>
+</body>
+</html>

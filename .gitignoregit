@@ -1,0 +1,1 @@
+node_modules/  rm -r --cached node_modulesgit commit -m "Remove node_modules from git"git push

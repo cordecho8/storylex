@@ -1,0 +1,4766 @@
+{
+  "fatigue": {
+    "syllables": "fa·ti·gue",
+    "ipa": "/fəˈtiːɡ/"
+  },
+  "absurd": {
+    "syllables": "absurd",
+    "ipa": "/æbˈzɝd/"
+  },
+  "supreme": {
+    "syllables": "supre·me",
+    "ipa": "/ˌs(j)uːˈpɹiːm/"
+  },
+  "genius": {
+    "syllables": "ge·nius",
+    "ipa": "/ˈdʒiː.nɪəs/"
+  },
+  "stubborn": {
+    "syllables": "stubborn",
+    "ipa": "/ˈstʌbən/"
+  },
+  "grand": {
+    "syllables": "grand",
+    "ipa": "/ɡɹænd/"
+  },
+  "elegant": {
+    "syllables": "ele·gant",
+    "ipa": "/ˈɛl.ə.ɡənt/"
+  },
+  "anxiety": {
+    "syllables": "anxiety",
+    "ipa": "/ˌæŋ(ɡ)ˈzaɪ.ə.ti/"
+  },
+  "graceful": {
+    "syllables": "gra·ce·ful",
+    "ipa": "/ˈɡɹeɪsfʊl/"
+  },
+  "unfavorable": {
+    "syllables": "unfa·vo·rable",
+    "ipa": ""
+  },
+  "comply": {
+    "syllables": "comply",
+    "ipa": "/kəmˈplaɪ/"
+  },
+  "interfere": {
+    "syllables": "interfe·re",
+    "ipa": "/ˌɪntəˈfɪə/"
+  },
+  "blunt": {
+    "syllables": "blunt",
+    "ipa": "/blʌnt/"
+  },
+  "independence": {
+    "syllables": "inde·pendence",
+    "ipa": "/ɪndɪˈpɛndəns/"
+  },
+  "manual": {
+    "syllables": "ma·nual",
+    "ipa": "/ˈman.j(ʊ)əl/"
+  },
+  "restriction": {
+    "syllables": "restriction",
+    "ipa": "/ɹɪˈstɹɪkʃən/"
+  },
+  "exhausted": {
+    "syllables": "exhausted",
+    "ipa": "/ɪɡˈzɑstɪd/"
+  },
+  "curiosity": {
+    "syllables": "cu·riosi·ty",
+    "ipa": "/ˌkjʊəɹɪˈɒsɪti/"
+  },
+  "maintenance": {
+    "syllables": "mainte·nance",
+    "ipa": "/ˈmeɪnt(ə)nəns/"
+  },
+  "bold": {
+    "syllables": "bold",
+    "ipa": "/bəʊld/"
+  },
+  "ambition": {
+    "syllables": "ambi·tion",
+    "ipa": "/æmˈbɪ.ʃən/"
+  },
+  "loyal": {
+    "syllables": "loyal",
+    "ipa": "/ˈlɔɪəl/"
+  },
+  "aura": {
+    "syllables": "aura",
+    "ipa": "/ˈɔːɹə/"
+  },
+  "tremble": {
+    "syllables": "tremble",
+    "ipa": "/ˈtɹɛmbl̩/"
+  },
+  "betray": {
+    "syllables": "betray",
+    "ipa": "/bəˈtɹeɪ/"
+  },
+  "endure": {
+    "syllables": "endu·re",
+    "ipa": "/ɪnˈdjɔː(ɹ)/"
+  },
+  "strangers": {
+    "syllables": "strangers",
+    "ipa": "/ˈstɹeɪndʒəz/"
+  },
+  "liberty": {
+    "syllables": "li·berty",
+    "ipa": "/ˈlɪbɚti/"
+  },
+  "complex": {
+    "syllables": "complex",
+    "ipa": ""
+  },
+  "smash": {
+    "syllables": "smash",
+    "ipa": "/smæʃ/"
+  },
+  "helpless": {
+    "syllables": "helpless",
+    "ipa": "/ˈhɛlplɪs/"
+  },
+  "distinct": {
+    "syllables": "distinct",
+    "ipa": "/dɪsˈtɪŋkt/"
+  },
+  "compulsory": {
+    "syllables": "compulso·ry",
+    "ipa": "/kəmˈpʌlsəri/"
+  },
+  "hesitate": {
+    "syllables": "he·si·ta·te",
+    "ipa": "/ˈhɛzɪteɪt/"
+  },
+  "recover": {
+    "syllables": "re·co·ver",
+    "ipa": "/ɹɪˈkʌvə/"
+  },
+  "data": {
+    "syllables": "da·ta",
+    "ipa": "/ˈdeɪtə/"
+  },
+  "burden": {
+    "syllables": "burden",
+    "ipa": "/ˈbɜːdn/"
+  },
+  "awkward": {
+    "syllables": "awkward",
+    "ipa": "/ˈɑkwɚd/"
+  },
+  "disgrace": {
+    "syllables": "disgra·ce",
+    "ipa": "/dɪsˈɡɹeɪs/"
+  },
+  "prestige": {
+    "syllables": "presti·ge",
+    "ipa": "/pɹəˈsti(d)ʒ/"
+  },
+  "intense": {
+    "syllables": "intense",
+    "ipa": "/ɪnˈtɛns/"
+  },
+  "gentle": {
+    "syllables": "gentle",
+    "ipa": "/ˈdʒɛntl̩/"
+  },
+  "associate": {
+    "syllables": "asso·ciate",
+    "ipa": "/əˈsəʊsi.ət/"
+  },
+  "vulnerable": {
+    "syllables": "vulne·rable",
+    "ipa": "/ˈvʌln(ə)ɹəbl̩/"
+  },
+  "halted": {
+    "syllables": "halted",
+    "ipa": "/ˈhɔːltɪd/"
+  },
+  "consult": {
+    "syllables": "consult",
+    "ipa": ""
+  },
+  "tough": {
+    "syllables": "tough",
+    "ipa": "/tʌf/"
+  },
+  "moan": {
+    "syllables": "moan",
+    "ipa": "/məʊn/"
+  },
+  "dissolved": {
+    "syllables": "dissolved",
+    "ipa": "/dɪˈzɒlvd/"
+  },
+  "rare": {
+    "syllables": "ra·re",
+    "ipa": "[ɹɜɹ]"
+  },
+  "anniversary": {
+    "syllables": "anni·versa·ry",
+    "ipa": "/ˌænɪˈvɜːs(ə)ɹi/"
+  },
+  "image": {
+    "syllables": "ima·ge",
+    "ipa": "/ˈɪmɪd͡ʒ/"
+  },
+  "sophisticated": {
+    "syllables": "sophisti·ca·ted",
+    "ipa": ""
+  },
+  "influential": {
+    "syllables": "influential",
+    "ipa": "/ɪnfluˈɛnʃəl/"
+  },
+  "intimate": {
+    "syllables": "inti·ma·te",
+    "ipa": "/ˈɪn.tɪ.mət/"
+  },
+  "rumor": {
+    "syllables": "ru·mor",
+    "ipa": "/ˈɹuːmə(ɹ)/"
+  },
+  "rebellion": {
+    "syllables": "re·bellion",
+    "ipa": "/ɹɪˈbɛl.i.ən/"
+  },
+  "efficiency": {
+    "syllables": "effi·ciency",
+    "ipa": "/ɪˈfɪʃn̩si/"
+  },
+  "intelligence": {
+    "syllables": "intelli·gence",
+    "ipa": "/ɪnˈtɛl.ɪ.d͡ʒəns/"
+  },
+  "harmony": {
+    "syllables": "harmo·ny",
+    "ipa": "/ˈhɑːməni/"
+  },
+  "rival": {
+    "syllables": "ri·val",
+    "ipa": "/ˈɹaɪvəl/"
+  },
+  "admiration": {
+    "syllables": "admi·ra·tion",
+    "ipa": "/ˌæd.mɚˈeɪʃ.ən/"
+  },
+  "cheerful": {
+    "syllables": "cheerful",
+    "ipa": "/ˈt͡ʃɪəfəl/"
+  },
+  "governor": {
+    "syllables": "go·vernor",
+    "ipa": "/ˈɡʌv(ə)nə(ɹ)/"
+  },
+  "gloomy": {
+    "syllables": "gloomy",
+    "ipa": "/ˈɡlumi/"
+  },
+  "aggressive": {
+    "syllables": "aggressi·ve",
+    "ipa": "/əˈɡɹɛs.ɪv/"
+  },
+  "hostile": {
+    "syllables": "hosti·le",
+    "ipa": "/ˈhɒstaɪl/"
+  },
+  "ironic": {
+    "syllables": "iro·nic",
+    "ipa": "/aɪˈɹɒn.ɪk/"
+  },
+  "commodity": {
+    "syllables": "commo·di·ty",
+    "ipa": "/kəˈmɒdəti/"
+  },
+  "romantic": {
+    "syllables": "ro·mantic",
+    "ipa": "/ɹə-/"
+  },
+  "threat": {
+    "syllables": "threat",
+    "ipa": "/θɹɛt/"
+  },
+  "extensive": {
+    "syllables": "extensi·ve",
+    "ipa": "/ɛksˈtɛn.sɪv/"
+  },
+  "tension": {
+    "syllables": "tension",
+    "ipa": "/ˈtɛnʃən/"
+  },
+  "dizzy": {
+    "syllables": "dizzy",
+    "ipa": "/ˈdɪzi/"
+  },
+  "fierce": {
+    "syllables": "fierce",
+    "ipa": "/fɪəs/"
+  },
+  "identity": {
+    "syllables": "identi·ty",
+    "ipa": "/aɪˈdɛntəti/"
+  },
+  "frustrated": {
+    "syllables": "frustra·ted",
+    "ipa": "/fɹəsˈtɹeɪt.ɪd/"
+  },
+  "promote": {
+    "syllables": "pro·mo·te",
+    "ipa": "/pɹəˈməʊt/"
+  },
+  "jealousy": {
+    "syllables": "jealousy",
+    "ipa": "/ˈdʒɛləsi/"
+  },
+  "unexpected": {
+    "syllables": "unexpected",
+    "ipa": "/ʌnɪkˈspɛktɪd/"
+  },
+  "mysterious": {
+    "syllables": "myste·rious",
+    "ipa": "/mɪˈstɪəɹi.əs/"
+  },
+  "despair": {
+    "syllables": "despair",
+    "ipa": "/dɪˈspɛə(ɹ)/"
+  },
+  "confident": {
+    "syllables": "confi·dent",
+    "ipa": "/ˈkɒn.fɪ.dənt/"
+  },
+  "shrink": {
+    "syllables": "shrink",
+    "ipa": "/ˈʃɹɪŋk/"
+  },
+  "severe": {
+    "syllables": "se·ve·re",
+    "ipa": "/sɪˈvɪə/"
+  },
+  "defend": {
+    "syllables": "de·fend",
+    "ipa": "/dɪˈfɛnd/"
+  },
+  "sympathy": {
+    "syllables": "sympathy",
+    "ipa": "/ˈsɪmpəθi/"
+  },
+  "calm": {
+    "syllables": "calm",
+    "ipa": "/kam/"
+  },
+  "crush": {
+    "syllables": "crush",
+    "ipa": "/kɹʌʃ/"
+  },
+  "compassion": {
+    "syllables": "compassion",
+    "ipa": "/kəmˈpæʃ.ən/"
+  },
+  "heal": {
+    "syllables": "heal",
+    "ipa": "/hiːl/"
+  },
+  "sincere": {
+    "syllables": "since·re",
+    "ipa": "/sɪnˈsɪə(ɹ)/"
+  },
+  "weakness": {
+    "syllables": "weakness",
+    "ipa": "/ˈwiːk.nəs/"
+  },
+  "sacrifice": {
+    "syllables": "sacri·fi·ce",
+    "ipa": "/ˈsækɹɪfaɪs/"
+  },
+  "noticeable": {
+    "syllables": "no·ti·ceable",
+    "ipa": "/ˈnəʊtɪsəbl̩/"
+  },
+  "temporary": {
+    "syllables": "tempo·ra·ry",
+    "ipa": "/ˈtɛmpəɹi/"
+  },
+  "private": {
+    "syllables": "pri·va·te",
+    "ipa": "/ˈpɹaɪvət/"
+  },
+  "noise": {
+    "syllables": "noise",
+    "ipa": "/nɔɪz/"
+  },
+  "property": {
+    "syllables": "pro·perty",
+    "ipa": "/ˈpɹɒp.ət.i/"
+  },
+  "depressed": {
+    "syllables": "depressed",
+    "ipa": "/dɪˈpɹɛst/"
+  },
+  "antique": {
+    "syllables": "anti·que",
+    "ipa": "/ænˈtiːk/"
+  },
+  "mechanical": {
+    "syllables": "mecha·ni·cal",
+    "ipa": "/mɪˈkanɪk(ə)l/"
+  },
+  "amazed": {
+    "syllables": "ama·zed",
+    "ipa": "/əˈmeɪzd/"
+  },
+  "finance": {
+    "syllables": "fi·nance",
+    "ipa": "/faɪˈnæns/"
+  },
+  "logic": {
+    "syllables": "lo·gic",
+    "ipa": "/ˈlɒdʒɪk/"
+  },
+  "secure": {
+    "syllables": "se·cu·re",
+    "ipa": "/səˈkjɔː(ɹ)/"
+  },
+  "release": {
+    "syllables": "re·lease",
+    "ipa": "/ɹɪˈliːs/"
+  },
+  "outsider": {
+    "syllables": "outsi·der",
+    "ipa": "/ˌaʊtˈsaɪdəɹ/"
+  },
+  "accelerate": {
+    "syllables": "acce·le·ra·te",
+    "ipa": "/æk.ˈsɛl.ə.ˌɹeɪt/"
+  },
+  "frozen": {
+    "syllables": "fro·zen",
+    "ipa": "/ˈfɹəʊzən/"
+  },
+  "hesitation": {
+    "syllables": "he·si·ta·tion",
+    "ipa": "/hɛzɪˈteɪʃən/"
+  },
+  "unique": {
+    "syllables": "uni·que",
+    "ipa": "/juːˈniːk/"
+  },
+  "submit": {
+    "syllables": "submit",
+    "ipa": "/səbˈmɪt/"
+  },
+  "challenge": {
+    "syllables": "challenge",
+    "ipa": "/ˈtʃæl.əndʒ/"
+  },
+  "vivid": {
+    "syllables": "vi·vid",
+    "ipa": "/ˈvɪvɪd/"
+  },
+  "delicate": {
+    "syllables": "de·li·ca·te",
+    "ipa": "/ˈdɛlɪkət/"
+  },
+  "alarm": {
+    "syllables": "alarm",
+    "ipa": "/əˈlɑːm/"
+  },
+  "volunteer": {
+    "syllables": "vo·lunteer",
+    "ipa": "/vɒl.ənˈtɪə/"
+  },
+  "annoyed": {
+    "syllables": "annoyed",
+    "ipa": "/əˈnɔɪd/"
+  },
+  "charity": {
+    "syllables": "cha·ri·ty",
+    "ipa": "/ˈtʃæɹɪti/"
+  },
+  "supervise": {
+    "syllables": "su·pervi·se",
+    "ipa": ""
+  },
+  "vibration": {
+    "syllables": "vibra·tion",
+    "ipa": "/vaɪˈbɹeɪʃən/"
+  },
+  "crack": {
+    "syllables": "crack",
+    "ipa": "/kɹæk/"
+  },
+  "echo": {
+    "syllables": "echo",
+    "ipa": "/ˈɛkəʊ/"
+  },
+  "detach": {
+    "syllables": "de·tach",
+    "ipa": "/dəˈtætʃ/"
+  },
+  "reluctance": {
+    "syllables": "re·luctance",
+    "ipa": "/ɹɪˈlʌktəns/"
+  },
+  "stifled": {
+    "syllables": "stifled",
+    "ipa": ""
+  },
+  "horror": {
+    "syllables": "horror",
+    "ipa": "/ˈhɔɹɚ/"
+  },
+  "weary": {
+    "syllables": "weary",
+    "ipa": "/ˈwiːɹi/"
+  },
+  "dangerous": {
+    "syllables": "dange·rous",
+    "ipa": "/ˈdeɪnd͡ʒ(ə)ɹəs/"
+  },
+  "responsibility": {
+    "syllables": "responsi·bi·li·ty",
+    "ipa": "/ɹɪˌspɑnsəˈbɪlɪɾi/"
+  },
+  "firm": {
+    "syllables": "firm",
+    "ipa": "/fɜːm/"
+  },
+  "protect": {
+    "syllables": "pro·tect",
+    "ipa": "/pɹəˈtɛkt/"
+  },
+  "fundamental": {
+    "syllables": "funda·mental",
+    "ipa": "/ˌfʌndəˈmɛntəl/"
+  },
+  "genuine": {
+    "syllables": "ge·nuine",
+    "ipa": "/ˈdʒɛnjuːˌaɪn/"
+  },
+  "successful": {
+    "syllables": "successful",
+    "ipa": "/səkˈsɛsfl̩/"
+  },
+  "solemn": {
+    "syllables": "so·lemn",
+    "ipa": "/ˈsɒləm/"
+  },
+  "rough": {
+    "syllables": "rough",
+    "ipa": "/ɹʌf/"
+  },
+  "solidified": {
+    "syllables": "so·li·di·fied",
+    "ipa": ""
+  },
+  "startled": {
+    "syllables": "startled",
+    "ipa": "/ˈstɑːt.l̩d/"
+  },
+  "concerned": {
+    "syllables": "concerned",
+    "ipa": "/kənˈsɜːnd/"
+  },
+  "contempt": {
+    "syllables": "contempt",
+    "ipa": "/kənˈtɛmpt/"
+  },
+  "disaster": {
+    "syllables": "di·saster",
+    "ipa": "/dɪˈzæs.tə/"
+  },
+  "stable": {
+    "syllables": "stable",
+    "ipa": "/ˈsteɪ.bəɫ/"
+  },
+  "sharp": {
+    "syllables": "sharp",
+    "ipa": "/ʃɑːp/"
+  },
+  "painful": {
+    "syllables": "painful",
+    "ipa": "/ˈpeɪn.fəl/"
+  },
+  "dignity": {
+    "syllables": "digni·ty",
+    "ipa": "/ˈdɪɡnɪti/"
+  },
+  "prompt": {
+    "syllables": "prompt",
+    "ipa": "/pɹɒmpt/"
+  },
+  "mockery": {
+    "syllables": "mocke·ry",
+    "ipa": "/ˈmɒkəɹi/"
+  },
+  "legal": {
+    "syllables": "le·gal",
+    "ipa": "/ˈliː.ɡəl/"
+  },
+  "inappropriate": {
+    "syllables": "inappropriate",
+    "ipa": "/ˌɪnəˈpɹəʊpɹi.ət/"
+  },
+  "rigid": {
+    "syllables": "ri·gid",
+    "ipa": "/ˈɹɪdʒɪd/"
+  },
+  "happiness": {
+    "syllables": "happi·ness",
+    "ipa": "/ˈhæpinəs/"
+  },
+  "physical": {
+    "syllables": "phy·si·cal",
+    "ipa": "/ˈfɪzɪkəl/"
+  },
+  "security": {
+    "syllables": "se·cu·ri·ty",
+    "ipa": "/sɪˈkjɔːɹəti/"
+  },
+  "embarrassment": {
+    "syllables": "embarrassment",
+    "ipa": "/ɪmˈbæɹəsmənt/"
+  },
+  "distress": {
+    "syllables": "distress",
+    "ipa": "/dɪˈstɹɛs/"
+  },
+  "formal": {
+    "syllables": "formal",
+    "ipa": "/ˈfɔːməl/"
+  },
+  "quiet": {
+    "syllables": "quiet",
+    "ipa": "/ˈkwaɪ.ət/"
+  },
+  "departed": {
+    "syllables": "de·parted",
+    "ipa": "/dɪˈpɑːtɪd/"
+  },
+  "loyalty": {
+    "syllables": "loyalty",
+    "ipa": "/ˈlɔɪəlti/"
+  },
+  "suspicion": {
+    "syllables": "suspi·cion",
+    "ipa": "/sə.ˈspɪ.ʃən/"
+  },
+  "idiot": {
+    "syllables": "idiot",
+    "ipa": "/ˈɪd.i.(j)ɪt/"
+  },
+  "anger": {
+    "syllables": "anger",
+    "ipa": "/ˈæŋɡə(ɹ)/"
+  },
+  "tenderness": {
+    "syllables": "tenderness",
+    "ipa": "/ˈtɛn.də.nɪs/"
+  },
+  "drastic": {
+    "syllables": "drastic",
+    "ipa": "/ˈdɹɑːs.tɪk/"
+  },
+  "obscure": {
+    "syllables": "obscu·re",
+    "ipa": "/əbˈskjɔː(ɹ)/"
+  },
+  "purchase": {
+    "syllables": "purcha·se",
+    "ipa": "/ˈpɜːtʃəs/"
+  },
+  "threatening": {
+    "syllables": "threate·ning",
+    "ipa": "/ˈθɹɛt.n̩.ɪŋ/"
+  },
+  "surrender": {
+    "syllables": "surrender",
+    "ipa": "/səˈɹɛndəɹ/"
+  },
+  "shame": {
+    "syllables": "sha·me",
+    "ipa": "/ʃeɪm/"
+  },
+  "encoded": {
+    "syllables": "enco·ded",
+    "ipa": ""
+  },
+  "frequent": {
+    "syllables": "fre·quent",
+    "ipa": "/ˈfɹiː.kwənt/"
+  },
+  "weak": {
+    "syllables": "weak",
+    "ipa": "/wiːk/"
+  },
+  "intuition": {
+    "syllables": "intuition",
+    "ipa": "/ˌɪntjʊˈɪʃən/"
+  },
+  "conceal": {
+    "syllables": "conceal",
+    "ipa": "/kənˈsiːl/"
+  },
+  "evidence": {
+    "syllables": "evi·dence",
+    "ipa": "[ˈɛvəɾəns]"
+  },
+  "frosty": {
+    "syllables": "frosty",
+    "ipa": ""
+  },
+  "panic": {
+    "syllables": "pa·nic",
+    "ipa": "/ˈpænɪk/"
+  },
+  "calmness": {
+    "syllables": "calmness",
+    "ipa": "/ˈkɑːmnəs/"
+  },
+  "vulnerability": {
+    "syllables": "vulne·ra·bi·li·ty",
+    "ipa": "/ˌvʌlnəɹəˈbɪlɪti/"
+  },
+  "treasure": {
+    "syllables": "treasu·re",
+    "ipa": "/ˈtɹɛʒə/"
+  },
+  "determination": {
+    "syllables": "de·termi·na·tion",
+    "ipa": "/dɪˌtɜːmɪˈneɪʃən/"
+  },
+  "thorough": {
+    "syllables": "tho·rough",
+    "ipa": "/ˈθʌɹə/"
+  },
+  "storm": {
+    "syllables": "storm",
+    "ipa": "/stɔːm/"
+  },
+  "passive": {
+    "syllables": "passi·ve",
+    "ipa": "/ˈpæs.ɪv/"
+  },
+  "objection": {
+    "syllables": "objection",
+    "ipa": "/əbˈdʒɛkʃən/"
+  },
+  "tense": {
+    "syllables": "tense",
+    "ipa": "/tɛns/"
+  },
+  "trembling": {
+    "syllables": "trembling",
+    "ipa": "/ˈtɹɛmblɪŋ/"
+  },
+  "merciless": {
+    "syllables": "merci·less",
+    "ipa": "/ˈmɜːsɪləs/"
+  },
+  "collapse": {
+    "syllables": "collapse",
+    "ipa": "/kəˈlæps/"
+  },
+  "gift": {
+    "syllables": "gift",
+    "ipa": "/ɡɪft/"
+  },
+  "ideal": {
+    "syllables": "ideal",
+    "ipa": "/aɪˈdiː.əl/"
+  },
+  "hypocrisy": {
+    "syllables": "hy·pocri·sy",
+    "ipa": "/hɪˈpɒkɹəsi/"
+  },
+  "dissatisfied": {
+    "syllables": "dissa·tisfied",
+    "ipa": "/dɪsˈsætɪsˌfaɪd/"
+  },
+  "stability": {
+    "syllables": "sta·bi·li·ty",
+    "ipa": "/stəˈbɪlɪti/"
+  },
+  "resign": {
+    "syllables": "re·sign",
+    "ipa": "/ɹɪˈzaɪn/"
+  },
+  "persuasive": {
+    "syllables": "persuasi·ve",
+    "ipa": ""
+  },
+  "precise": {
+    "syllables": "pre·ci·se",
+    "ipa": "/pɹɪˈsaɪs/"
+  },
+  "investigation": {
+    "syllables": "investi·ga·tion",
+    "ipa": "/ɪnˌvɛstəˈɡeɪʃən/"
+  },
+  "manipulation": {
+    "syllables": "ma·ni·pu·la·tion",
+    "ipa": "/məˌnɪp.juˈleɪ.ʃən/"
+  },
+  "pale": {
+    "syllables": "pa·le",
+    "ipa": "/peɪl/"
+  },
+  "solid": {
+    "syllables": "so·lid",
+    "ipa": "/ˈsɒlɪd/"
+  },
+  "steady": {
+    "syllables": "steady",
+    "ipa": "/ˈstɛdi/"
+  },
+  "justice": {
+    "syllables": "justi·ce",
+    "ipa": "/ˈdʒʌs.tɪs/"
+  },
+  "hatred": {
+    "syllables": "hatred",
+    "ipa": "/ˈheɪtɹɪd/"
+  },
+  "triumph": {
+    "syllables": "triumph",
+    "ipa": "/ˈtɹaɪ.ʌmf/"
+  },
+  "rapid": {
+    "syllables": "ra·pid",
+    "ipa": "/ˈɹæpɪd/"
+  },
+  "protection": {
+    "syllables": "pro·tection",
+    "ipa": "/pɹəˈtɛkʃən/"
+  },
+  "stubbornness": {
+    "syllables": "stubbornness",
+    "ipa": "/ˈstʌbən(n)əs/"
+  },
+  "transaction": {
+    "syllables": "transaction",
+    "ipa": "/tɹænˈzækʃən/"
+  },
+  "calculate": {
+    "syllables": "calcu·la·te",
+    "ipa": "/ˈkælkjəleɪt/"
+  },
+  "affection": {
+    "syllables": "affection",
+    "ipa": "/əˈfɛkʃən/"
+  },
+  "substitute": {
+    "syllables": "substi·tu·te",
+    "ipa": "/ˈsʌbstɪtjut/"
+  },
+  "sincerity": {
+    "syllables": "since·ri·ty",
+    "ipa": "/sɪnˈsɛɹəti/"
+  },
+  "unethical": {
+    "syllables": "unethi·cal",
+    "ipa": ""
+  },
+  "noble": {
+    "syllables": "noble",
+    "ipa": "/ˈnəʊbəl/"
+  },
+  "nature": {
+    "syllables": "na·tu·re",
+    "ipa": "/ˈneɪtʃə/"
+  },
+  "sufficient": {
+    "syllables": "suffi·cient",
+    "ipa": "/səˈfɪʃənt/"
+  },
+  "mounting": {
+    "syllables": "mounting",
+    "ipa": "/ˈmaʊntɪŋ/"
+  },
+  "unconscious": {
+    "syllables": "unconscious",
+    "ipa": "/ˌʌnˈkɒnʃəs/"
+  },
+  "quivered": {
+    "syllables": "quive·red",
+    "ipa": ""
+  },
+  "guilt": {
+    "syllables": "guilt",
+    "ipa": "/ɡɪlt/"
+  },
+  "encouragement": {
+    "syllables": "encoura·ge·ment",
+    "ipa": "[ɪnˈkʌɹɪdʒmənt]"
+  },
+  "feeble": {
+    "syllables": "feeble",
+    "ipa": "/ˈfiːbəl/"
+  },
+  "hostility": {
+    "syllables": "hosti·li·ty",
+    "ipa": "/hɒˈstɪlɪti/"
+  },
+  "hope": {
+    "syllables": "ho·pe",
+    "ipa": "/həʊp/"
+  },
+  "abandon": {
+    "syllables": "abandon",
+    "ipa": "/əˈbæn.dən/"
+  },
+  "assault": {
+    "syllables": "assault",
+    "ipa": "/əˈsɔːlt/"
+  },
+  "persist": {
+    "syllables": "persist",
+    "ipa": "/pəˈsɪst/"
+  },
+  "original": {
+    "syllables": "ori·gi·nal",
+    "ipa": "/əˈɹɪdʒnəl/"
+  },
+  "mislead": {
+    "syllables": "mislead",
+    "ipa": "/mɪsˈliːd/"
+  },
+  "silence": {
+    "syllables": "si·lence",
+    "ipa": "/ˈsaɪ.ləns/"
+  },
+  "absolute": {
+    "syllables": "abso·lu·te",
+    "ipa": "/ˈæb.səˌljuːt/"
+  },
+  "profound": {
+    "syllables": "pro·found",
+    "ipa": "/pɹəˈfaʊnd/"
+  },
+  "authority": {
+    "syllables": "autho·ri·ty",
+    "ipa": "/ɔːˈθɒɹəti/"
+  },
+  "penalty": {
+    "syllables": "pe·nalty",
+    "ipa": "/ˈpɛnəlti/"
+  },
+  "honesty": {
+    "syllables": "ho·nesty",
+    "ipa": "/ˈɒnəsti/"
+  },
+  "tender": {
+    "syllables": "tender",
+    "ipa": "/ˈtɛn.də(ɹ)/"
+  },
+  "wisdom": {
+    "syllables": "wisdom",
+    "ipa": "/ˈwɪzdəm/"
+  },
+  "deception": {
+    "syllables": "de·ception",
+    "ipa": "/dɪˈsɛpʃən/"
+  },
+  "decency": {
+    "syllables": "de·cency",
+    "ipa": "/ˈdiːsənsi/"
+  },
+  "moist": {
+    "syllables": "moist",
+    "ipa": "/mɔɪst/"
+  },
+  "expire": {
+    "syllables": "expi·re",
+    "ipa": "/ɛkˈspaɪ.ə(ɹ)/"
+  },
+  "indifferent": {
+    "syllables": "indiffe·rent",
+    "ipa": "/ɪnˈdɪf.ə.ɹənt/"
+  },
+  "compensation": {
+    "syllables": "compensa·tion",
+    "ipa": "/ˌkɒmpɛnˈseɪʃən/"
+  },
+  "brilliant": {
+    "syllables": "brilliant",
+    "ipa": "/ˈbɹɪljənt/"
+  },
+  "wealth": {
+    "syllables": "wealth",
+    "ipa": "/wɛlθ/"
+  },
+  "proposal": {
+    "syllables": "pro·po·sal",
+    "ipa": "/pɹəˈpəʊzəl/"
+  },
+  "conviction": {
+    "syllables": "conviction",
+    "ipa": "/kənˈvɪkʃən/"
+  },
+  "glimmered": {
+    "syllables": "glimme·red",
+    "ipa": ""
+  },
+  "romance": {
+    "syllables": "ro·mance",
+    "ipa": "/ɹəˈmæns/"
+  },
+  "mate": {
+    "syllables": "ma·te",
+    "ipa": "/meɪt/"
+  },
+  "challenges": {
+    "syllables": "challenges",
+    "ipa": ""
+  },
+  "possibility": {
+    "syllables": "possi·bi·li·ty",
+    "ipa": "/ˌpɒsɪˈbɪliti/"
+  },
+  "filter": {
+    "syllables": "filter",
+    "ipa": "/ˈfɪltə/"
+  },
+  "overexposed": {
+    "syllables": "ove·rexpo·sed",
+    "ipa": ""
+  },
+  "restrain": {
+    "syllables": "restrain",
+    "ipa": "/ɹɪˈstɹeɪn/"
+  },
+  "deliberate": {
+    "syllables": "de·li·be·ra·te",
+    "ipa": ""
+  },
+  "formerly": {
+    "syllables": "formerly",
+    "ipa": "/ˈfɔːməli/"
+  },
+  "initiate": {
+    "syllables": "ini·tiate",
+    "ipa": ""
+  },
+  "posture": {
+    "syllables": "postu·re",
+    "ipa": "/ˈpɒstʃə/"
+  },
+  "assignment": {
+    "syllables": "assignment",
+    "ipa": ""
+  },
+  "intensive care": {
+    "syllables": "intensi·ve ca·re",
+    "ipa": ""
+  },
+  "consent": {
+    "syllables": "consent",
+    "ipa": "/kənˈsɛnt/"
+  },
+  "apologetic": {
+    "syllables": "apo·lo·ge·tic",
+    "ipa": "/əˌpɒləˈdʒɛtɪk/"
+  },
+  "neutral": {
+    "syllables": "neutral",
+    "ipa": "/ˈnjuːtɹəl/"
+  },
+  "lease": {
+    "syllables": "lease",
+    "ipa": "/liːs/"
+  },
+  "transition": {
+    "syllables": "transi·tion",
+    "ipa": "/tɹænˈzɪʃən/"
+  },
+  "protest": {
+    "syllables": "pro·test",
+    "ipa": "/ˈpɹəʊ.tɛst/"
+  },
+  "trace": {
+    "syllables": "tra·ce",
+    "ipa": "/tɹeɪs/"
+  },
+  "expose": {
+    "syllables": "expo·se",
+    "ipa": "/ɪkˈspəʊz/"
+  },
+  "fabricate": {
+    "syllables": "fabri·ca·te",
+    "ipa": "/ˈfæb.ɹɪ.keɪt/"
+  },
+  "narrative": {
+    "syllables": "narra·ti·ve",
+    "ipa": "/ˈnæɹətɪv/"
+  },
+  "satisfied": {
+    "syllables": "sa·tisfied",
+    "ipa": "/ˈsætɪsfaɪd/"
+  },
+  "freeze": {
+    "syllables": "freeze",
+    "ipa": "/ˈfɹiːz/"
+  },
+  "flat": {
+    "syllables": "flat",
+    "ipa": "/flæt/"
+  },
+  "pretend": {
+    "syllables": "pre·tend",
+    "ipa": "/pɹɪˈtɛnd/"
+  },
+  "sweep": {
+    "syllables": "sweep",
+    "ipa": "/swiːp/"
+  },
+  "subtle": {
+    "syllables": "subtle",
+    "ipa": "/ˈsʌt(ə)l/"
+  },
+  "unspoken": {
+    "syllables": "unspo·ken",
+    "ipa": "/ʌnˈspoʊkən/"
+  },
+  "shrewd": {
+    "syllables": "shrewd",
+    "ipa": "/ʃɹuːd/"
+  },
+  "competence": {
+    "syllables": "compe·tence",
+    "ipa": "/ˈkɒmpətəns/"
+  },
+  "investigate": {
+    "syllables": "investi·ga·te",
+    "ipa": "[ɪn.ˈves.tɪ.ɡeɪ̯t]"
+  },
+  "prominent": {
+    "syllables": "pro·mi·nent",
+    "ipa": "/ˈpɹɒmɪnənt/"
+  },
+  "domestic": {
+    "syllables": "do·mestic",
+    "ipa": "/dəˈmɛstɪk/"
+  },
+  "anonymous": {
+    "syllables": "ano·ny·mous",
+    "ipa": "/əˈnɒnəməs/"
+  },
+  "mobilize": {
+    "syllables": "mo·bi·li·ze",
+    "ipa": ""
+  },
+  "coordinated": {
+    "syllables": "coordi·na·ted",
+    "ipa": ""
+  },
+  "leak": {
+    "syllables": "leak",
+    "ipa": "/liːk/"
+  },
+  "suspect": {
+    "syllables": "suspect",
+    "ipa": "/ˈsʌs.pɛkt/"
+  },
+  "swift": {
+    "syllables": "swift",
+    "ipa": "/swɪft/"
+  },
+  "standard": {
+    "syllables": "standard",
+    "ipa": "/ˈstændəd/"
+  },
+  "irrational": {
+    "syllables": "irra·tional",
+    "ipa": "/ɪˈɹæʃ.(ə.)nəl/"
+  },
+  "precaution": {
+    "syllables": "pre·caution",
+    "ipa": "/pɹiːˈkɔːʃən/"
+  },
+  "expression": {
+    "syllables": "expression",
+    "ipa": "/ɪkˈspɹɛʃ.ən/"
+  },
+  "articulate": {
+    "syllables": "arti·cu·la·te",
+    "ipa": "/ɑː(ɹ)ˈtɪk.jʊ.lət/"
+  },
+  "confront": {
+    "syllables": "confront",
+    "ipa": "/kɒnˈfɹɒnt/"
+  },
+  "withdraw": {
+    "syllables": "withdraw",
+    "ipa": "/wɪðˈdɹɔː/"
+  },
+  "proceed": {
+    "syllables": "pro·ceed",
+    "ipa": "/pɹəˈsiːd/"
+  },
+  "deactivate": {
+    "syllables": "deacti·va·te",
+    "ipa": "/ˌdiːˈæktɪveɪt/"
+  },
+  "suspend": {
+    "syllables": "suspend",
+    "ipa": "/səˈspɛnd/"
+  },
+  "uneasy": {
+    "syllables": "uneasy",
+    "ipa": "/ʌnˈiːzi/"
+  },
+  "perceptive": {
+    "syllables": "percepti·ve",
+    "ipa": "/pəˈsɛptɪv/"
+  },
+  "align": {
+    "syllables": "align",
+    "ipa": "/æˈlaɪn/"
+  },
+  "unhurried": {
+    "syllables": "unhurried",
+    "ipa": ""
+  },
+  "intervene": {
+    "syllables": "interve·ne",
+    "ipa": ""
+  },
+  "clarify": {
+    "syllables": "cla·ri·fy",
+    "ipa": "/ˈklæɹɪfaɪ/"
+  },
+  "remove": {
+    "syllables": "re·mo·ve",
+    "ipa": "/ɹɪˈmuːv/"
+  },
+  "interference": {
+    "syllables": "interfe·rence",
+    "ipa": "/ˌɪntəɹˈfiɹɨns/"
+  },
+  "frustration": {
+    "syllables": "frustra·tion",
+    "ipa": "/fɹʌsˈtɹeɪʃən/"
+  },
+  "categorize": {
+    "syllables": "ca·te·go·ri·ze",
+    "ipa": ""
+  },
+  "technique": {
+    "syllables": "techni·que",
+    "ipa": "/tɛkˈniːk/"
+  },
+  "detectable": {
+    "syllables": "de·tectable",
+    "ipa": "/dɪˈtɛktəbəɫ/"
+  },
+  "warmth": {
+    "syllables": "warmth",
+    "ipa": "/wɔːmθ/"
+  },
+  "contrast": {
+    "syllables": "contrast",
+    "ipa": "/ˈkɒntɹɑːst/"
+  },
+  "variable": {
+    "syllables": "va·riable",
+    "ipa": "/ˈvɛəɹ.i.ə.bl̩/"
+  },
+  "simultaneously": {
+    "syllables": "si·multa·neously",
+    "ipa": "/ˌsɪməlˈteɪnɪəsli/"
+  },
+  "burst out laughing": {
+    "syllables": "burst out laughing",
+    "ipa": ""
+  },
+  "artifice": {
+    "syllables": "arti·fi·ce",
+    "ipa": "/ˈɑː(ɹ)tɪfɪs/"
+  },
+  "meek": {
+    "syllables": "meek",
+    "ipa": "/miːk/"
+  },
+  "predict": {
+    "syllables": "pre·dict",
+    "ipa": "/pɹɪˈdɪkt/"
+  },
+  "dominate": {
+    "syllables": "do·mi·na·te",
+    "ipa": "/ˈdɒməˌneɪt/"
+  },
+  "concede": {
+    "syllables": "conce·de",
+    "ipa": "/kənˈsiːd/"
+  },
+  "appetite": {
+    "syllables": "appe·ti·te",
+    "ipa": "/ˈæp.ə.taɪt/"
+  },
+  "tactic": {
+    "syllables": "tactic",
+    "ipa": "/ˈtæktɪk/"
+  },
+  "communicate": {
+    "syllables": "commu·ni·ca·te",
+    "ipa": "/kəˈmjuːnɪkeɪt/"
+  },
+  "disarm": {
+    "syllables": "di·sarm",
+    "ipa": "/dɪsˈɑː(ɹ)m/"
+  },
+  "smuggling": {
+    "syllables": "smuggling",
+    "ipa": ""
+  },
+  "object": {
+    "syllables": "object",
+    "ipa": "/ˈɒb.d͡ʒɛkt/"
+  },
+  "discharge": {
+    "syllables": "discharge",
+    "ipa": "/ˈdɪstʃɑːdʒ/"
+  },
+  "scout": {
+    "syllables": "scout",
+    "ipa": "[skʌʊt]"
+  },
+  "surveillance": {
+    "syllables": "surveillance",
+    "ipa": "/səɹˈveɪ.ləns/"
+  },
+  "assess": {
+    "syllables": "assess",
+    "ipa": "/əˈsɛs/"
+  },
+  "coordinate": {
+    "syllables": "coordi·na·te",
+    "ipa": ""
+  },
+  "efficient": {
+    "syllables": "effi·cient",
+    "ipa": "/əˈfɪʃənt/"
+  },
+  "composed": {
+    "syllables": "compo·sed",
+    "ipa": "/kəmˈpəʊzd/"
+  },
+  "resolve": {
+    "syllables": "re·solve",
+    "ipa": "/ɹiːˈzɒlv/"
+  },
+  "anticipate": {
+    "syllables": "anti·ci·pa·te",
+    "ipa": "/ænˈtɪs.ɪ.peɪt/"
+  },
+  "accusation": {
+    "syllables": "accu·sa·tion",
+    "ipa": "/ˌæk.jə.ˈzeɪ.ʃən/"
+  },
+  "veto": {
+    "syllables": "ve·to",
+    "ipa": "/ˈviːtəʊ/"
+  },
+  "deny": {
+    "syllables": "de·ny",
+    "ipa": "/dɪˈnaɪ/"
+  },
+  "significant": {
+    "syllables": "signi·fi·cant",
+    "ipa": "/sɪɡˈnɪ.fɪ.kənt/"
+  },
+  "rely": {
+    "syllables": "re·ly",
+    "ipa": "/ɹɪˈlaɪ/"
+  },
+  "logical": {
+    "syllables": "lo·gi·cal",
+    "ipa": "/ˈlɒdʒɪkəɫ/"
+  },
+  "hesitant": {
+    "syllables": "he·si·tant",
+    "ipa": "/ˈhɛzɪtənt/"
+  },
+  "meticulous": {
+    "syllables": "me·ti·cu·lous",
+    "ipa": "/mɨˈtɪkjuləs/"
+  },
+  "verify": {
+    "syllables": "ve·ri·fy",
+    "ipa": ""
+  },
+  "attitude": {
+    "syllables": "atti·tu·de",
+    "ipa": "/ˈætɪˌtjuːd/"
+  },
+  "unconventional": {
+    "syllables": "unconventional",
+    "ipa": ""
+  },
+  "absorbed": {
+    "syllables": "absorbed",
+    "ipa": "/æbˈsɔɹbd/"
+  },
+  "verbal": {
+    "syllables": "verbal",
+    "ipa": "/ˈvɜː.bəl/"
+  },
+  "retain": {
+    "syllables": "re·tain",
+    "ipa": "/ɹɪˈteɪn/"
+  },
+  "witness": {
+    "syllables": "witness",
+    "ipa": "/ˈwɪtnəs/"
+  },
+  "covert": {
+    "syllables": "co·vert",
+    "ipa": "/ˈkəʊvəːt/"
+  },
+  "scar": {
+    "syllables": "scar",
+    "ipa": "/skɑː(ɹ)/"
+  },
+  "contract": {
+    "syllables": "contract",
+    "ipa": "/ˈkɒntɹækt/"
+  },
+  "antiseptic": {
+    "syllables": "anti·septic",
+    "ipa": ""
+  },
+  "inherent": {
+    "syllables": "inhe·rent",
+    "ipa": "/ɪnˈhɛɹənt/"
+  },
+  "guarantee": {
+    "syllables": "guarantee",
+    "ipa": "/ˌɡæɹənˈtiː/"
+  },
+  "intact": {
+    "syllables": "intact",
+    "ipa": "/ɪnˈtækt/"
+  },
+  "intend": {
+    "syllables": "intend",
+    "ipa": "/ɪnˈtɛnd/"
+  },
+  "withhold": {
+    "syllables": "withhold",
+    "ipa": "/wɪðˈhəʊld/"
+  },
+  "aborted": {
+    "syllables": "aborted",
+    "ipa": ""
+  },
+  "stagger": {
+    "syllables": "stagger",
+    "ipa": "/ˈstæɡə/"
+  },
+  "tally": {
+    "syllables": "tally",
+    "ipa": "/ˈtæli/"
+  },
+  "instinct": {
+    "syllables": "instinct",
+    "ipa": "/ˈɪn.stɪŋkt/"
+  },
+  "fragmented": {
+    "syllables": "fragmented",
+    "ipa": ""
+  },
+  "coherent": {
+    "syllables": "co·he·rent",
+    "ipa": "/kəʊˈhɪəɹənt/"
+  },
+  "complain": {
+    "syllables": "complain",
+    "ipa": "/kəmˈpleɪn/"
+  },
+  "strategy": {
+    "syllables": "stra·te·gy",
+    "ipa": "/ˈstɹætədʒi/"
+  },
+  "unguarded": {
+    "syllables": "unguarded",
+    "ipa": ""
+  },
+  "distance": {
+    "syllables": "distance",
+    "ipa": "/ˈdɪs.təns/"
+  },
+  "glitter": {
+    "syllables": "glitter",
+    "ipa": "/ˈɡlɪtə(ɹ)/"
+  },
+  "scattered": {
+    "syllables": "scatte·red",
+    "ipa": "/ˈskætəd/"
+  },
+  "evade": {
+    "syllables": "eva·de",
+    "ipa": "/ɪˈveɪd/"
+  },
+  "formulate": {
+    "syllables": "formu·la·te",
+    "ipa": ""
+  },
+  "delay": {
+    "syllables": "de·lay",
+    "ipa": "/dɪˈleɪ/"
+  },
+  "deploy": {
+    "syllables": "deploy",
+    "ipa": "/dɪˈplɔɪ/"
+  },
+  "prepare": {
+    "syllables": "pre·pa·re",
+    "ipa": "/pɹɪˈpɛə/"
+  },
+  "accessible": {
+    "syllables": "accessible",
+    "ipa": "/əkˈsɛs.ə.bəl/"
+  },
+  "restrained": {
+    "syllables": "restrained",
+    "ipa": ""
+  },
+  "urgency": {
+    "syllables": "urgency",
+    "ipa": "/ˈɝ.dʒən.si/"
+  },
+  "extend": {
+    "syllables": "extend",
+    "ipa": "/ɛkˈstɛnd/"
+  },
+  "sob": {
+    "syllables": "sob",
+    "ipa": "/sɒb/"
+  },
+  "ambiguous": {
+    "syllables": "ambi·guous",
+    "ipa": "/æmˈbɪɡjuəs/"
+  },
+  "encrypted": {
+    "syllables": "encrypted",
+    "ipa": ""
+  },
+  "background": {
+    "syllables": "background",
+    "ipa": "/ˈbæk.ɡɹaʊnd/"
+  },
+  "suppress": {
+    "syllables": "suppress",
+    "ipa": "/səˈpɹɛs/"
+  },
+  "exhale": {
+    "syllables": "exha·le",
+    "ipa": "/ɛksˈheɪl/"
+  },
+  "bare": {
+    "syllables": "ba·re",
+    "ipa": "/bɛə(ɹ)/"
+  },
+  "prior": {
+    "syllables": "prior",
+    "ipa": "/ˈpɹaɪɚ/"
+  },
+  "revise": {
+    "syllables": "re·vi·se",
+    "ipa": "/ɹɪˈvaɪ̯z/"
+  },
+  "superficial": {
+    "syllables": "su·perfi·cial",
+    "ipa": "/ˌs(j)uːpəˈfɪʃəl/"
+  },
+  "possession": {
+    "syllables": "possession",
+    "ipa": "/pəˈzɛʃən/"
+  },
+  "dramatize": {
+    "syllables": "dra·ma·ti·ze",
+    "ipa": ""
+  },
+  "step aside": {
+    "syllables": "step a·si·de",
+    "ipa": ""
+  },
+  "discard": {
+    "syllables": "discard",
+    "ipa": "/ˈdɪskɑːd/"
+  },
+  "presence": {
+    "syllables": "pre·sence",
+    "ipa": "/ˈpɹɛzəns/"
+  },
+  "tangible": {
+    "syllables": "tangible",
+    "ipa": "/ˈtæn(d)ʒɪb(ə)l/"
+  },
+  "measure": {
+    "syllables": "measu·re",
+    "ipa": "/ˈmɛʒə/"
+  },
+  "gradually": {
+    "syllables": "gra·dually",
+    "ipa": "/ˈɡɹædʒuəli/"
+  },
+  "indifference": {
+    "syllables": "indiffe·rence",
+    "ipa": "/ɪnˈdɪf.ə.ɹəns/"
+  },
+  "accountable": {
+    "syllables": "accountable",
+    "ipa": "/ə.ˈkaʊn.tə.bəl/"
+  },
+  "unshakeable": {
+    "syllables": "unsha·keable",
+    "ipa": ""
+  },
+  "certainty": {
+    "syllables": "certainty",
+    "ipa": "/ˈsɜːtn̩ti/"
+  },
+  "unremarkable": {
+    "syllables": "unre·markable",
+    "ipa": ""
+  },
+  "moderate": {
+    "syllables": "mo·de·ra·te",
+    "ipa": "/ˈmɑdəɹeɪt/"
+  },
+  "renegotiate": {
+    "syllables": "re·ne·go·tiate",
+    "ipa": ""
+  },
+  "revoke": {
+    "syllables": "re·vo·ke",
+    "ipa": ""
+  },
+  "interval": {
+    "syllables": "interval",
+    "ipa": "/ˈɪntəvəl/"
+  },
+  "impassive": {
+    "syllables": "impassi·ve",
+    "ipa": "/ɪmˈpæsɪv/"
+  },
+  "contained": {
+    "syllables": "contained",
+    "ipa": "/kənˈteɪnd/"
+  },
+  "vocabulary": {
+    "syllables": "vo·ca·bu·la·ry",
+    "ipa": "/vəʊˈkabjʊləɹɪ/"
+  },
+  "acute": {
+    "syllables": "acu·te",
+    "ipa": "/əˈkjuːt/"
+  },
+  "disorientation": {
+    "syllables": "di·so·rienta·tion",
+    "ipa": "/dɪsˌɔːɹɪənˈteɪʃən/"
+  },
+  "penetrate": {
+    "syllables": "pe·netra·te",
+    "ipa": "/ˈpɛnɪtɹeɪt/"
+  },
+  "previous": {
+    "syllables": "pre·vious",
+    "ipa": "/ˈpɹiːvɪəs/"
+  },
+  "conspire": {
+    "syllables": "conspi·re",
+    "ipa": ""
+  },
+  "suffocate": {
+    "syllables": "suffo·ca·te",
+    "ipa": "/ˈsʌfəkeɪt/"
+  },
+  "orient": {
+    "syllables": "orient",
+    "ipa": "/ˈɔː.ɹɪ.ənt/"
+  },
+  "memorize": {
+    "syllables": "me·mo·ri·ze",
+    "ipa": "/ˈmɛm.əɹˌaɪ̯z/"
+  },
+  "transmit": {
+    "syllables": "transmit",
+    "ipa": "/tɹænsˈmɪt/"
+  },
+  "amass": {
+    "syllables": "amass",
+    "ipa": "/əˈmæs/"
+  },
+  "lucid": {
+    "syllables": "lu·cid",
+    "ipa": "/ˈl(j)uːsɪd/"
+  },
+  "unsheathe": {
+    "syllables": "unsheathe",
+    "ipa": ""
+  },
+  "impulsive": {
+    "syllables": "impulsi·ve",
+    "ipa": "/ɪmˈpʌlsɪv/"
+  },
+  "dismantle": {
+    "syllables": "dismantle",
+    "ipa": "[dɪsˈmæntʰəɫ]"
+  },
+  "fitting": {
+    "syllables": "fitting",
+    "ipa": "/fɪtɪŋ/"
+  },
+  "curl": {
+    "syllables": "curl",
+    "ipa": "/kəːl/"
+  },
+  "premise": {
+    "syllables": "pre·mi·se",
+    "ipa": "/ˈpɹɛ.mɪs/"
+  },
+  "stabilize": {
+    "syllables": "sta·bi·li·ze",
+    "ipa": ""
+  },
+  "exceptional": {
+    "syllables": "exceptional",
+    "ipa": "/ɪkˈsɛpʃənəl/"
+  },
+  "naive": {
+    "syllables": "naive",
+    "ipa": "/naɪˈiːv/"
+  },
+  "calculated": {
+    "syllables": "calcu·la·ted",
+    "ipa": "/ˈkælkjəleɪtɪd/"
+  },
+  "notation": {
+    "syllables": "no·ta·tion",
+    "ipa": "/noʊˈteɪʃən/"
+  },
+  "hover": {
+    "syllables": "ho·ver",
+    "ipa": "/ˈhɒ.və(ɹ)/"
+  },
+  "effortless": {
+    "syllables": "effortless",
+    "ipa": ""
+  },
+  "probe": {
+    "syllables": "pro·be",
+    "ipa": "/pɹəʊb/"
+  },
+  "vigilant": {
+    "syllables": "vi·gi·lant",
+    "ipa": "/ˈvɪdʒɪlənt/"
+  },
+  "disguise": {
+    "syllables": "disguise",
+    "ipa": "/dɪsˈɡaɪz/"
+  },
+  "casual": {
+    "syllables": "ca·sual",
+    "ipa": "/ˈkɛʒɘl/"
+  },
+  "tighten": {
+    "syllables": "tighten",
+    "ipa": "/ˈtaɪ.tən/"
+  },
+  "portray": {
+    "syllables": "portray",
+    "ipa": "/pɔɹˈtɹeɪ/"
+  },
+  "exploit": {
+    "syllables": "exploit",
+    "ipa": ""
+  },
+  "construct": {
+    "syllables": "construct",
+    "ipa": "/ˈkɒn.stɹʌkt/"
+  },
+  "facade": {
+    "syllables": "fa·ca·de",
+    "ipa": "/fəˈsaːd/"
+  },
+  "numb": {
+    "syllables": "numb",
+    "ipa": "/nʌm/"
+  },
+  "scheme": {
+    "syllables": "sche·me",
+    "ipa": "/skiːm/"
+  },
+  "brief": {
+    "syllables": "brief",
+    "ipa": "/bɹiːf/"
+  },
+  "courtesy": {
+    "syllables": "courte·sy",
+    "ipa": "/ˈkɜːtəsi/"
+  },
+  "drag": {
+    "syllables": "drag",
+    "ipa": "/dɹæɡ/"
+  },
+  "revival": {
+    "syllables": "re·vi·val",
+    "ipa": "/ɹɪˈvaɪvəl/"
+  },
+  "submerge": {
+    "syllables": "submerge",
+    "ipa": "/sʌbˈmɜːdʒ/"
+  },
+  "testimony": {
+    "syllables": "testi·mo·ny",
+    "ipa": "/ˈtɛstɪməni/"
+  },
+  "archaeology": {
+    "syllables": "archaeolo·gy",
+    "ipa": "/ˌɑː.kiˈɒ.lə.dʒi/"
+  },
+  "serene": {
+    "syllables": "se·re·ne",
+    "ipa": "/səˈɹiːn/"
+  },
+  "impartial": {
+    "syllables": "impartial",
+    "ipa": "/ɪmˈpɑɹ.ʃəl/"
+  },
+  "restitution": {
+    "syllables": "resti·tu·tion",
+    "ipa": "/ˌɹɛstɪˈtjuʃən/"
+  },
+  "consolidate": {
+    "syllables": "conso·li·da·te",
+    "ipa": "/kənˈsɒlɪdeɪt/"
+  },
+  "inject": {
+    "syllables": "inject",
+    "ipa": "/ɪnˈdʒɛkt/"
+  },
+  "authorize": {
+    "syllables": "autho·ri·ze",
+    "ipa": "/ˈɑθəɹaɪz/"
+  },
+  "clause": {
+    "syllables": "clause",
+    "ipa": "/klɔːz/"
+  },
+  "donation": {
+    "syllables": "do·na·tion",
+    "ipa": "/dəʊˈneɪʃən/"
+  },
+  "validity": {
+    "syllables": "va·li·di·ty",
+    "ipa": ""
+  },
+  "deteriorate": {
+    "syllables": "de·te·riora·te",
+    "ipa": "/dɪˈtɪəɹɪəɹeɪt/"
+  },
+  "litigation": {
+    "syllables": "li·ti·ga·tion",
+    "ipa": "/ˌlɪtəˈɡeɪʃən/"
+  },
+  "retrieve": {
+    "syllables": "retrieve",
+    "ipa": "/ɹiˈtɹiv/"
+  },
+  "renowned": {
+    "syllables": "re·nowned",
+    "ipa": "/ɹɪˈnaʊnd/"
+  },
+  "request": {
+    "syllables": "re·quest",
+    "ipa": "/ɹɪˈkwɛst/"
+  },
+  "benefit": {
+    "syllables": "be·ne·fit",
+    "ipa": "/ˈbɛn.ɪ.fɪt/"
+  },
+  "waver": {
+    "syllables": "wa·ver",
+    "ipa": "/ˈweɪ.və(ɹ)/"
+  },
+  "repress": {
+    "syllables": "repress",
+    "ipa": ""
+  },
+  "intuitive": {
+    "syllables": "intuiti·ve",
+    "ipa": "/ɪnˈtjuːɪtɪv/"
+  },
+  "uncover": {
+    "syllables": "unco·ver",
+    "ipa": "/ʌnˈkʌvə(ɹ)/"
+  },
+  "signal": {
+    "syllables": "signal",
+    "ipa": "/ˈsɪɡnəl/"
+  },
+  "implication": {
+    "syllables": "impli·ca·tion",
+    "ipa": "/ˌɪmpləˈkeɪʃən/"
+  },
+  "ally": {
+    "syllables": "ally",
+    "ipa": ""
+  },
+  "neutralize": {
+    "syllables": "neutra·li·ze",
+    "ipa": ""
+  },
+  "innocent": {
+    "syllables": "inno·cent",
+    "ipa": "/ˈɪnəsn̩t/"
+  },
+  "hasten": {
+    "syllables": "hasten",
+    "ipa": "/ˈheɪ.sən/"
+  },
+  "eager": {
+    "syllables": "eager",
+    "ipa": "/ˈiːɡə/"
+  },
+  "engrave": {
+    "syllables": "engra·ve",
+    "ipa": "/ɪnˈɡɹeɪv/"
+  },
+  "domineer": {
+    "syllables": "do·mi·neer",
+    "ipa": ""
+  },
+  "accustomed": {
+    "syllables": "accusto·med",
+    "ipa": "/ə.ˈkʌs.təmd/"
+  },
+  "yield": {
+    "syllables": "yield",
+    "ipa": "/jiːld/"
+  },
+  "possessive": {
+    "syllables": "possessi·ve",
+    "ipa": "/pəˈzɛsɪv/"
+  },
+  "appropriate": {
+    "syllables": "appropriate",
+    "ipa": ""
+  },
+  "bland": {
+    "syllables": "bland",
+    "ipa": "/blænd/"
+  },
+  "nostalgia": {
+    "syllables": "nostalgia",
+    "ipa": "/nɒˈstaldʒə/"
+  },
+  "nausea": {
+    "syllables": "nausea",
+    "ipa": "/ˈnɔːsɪə/"
+  },
+  "even": {
+    "syllables": "even",
+    "ipa": "/ˈiːvən/"
+  },
+  "fracture": {
+    "syllables": "fractu·re",
+    "ipa": "/ˈfɹæk.tjə/"
+  },
+  "immaculate": {
+    "syllables": "imma·cu·la·te",
+    "ipa": "/ɪˈmækjəlɪt/"
+  },
+  "observe": {
+    "syllables": "observe",
+    "ipa": "/əbˈzɝv/"
+  },
+  "annotation": {
+    "syllables": "anno·ta·tion",
+    "ipa": ""
+  },
+  "loophole": {
+    "syllables": "loopho·le",
+    "ipa": "/ˈluːphəʊl/"
+  },
+  "highlight": {
+    "syllables": "highlight",
+    "ipa": "/ˈhaɪ.ˌlaɪt/"
+  },
+  "nonchalant": {
+    "syllables": "noncha·lant",
+    "ipa": "/ˈnɒn.ʃəl.ənt/"
+  },
+  "scrutinize": {
+    "syllables": "scru·ti·ni·ze",
+    "ipa": "/ˈskɹuːtɨnaɪz/"
+  },
+  "pity": {
+    "syllables": "pi·ty",
+    "ipa": "/ˈpɪti/"
+  },
+  "solidarity": {
+    "syllables": "so·li·da·ri·ty",
+    "ipa": ""
+  },
+  "decent": {
+    "syllables": "de·cent",
+    "ipa": "/ˈdiːsənt/"
+  },
+  "stir": {
+    "syllables": "stir",
+    "ipa": "/stɜː/"
+  },
+  "reclaim": {
+    "syllables": "reclaim",
+    "ipa": ""
+  },
+  "hinder": {
+    "syllables": "hinder",
+    "ipa": "/ˈhɪndə/"
+  },
+  "consume": {
+    "syllables": "consu·me",
+    "ipa": "/kənˈsjuːm/"
+  },
+  "relay": {
+    "syllables": "re·lay",
+    "ipa": ""
+  },
+  "foresee": {
+    "syllables": "fo·re·see",
+    "ipa": "/fɔːˈsiː/"
+  },
+  "evasion": {
+    "syllables": "eva·sion",
+    "ipa": "/ɪˈveɪʒən/"
+  },
+  "irrevocable": {
+    "syllables": "irre·vo·cable",
+    "ipa": "/ɪˈɹɛvəkəb(ə)l/"
+  },
+  "measured": {
+    "syllables": "measu·red",
+    "ipa": "/ˈmɛʒəd/"
+  },
+  "resignation": {
+    "syllables": "re·signa·tion",
+    "ipa": "/ɹɛzɪɡˈneɪʃən/"
+  },
+  "blackmail": {
+    "syllables": "blackmail",
+    "ipa": ""
+  },
+  "vertigo": {
+    "syllables": "verti·go",
+    "ipa": "/ˈvɜːtɪɡəʊ/"
+  },
+  "determine": {
+    "syllables": "de·termi·ne",
+    "ipa": "/dɪˈtɜːmɪn/"
+  },
+  "brittle": {
+    "syllables": "brittle",
+    "ipa": "/ˈbɹɪtl̩/"
+  },
+  "hoarse": {
+    "syllables": "hoarse",
+    "ipa": "/hɔːs/"
+  },
+  "shelter": {
+    "syllables": "shelter",
+    "ipa": "/ˈʃɛltə/"
+  },
+  "shimmer": {
+    "syllables": "shimmer",
+    "ipa": "/ˈʃɪmə(ɹ)/"
+  },
+  "existence": {
+    "syllables": "existence",
+    "ipa": "/ɛɡ.ˈzɪs.təns/"
+  },
+  "underestimate": {
+    "syllables": "unde·resti·ma·te",
+    "ipa": "/ʌndɚˈɛs.tɨ.meɪt/"
+  },
+  "sequential": {
+    "syllables": "se·quential",
+    "ipa": ""
+  },
+  "expendable": {
+    "syllables": "expendable",
+    "ipa": ""
+  },
+  "discreet": {
+    "syllables": "discreet",
+    "ipa": "/dɪˈskɹiːt/"
+  },
+  "peculiar": {
+    "syllables": "pe·cu·liar",
+    "ipa": "[pʰə̥ˈkʰj̊uːljʊə]"
+  },
+  "portfolio": {
+    "syllables": "portfo·lio",
+    "ipa": "/-əʊl.jəʊ/"
+  },
+  "mend": {
+    "syllables": "mend",
+    "ipa": "/mɛnd/"
+  },
+  "compile": {
+    "syllables": "compi·le",
+    "ipa": "/kəmpʌɪl/"
+  },
+  "convey": {
+    "syllables": "convey",
+    "ipa": "/kənˈveɪ/"
+  },
+  "revenge": {
+    "syllables": "re·venge",
+    "ipa": "/ɹɪˈvɛndʒ/"
+  },
+  "accountability": {
+    "syllables": "accounta·bi·li·ty",
+    "ipa": "/ə.ˌkaʊn.tə.ˈbɪl.ət.i/"
+  },
+  "crumble": {
+    "syllables": "crumble",
+    "ipa": "/ˈkɹʌmbəl/"
+  },
+  "unravel": {
+    "syllables": "unra·vel",
+    "ipa": "/ʌnˈɹævəl/"
+  },
+  "merger": {
+    "syllables": "merger",
+    "ipa": "/ˈmɜːdʒə/"
+  },
+  "disclose": {
+    "syllables": "disclo·se",
+    "ipa": "/dɪsˈkləʊz/"
+  },
+  "manipulate": {
+    "syllables": "ma·ni·pu·la·te",
+    "ipa": "/məˈnɪpjʊleɪt/"
+  },
+  "review": {
+    "syllables": "re·view",
+    "ipa": "/ɹɪˈvjuː/"
+  },
+  "emerge": {
+    "syllables": "emerge",
+    "ipa": "/iˈmɜːd͡ʒ/"
+  },
+  "publicize": {
+    "syllables": "publi·ci·ze",
+    "ipa": "/ˈpʌblɪˌsaɪz/"
+  },
+  "present": {
+    "syllables": "pre·sent",
+    "ipa": "/pɹəˈzɛnt/"
+  },
+  "surface": {
+    "syllables": "surfa·ce",
+    "ipa": "/ˈsɜːfɪs/"
+  },
+  "confrontation": {
+    "syllables": "confronta·tion",
+    "ipa": "/ˌkɒnfɹənˈteɪʃən/"
+  },
+  "relief": {
+    "syllables": "re·lief",
+    "ipa": "/ɹɪˈliːf/"
+  },
+  "ordinary": {
+    "syllables": "ordi·na·ry",
+    "ipa": "/ˈɔːdənɹi/"
+  },
+  "sigh out": {
+    "syllables": "sigh out",
+    "ipa": ""
+  },
+  "settle": {
+    "syllables": "settle",
+    "ipa": "/ˈsɛtəl/"
+  },
+  "thesis": {
+    "syllables": "the·sis",
+    "ipa": "/ˈθisɪs/"
+  },
+  "coercive": {
+    "syllables": "coerci·ve",
+    "ipa": ""
+  },
+  "remedy": {
+    "syllables": "re·me·dy",
+    "ipa": "/ˈɹɛmədi/"
+  },
+  "specimen": {
+    "syllables": "spe·ci·men",
+    "ipa": "/ˈspɛsɪmɪn/"
+  },
+  "reserve": {
+    "syllables": "re·serve",
+    "ipa": "/ɹɪˈzɜːv/"
+  },
+  "subdued": {
+    "syllables": "subdued",
+    "ipa": "/səbˈdjuːd/"
+  },
+  "stand by": {
+    "syllables": "stand by",
+    "ipa": ""
+  },
+  "definitive": {
+    "syllables": "de·fi·ni·ti·ve",
+    "ipa": "/dɪˈfɪn.ɪt.ɪv/"
+  },
+  "brighten": {
+    "syllables": "brighten",
+    "ipa": "/ˈbɹaɪtən/"
+  },
+  "bloom": {
+    "syllables": "bloom",
+    "ipa": "/bluːm/"
+  },
+  "sensation": {
+    "syllables": "sensa·tion",
+    "ipa": "/sɛnˈseɪʃən/"
+  },
+  "transparent": {
+    "syllables": "transpa·rent",
+    "ipa": "/tɹæn(t)sˈpæɹənt/"
+  },
+  "peace": {
+    "syllables": "peace",
+    "ipa": "/piːs/"
+  },
+  "void": {
+    "syllables": "void",
+    "ipa": "/vɔɪd/"
+  },
+  "return": {
+    "syllables": "re·turn",
+    "ipa": "/ɹɪˈtɜːn/"
+  },
+  "gloat": {
+    "syllables": "gloat",
+    "ipa": "/ɡləʊt/"
+  },
+  "alternate": {
+    "syllables": "alterna·te",
+    "ipa": ""
+  },
+  "hold": {
+    "syllables": "hold",
+    "ipa": "/həʊld/"
+  },
+  "crystallize": {
+    "syllables": "crystalli·ze",
+    "ipa": "/ˈkɹɪstəlaɪz/"
+  },
+  "live": {
+    "syllables": "li·ve",
+    "ipa": "/lɪv/"
+  },
+  "blacklist": {
+    "syllables": "blacklist",
+    "ipa": "/ˈblæklɪst/"
+  },
+  "allege": {
+    "syllables": "alle·ge",
+    "ipa": "/əˈlɛdʒ/"
+  },
+  "drag on": {
+    "syllables": "drag on",
+    "ipa": ""
+  },
+  "liability": {
+    "syllables": "liabi·li·ty",
+    "ipa": "/laɪəˈbɪlɪti/"
+  },
+  "savings": {
+    "syllables": "sa·vings",
+    "ipa": "/ˈseɪvɪŋz/"
+  },
+  "affordable": {
+    "syllables": "affordable",
+    "ipa": "/əˈfɔː(ɹ).də.bəl/"
+  },
+  "dubbing": {
+    "syllables": "dubbing",
+    "ipa": "/ˈdʌbɪŋ/"
+  },
+  "broadcast": {
+    "syllables": "broadcast",
+    "ipa": "/ˈbɹɑdkæst/"
+  },
+  "casting": {
+    "syllables": "casting",
+    "ipa": "/ˈkastɪŋ/"
+  },
+  "concise": {
+    "syllables": "conci·se",
+    "ipa": "/kənˈsaɪs/"
+  },
+  "audition": {
+    "syllables": "audi·tion",
+    "ipa": ""
+  },
+  "prestigious": {
+    "syllables": "presti·gious",
+    "ipa": "/pɹə-/"
+  },
+  "stringent": {
+    "syllables": "stringent",
+    "ipa": ""
+  },
+  "fabricated": {
+    "syllables": "fabri·ca·ted",
+    "ipa": ""
+  },
+  "notorious": {
+    "syllables": "no·to·rious",
+    "ipa": "/nəʊˈtɔːɹɪəs/"
+  },
+  "instruction": {
+    "syllables": "instruction",
+    "ipa": "/ɪnˈstɹʌkʃən/"
+  },
+  "tolerate": {
+    "syllables": "to·le·ra·te",
+    "ipa": "/ˈtɒl.ə.ɹeɪt/"
+  },
+  "negotiate": {
+    "syllables": "ne·go·tiate",
+    "ipa": "/nəˈɡəʊ.ʃi.eɪt/"
+  },
+  "portrayal": {
+    "syllables": "portrayal",
+    "ipa": "/ˌpɔɹˈtɹeɪ.əl/"
+  },
+  "preparation": {
+    "syllables": "pre·pa·ra·tion",
+    "ipa": "/pɹɛpəˈɹeɪʃən/"
+  },
+  "rehearse": {
+    "syllables": "re·hearse",
+    "ipa": "[ɹɪˈhɜːs]"
+  },
+  "interpretation": {
+    "syllables": "interpre·ta·tion",
+    "ipa": "/ɪntəpɹəˈteɪʃən/"
+  },
+  "envisage": {
+    "syllables": "envi·sa·ge",
+    "ipa": "/ɛnˈvɪzɪdʒ/"
+  },
+  "entourage": {
+    "syllables": "entoura·ge",
+    "ipa": "/ˈɑ̃ː.tʊ.ɹɑːʒ/"
+  },
+  "script": {
+    "syllables": "script",
+    "ipa": "/skɹɪpt/"
+  },
+  "shift": {
+    "syllables": "shift",
+    "ipa": "/ʃɪft/"
+  },
+  "see through": {
+    "syllables": "see through",
+    "ipa": ""
+  },
+  "perform": {
+    "syllables": "perform",
+    "ipa": "/pəˈfɔːm/"
+  },
+  "confess": {
+    "syllables": "confess",
+    "ipa": "/kənˈfɛs/"
+  },
+  "drifter": {
+    "syllables": "drifter",
+    "ipa": "/ˈdɹɪftə/"
+  },
+  "accumulate": {
+    "syllables": "accu·mu·la·te",
+    "ipa": "/əˈkjuːmjʊˌleɪt/"
+  },
+  "resilient": {
+    "syllables": "re·si·lient",
+    "ipa": ""
+  },
+  "longing": {
+    "syllables": "longing",
+    "ipa": "/ˈlɒŋɪŋ/"
+  },
+  "sorrow": {
+    "syllables": "sorrow",
+    "ipa": "/ˈsɔɹoʊ/"
+  },
+  "exaggerate": {
+    "syllables": "exagge·ra·te",
+    "ipa": "/ɛɡˈzæ.dʒə.ɹeɪt/"
+  },
+  "inhabit": {
+    "syllables": "inha·bit",
+    "ipa": "/ɪnˈhæbɪt/"
+  },
+  "debrief": {
+    "syllables": "debrief",
+    "ipa": "/diːˈbɹiːf/"
+  },
+  "remit": {
+    "syllables": "re·mit",
+    "ipa": "/ɹɪˈmɪt/"
+  },
+  "journal": {
+    "syllables": "journal",
+    "ipa": "/ˈd͡ʒɜːnəl/"
+  },
+  "competent": {
+    "syllables": "compe·tent",
+    "ipa": "/ˈkɒmpətənt/"
+  },
+  "critique": {
+    "syllables": "cri·ti·que",
+    "ipa": "/kɹɪˈtiːk/"
+  },
+  "monitor": {
+    "syllables": "mo·ni·tor",
+    "ipa": "/ˈmɒnɨtə/"
+  },
+  "dispassionate": {
+    "syllables": "dispassiona·te",
+    "ipa": "/dɪsˈpæʃənət/"
+  },
+  "replay": {
+    "syllables": "replay",
+    "ipa": ""
+  },
+  "flaw": {
+    "syllables": "flaw",
+    "ipa": "/ˈflɔː/"
+  },
+  "method": {
+    "syllables": "method",
+    "ipa": "/ˈmɛθəd/"
+  },
+  "correct": {
+    "syllables": "correct",
+    "ipa": "/kəˈɹɛkt/"
+  },
+  "recognise": {
+    "syllables": "re·cogni·se",
+    "ipa": "/ˈɹɛkənaɪz/"
+  },
+  "precision": {
+    "syllables": "pre·ci·sion",
+    "ipa": "/pɹɪˈsɪ.ʒ(ə)n/"
+  },
+  "weight": {
+    "syllables": "weight",
+    "ipa": "/weɪt/"
+  },
+  "formidable": {
+    "syllables": "formi·dable",
+    "ipa": "/fɔːˈmɪdəbəl/"
+  },
+  "wilt": {
+    "syllables": "wilt",
+    "ipa": "/wɪlt/"
+  },
+  "petition": {
+    "syllables": "pe·ti·tion",
+    "ipa": "/pəˈtɪ.ʃən/"
+  },
+  "accumulated": {
+    "syllables": "accu·mu·la·ted",
+    "ipa": "/əˈkjuːmjʊleɪtɪd/"
+  },
+  "ignite": {
+    "syllables": "igni·te",
+    "ipa": "/ɪɡˈnaɪt/"
+  },
+  "desperate": {
+    "syllables": "despe·ra·te",
+    "ipa": "/ˈdɛsp(ə)ɹət/"
+  },
+  "plea": {
+    "syllables": "plea",
+    "ipa": "/pliː/"
+  },
+  "interrupt": {
+    "syllables": "interrupt",
+    "ipa": "/ˌɪntəˈɹʌpt/"
+  },
+  "brim": {
+    "syllables": "brim",
+    "ipa": "/bɹɪm/"
+  },
+  "desolate": {
+    "syllables": "de·so·la·te",
+    "ipa": ""
+  },
+  "query": {
+    "syllables": "query",
+    "ipa": "/ˈkwɪə.ɹi/"
+  },
+  "direction": {
+    "syllables": "di·rection",
+    "ipa": "/d(a)ɪˈɹɛk.ʃən/"
+  },
+  "pan": {
+    "syllables": "pan",
+    "ipa": "/pæn/"
+  },
+  "grip": {
+    "syllables": "grip",
+    "ipa": "/ɡɹɪp/"
+  },
+  "inscribe": {
+    "syllables": "inscri·be",
+    "ipa": "/ɪnˈskɹaɪb/"
+  },
+  "reinstate": {
+    "syllables": "reinsta·te",
+    "ipa": ""
+  },
+  "sidelined": {
+    "syllables": "si·de·li·ned",
+    "ipa": ""
+  },
+  "anonymity": {
+    "syllables": "ano·ny·mi·ty",
+    "ipa": "/ænəˈnɪmɪti/"
+  },
+  "retaliate": {
+    "syllables": "re·ta·liate",
+    "ipa": "/ɹɪˈtæli.eɪt/"
+  },
+  "curriculum vitae": {
+    "syllables": "curri·cu·lum vi·tae",
+    "ipa": "/kəˈɹɪkjələm ˈviːtaɪ/"
+  },
+  "eloquent": {
+    "syllables": "elo·quent",
+    "ipa": "/ˈɛl.əˌkwənt/"
+  },
+  "sealed": {
+    "syllables": "sealed",
+    "ipa": "/siːld/"
+  },
+  "unlock": {
+    "syllables": "unlock",
+    "ipa": "/ʌnˈlɒk/"
+  },
+  "slip out": {
+    "syllables": "slip out",
+    "ipa": ""
+  },
+  "scandalous": {
+    "syllables": "scanda·lous",
+    "ipa": "/ˈskændələs/"
+  },
+  "playback": {
+    "syllables": "playback",
+    "ipa": ""
+  },
+  "whisper": {
+    "syllables": "whisper",
+    "ipa": "/ˈ(h)wɪspə/"
+  },
+  "concentrated": {
+    "syllables": "concentra·ted",
+    "ipa": "/ˈkɒnsəntɹeɪtɪd/"
+  },
+  "viral": {
+    "syllables": "vi·ral",
+    "ipa": "/ˈvaɪɹəl/"
+  },
+  "intricate": {
+    "syllables": "intri·ca·te",
+    "ipa": "/ˈɪn.tɹɪ.kət/"
+  },
+  "celebrity": {
+    "syllables": "ce·lebri·ty",
+    "ipa": "/sɪˈlɛbɹɪti/"
+  },
+  "amateur": {
+    "syllables": "ama·teur",
+    "ipa": "/ˈæ.mə.tə/"
+  },
+  "issue": {
+    "syllables": "issue",
+    "ipa": "/ˈɪsjuː/"
+  },
+  "level": {
+    "syllables": "le·vel",
+    "ipa": "/ˈlɛv.əl/"
+  },
+  "responsible": {
+    "syllables": "responsible",
+    "ipa": "/ɹɪˈspɒnsəbl̩/"
+  },
+  "gesture": {
+    "syllables": "gestu·re",
+    "ipa": "/ˈdʒɛs.tʃɚ/"
+  },
+  "space": {
+    "syllables": "spa·ce",
+    "ipa": "/speɪs/"
+  },
+  "shield": {
+    "syllables": "shield",
+    "ipa": "/ʃiːld/"
+  },
+  "premier": {
+    "syllables": "pre·mier",
+    "ipa": "/ˈpɹemjə/"
+  },
+  "symposium": {
+    "syllables": "sympo·sium",
+    "ipa": "/sɪm.ˈpoʊ.zi.əm/"
+  },
+  "express": {
+    "syllables": "express",
+    "ipa": "/ɛk.ˈspɹɛs/"
+  },
+  "comprehend": {
+    "syllables": "compre·hend",
+    "ipa": "/kɒmpɹɪˈhɛnd/"
+  },
+  "refine": {
+    "syllables": "re·fi·ne",
+    "ipa": "/ɹɪˈfaɪn/"
+  },
+  "bearing": {
+    "syllables": "bearing",
+    "ipa": "/ˈbɛə̯ɹɪŋ/"
+  },
+  "storyline": {
+    "syllables": "sto·ry·li·ne",
+    "ipa": ""
+  },
+  "still": {
+    "syllables": "still",
+    "ipa": "/stɪl/"
+  },
+  "appreciation": {
+    "syllables": "appre·ciation",
+    "ipa": "/əˌpɹiː.ʃiˈeɪ.ʃən/"
+  },
+  "create": {
+    "syllables": "create",
+    "ipa": "/kɹiːˈeɪt/"
+  },
+  "nominate": {
+    "syllables": "no·mi·na·te",
+    "ipa": "/ˈnɒm.ə.neɪt/"
+  },
+  "obsess": {
+    "syllables": "obsess",
+    "ipa": "/əbˈsɛs/"
+  },
+  "credential": {
+    "syllables": "cre·dential",
+    "ipa": "/kɹɪˈdɛnʃəl/"
+  },
+  "genre": {
+    "syllables": "genre",
+    "ipa": "/(d)ʒɒn.ɹə/"
+  },
+  "documentary": {
+    "syllables": "do·cu·menta·ry",
+    "ipa": "/ˌdɒk.jəˈmɛn.tɹi/"
+  },
+  "inclination": {
+    "syllables": "incli·na·tion",
+    "ipa": "/ɪn.klɪˈneɪ.ʃən/"
+  },
+  "underrepresented": {
+    "syllables": "underrepre·sented",
+    "ipa": ""
+  },
+  "dilemma": {
+    "syllables": "di·lemma",
+    "ipa": "/daɪˈlɛmə/"
+  },
+  "ajar": {
+    "syllables": "ajar",
+    "ipa": "/əˈd͡ʒɑː/"
+  },
+  "foundational": {
+    "syllables": "founda·tional",
+    "ipa": ""
+  },
+  "listen": {
+    "syllables": "listen",
+    "ipa": "/ˈlɪs.ən/"
+  },
+  "hear": {
+    "syllables": "hear",
+    "ipa": "/hɪə(ɹ)/"
+  },
+  "outline": {
+    "syllables": "outli·ne",
+    "ipa": "/ˈaʊtlaɪn/"
+  },
+  "trophy": {
+    "syllables": "trophy",
+    "ipa": "/ˈtɹəʊfi/"
+  },
+  "clarity": {
+    "syllables": "cla·ri·ty",
+    "ipa": "/ˈklæɹ.ə.ti/"
+  },
+  "acceptance": {
+    "syllables": "acceptance",
+    "ipa": "/ək.ˈsɛp.təns/"
+  },
+  "manuscript": {
+    "syllables": "ma·nuscript",
+    "ipa": "/ˈmænjəˌskɹɪpt/"
+  },
+  "pocket": {
+    "syllables": "pocket",
+    "ipa": "/ˈpɒkɪt/"
+  },
+  "training": {
+    "syllables": "training",
+    "ipa": "/ˈtɹeɪnɪŋ/"
+  },
+  "embody": {
+    "syllables": "embo·dy",
+    "ipa": "/ɪmˈbɒdi/"
+  },
+  "consistent": {
+    "syllables": "consistent",
+    "ipa": "/kənˈsɪstənt/"
+  },
+  "restore": {
+    "syllables": "resto·re",
+    "ipa": "/ɹɪˈstɔː/"
+  },
+  "career": {
+    "syllables": "ca·reer",
+    "ipa": "/kəˈɹɪə/"
+  },
+  "applaud": {
+    "syllables": "applaud",
+    "ipa": "/əˈplɔːd/"
+  },
+  "proud": {
+    "syllables": "proud",
+    "ipa": "/pɹaʊd/"
+  },
+  "archivist": {
+    "syllables": "archi·vist",
+    "ipa": "/ˈɑː(ɹ)kəvɪst/"
+  },
+  "catalogue": {
+    "syllables": "ca·ta·lo·gue",
+    "ipa": "/ˈkætəlɑɡ/"
+  },
+  "neglect": {
+    "syllables": "neglect",
+    "ipa": "/nɪˈɡlɛkt/"
+  },
+  "completion": {
+    "syllables": "comple·tion",
+    "ipa": "/kəmˈpliːʃən/"
+  },
+  "systematically": {
+    "syllables": "syste·ma·ti·cally",
+    "ipa": ""
+  },
+  "falsify": {
+    "syllables": "falsi·fy",
+    "ipa": "/ˈfɒlsɪfaɪ/"
+  },
+  "abrupt": {
+    "syllables": "abrupt",
+    "ipa": "/aˈbɹʌpt/"
+  },
+  "cautious": {
+    "syllables": "cautious",
+    "ipa": "/ˈkɔːʃəs/"
+  },
+  "boulevard": {
+    "syllables": "boule·vard",
+    "ipa": "/ˈbʊləvɑɹd/"
+  },
+  "bud": {
+    "syllables": "bud",
+    "ipa": "/bʌd/"
+  },
+  "quality": {
+    "syllables": "quali·ty",
+    "ipa": "/ˈkwɒlɪti/"
+  },
+  "moment": {
+    "syllables": "mo·ment",
+    "ipa": "/ˈməʊmənt/"
+  },
+  "co-write": {
+    "syllables": "co-wri·te",
+    "ipa": ""
+  },
+  "remote": {
+    "syllables": "re·mo·te",
+    "ipa": "[ɹəˈməʊt]"
+  },
+  "location scouting": {
+    "syllables": "lo·ca·tion scouting",
+    "ipa": ""
+  },
+  "authentic": {
+    "syllables": "authentic",
+    "ipa": "/ɒ.ˈθɛn.tɪk/"
+  },
+  "wander": {
+    "syllables": "wander",
+    "ipa": "/ˈwɒndə/"
+  },
+  "brew": {
+    "syllables": "brew",
+    "ipa": "/bɹuː/"
+  },
+  "faded": {
+    "syllables": "fa·ded",
+    "ipa": "/ˈfeɪdɪd/"
+  },
+  "resolution": {
+    "syllables": "re·so·lu·tion",
+    "ipa": "/ˌɹɛzəˈluːʃ(ə)n/"
+  },
+  "conclude": {
+    "syllables": "conclu·de",
+    "ipa": "/kən.ˈkluːd/"
+  },
+  "indistinct": {
+    "syllables": "indistinct",
+    "ipa": ""
+  },
+  "lock away": {
+    "syllables": "lock a·way",
+    "ipa": ""
+  },
+  "open": {
+    "syllables": "open",
+    "ipa": "/ˈəʊ.pən/"
+  },
+  "fragrance": {
+    "syllables": "fragrance",
+    "ipa": "/ˈfɹeɪɡɹəns/"
+  },
+  "nameless": {
+    "syllables": "na·me·less",
+    "ipa": ""
+  },
+  "outbreak": {
+    "syllables": "outbreak",
+    "ipa": "/ˈaʊtbɹeɪk/"
+  },
+  "precedent": {
+    "syllables": "pre·ce·dent",
+    "ipa": "/pɹɪˈsiː.dənt/"
+  },
+  "mild": {
+    "syllables": "mild",
+    "ipa": "/ˈmaɪld/"
+  },
+  "intern": {
+    "syllables": "intern",
+    "ipa": "/ɪnˈtɜːn/"
+  },
+  "graveyard shift": {
+    "syllables": "gra·veyard shift",
+    "ipa": ""
+  },
+  "infected": {
+    "syllables": "infected",
+    "ipa": ""
+  },
+  "rupture": {
+    "syllables": "ruptu·re",
+    "ipa": "/ˈɹʌptʃə/"
+  },
+  "alarmed": {
+    "syllables": "alarmed",
+    "ipa": "/əˈlɑːmd/"
+  },
+  "cowardly": {
+    "syllables": "co·wardly",
+    "ipa": "/ˈkaʊədli/"
+  },
+  "epicentre": {
+    "syllables": "epi·centre",
+    "ipa": "/ˈɛpɪˌsɛntə/"
+  },
+  "perimeter": {
+    "syllables": "pe·ri·me·ter",
+    "ipa": "/pəˈɹɪmɪtə(ɹ)/"
+  },
+  "sustain": {
+    "syllables": "sustain",
+    "ipa": "/səˈsteɪn/"
+  },
+  "patrol": {
+    "syllables": "patrol",
+    "ipa": "/pəˈtɹəʊl/"
+  },
+  "insignia": {
+    "syllables": "insignia",
+    "ipa": "/ɪnˈsɪɡ.ni.ə/"
+  },
+  "civilian": {
+    "syllables": "ci·vi·lian",
+    "ipa": "/sɪˈvɪljən/"
+  },
+  "reinforced": {
+    "syllables": "reinforced",
+    "ipa": ""
+  },
+  "checkpoint": {
+    "syllables": "checkpoint",
+    "ipa": ""
+  },
+  "ration": {
+    "syllables": "ra·tion",
+    "ipa": "/ˈɹæʃən/"
+  },
+  "assign": {
+    "syllables": "assign",
+    "ipa": "/əˈsaɪn/"
+  },
+  "lean": {
+    "syllables": "lean",
+    "ipa": "/liːn/"
+  },
+  "economical": {
+    "syllables": "eco·no·mi·cal",
+    "ipa": "/ˌɛkəˈnɒmɪkəl/"
+  },
+  "inventory": {
+    "syllables": "invento·ry",
+    "ipa": "/ɪnˈvɛn.tə.ɹi/"
+  },
+  "preface": {
+    "syllables": "pre·fa·ce",
+    "ipa": "/ˈpɹɛfəs/"
+  },
+  "scrutinise": {
+    "syllables": "scru·ti·ni·se",
+    "ipa": ""
+  },
+  "newcomer": {
+    "syllables": "newco·mer",
+    "ipa": "/ˈnjuːkʌmə/"
+  },
+  "sparse": {
+    "syllables": "sparse",
+    "ipa": "/spɑːs/"
+  },
+  "assume": {
+    "syllables": "assu·me",
+    "ipa": "/əˈsjuːm/"
+  },
+  "manifest": {
+    "syllables": "ma·ni·fest",
+    "ipa": "/ˈmæn.ə.fɛst/"
+  },
+  "mutant": {
+    "syllables": "mu·tant",
+    "ipa": "/ˈmjuːtənt/"
+  },
+  "breach": {
+    "syllables": "breach",
+    "ipa": "[bɹiːtʃ]"
+  },
+  "lockdown": {
+    "syllables": "lockdown",
+    "ipa": "/ˈlɒkˌdaʊn/"
+  },
+  "evacuate": {
+    "syllables": "eva·cuate",
+    "ipa": "/ɪˈvæk.ju.eɪt/"
+  },
+  "block": {
+    "syllables": "block",
+    "ipa": "/blɒk/"
+  },
+  "translucent": {
+    "syllables": "translu·cent",
+    "ipa": "/tɹænzˈluː.sənt/"
+  },
+  "crystallise": {
+    "syllables": "crystalli·se",
+    "ipa": ""
+  },
+  "spread": {
+    "syllables": "spread",
+    "ipa": "/spɹɛd/"
+  },
+  "seal": {
+    "syllables": "seal",
+    "ipa": "/siːl/"
+  },
+  "frostbite": {
+    "syllables": "frostbi·te",
+    "ipa": ""
+  },
+  "temperature": {
+    "syllables": "tempe·ra·tu·re",
+    "ipa": "/ˈtɛmp(ə)ɹətʃə(ɹ)/"
+  },
+  "radiate": {
+    "syllables": "ra·diate",
+    "ipa": "/ˈɹeɪdi.ət/"
+  },
+  "sense": {
+    "syllables": "sense",
+    "ipa": "/sɛn(t)s/"
+  },
+  "harm": {
+    "syllables": "harm",
+    "ipa": "/hɑːm/"
+  },
+  "report": {
+    "syllables": "re·port",
+    "ipa": "/ɹəˈpoːt/"
+  },
+  "figure out": {
+    "syllables": "fi·gu·re· out",
+    "ipa": ""
+  },
+  "circulate": {
+    "syllables": "circu·la·te",
+    "ipa": "/ˈsɚˌkju.leɪt/"
+  },
+  "regard": {
+    "syllables": "re·gard",
+    "ipa": "/ɹɪˈɡɑːd/"
+  },
+  "asset": {
+    "syllables": "asset",
+    "ipa": "/ˈæsɪt/"
+  },
+  "limit": {
+    "syllables": "li·mit",
+    "ipa": "/ˈlɪmt/"
+  },
+  "overextend": {
+    "syllables": "ove·rextend",
+    "ipa": ""
+  },
+  "provocation": {
+    "syllables": "pro·vo·ca·tion",
+    "ipa": "/ˌpɹɒvəˈkeɪʃən/"
+  },
+  "digest": {
+    "syllables": "di·gest",
+    "ipa": "/daɪˈdʒɛst/"
+  },
+  "pragmatic": {
+    "syllables": "pragma·tic",
+    "ipa": "/pɹæɡˈmætɪk/"
+  },
+  "record": {
+    "syllables": "re·cord",
+    "ipa": "/ˈɹɛkɔːd/"
+  },
+  "function": {
+    "syllables": "function",
+    "ipa": "/ˈfʌŋ(k)ʃən/"
+  },
+  "excessive": {
+    "syllables": "excessi·ve",
+    "ipa": "/ɪkˈsɛsɪv/"
+  },
+  "resource": {
+    "syllables": "re·source",
+    "ipa": "/ɹɪˈsɔːs/"
+  },
+  "lieutenant": {
+    "syllables": "lieute·nant",
+    "ipa": "/ləˈtɛnənt/"
+  },
+  "direct": {
+    "syllables": "di·rect",
+    "ipa": "/d(a)ɪˈɹɛkt/"
+  },
+  "unfiltered": {
+    "syllables": "unfilte·red",
+    "ipa": ""
+  },
+  "hedge": {
+    "syllables": "hedge",
+    "ipa": "/hɛdʒ/"
+  },
+  "packaged": {
+    "syllables": "packa·ged",
+    "ipa": ""
+  },
+  "resume": {
+    "syllables": "re·su·me",
+    "ipa": "/ɹɪˈzjuːm/"
+  },
+  "integrity": {
+    "syllables": "integri·ty",
+    "ipa": "/ɪnˈtɛɡɹəti/"
+  },
+  "trust": {
+    "syllables": "trust",
+    "ipa": "/trʊst/"
+  },
+  "candid": {
+    "syllables": "candid",
+    "ipa": "/ˈkæn.dɪd/"
+  },
+  "hoard": {
+    "syllables": "hoard",
+    "ipa": "/hɔːd/"
+  },
+  "bribe": {
+    "syllables": "bri·be",
+    "ipa": "/bɹaɪb/"
+  },
+  "supplement": {
+    "syllables": "supple·ment",
+    "ipa": "/ˈsʌpləmənt/"
+  },
+  "detect": {
+    "syllables": "de·tect",
+    "ipa": "/dɪˈtɛkt/"
+  },
+  "discrepancy": {
+    "syllables": "discre·pancy",
+    "ipa": "/dɪsˈkɹɛpənsi/"
+  },
+  "mechanism": {
+    "syllables": "mecha·nism",
+    "ipa": "/ˈmɛkənɪzm/"
+  },
+  "auditable": {
+    "syllables": "audi·table",
+    "ipa": ""
+  },
+  "voluntary": {
+    "syllables": "vo·lunta·ry",
+    "ipa": "/ˈvɒ.lən.tɹi/"
+  },
+  "public": {
+    "syllables": "public",
+    "ipa": "/ˈpʌblɪk/"
+  },
+  "punish": {
+    "syllables": "pu·nish",
+    "ipa": "/ˈpʌnɪʃ/"
+  },
+  "resentful": {
+    "syllables": "re·sentful",
+    "ipa": "/ɹɪˈzɛntfəl/"
+  },
+  "effective": {
+    "syllables": "effecti·ve",
+    "ipa": "/əˈfɛktɪv/"
+  },
+  "afford": {
+    "syllables": "afford",
+    "ipa": "/əˈfɔːd/"
+  },
+  "unleash": {
+    "syllables": "unleash",
+    "ipa": "/ʌnˈliʃ/"
+  },
+  "stray": {
+    "syllables": "stray",
+    "ipa": "/stɹeɪ/"
+  },
+  "pursue": {
+    "syllables": "pursue",
+    "ipa": "/pəˈsjuː/"
+  },
+  "weigh": {
+    "syllables": "weigh",
+    "ipa": "/weɪ/"
+  },
+  "erupt": {
+    "syllables": "erupt",
+    "ipa": "/ɪˈɹʌpt/"
+  },
+  "demeanour": {
+    "syllables": "de·meanour",
+    "ipa": ""
+  },
+  "extraordinary": {
+    "syllables": "extraordi·na·ry",
+    "ipa": "/ɪksˈtɹɔː(ɹ)dɪnəɹi/"
+  },
+  "apprehension": {
+    "syllables": "appre·hension",
+    "ipa": "/æp.ɹɪˈhɛn.ʃən/"
+  },
+  "defensive": {
+    "syllables": "de·fensi·ve",
+    "ipa": "/dɪˈfɛnsɪv/"
+  },
+  "commit": {
+    "syllables": "commit",
+    "ipa": "/kəˈmɪt/"
+  },
+  "generator": {
+    "syllables": "ge·ne·ra·tor",
+    "ipa": ""
+  },
+  "flicker": {
+    "syllables": "flicker",
+    "ipa": "/ˈflɪkə/"
+  },
+  "eerie": {
+    "syllables": "eerie",
+    "ipa": "/ˈɪəɹi/"
+  },
+  "emit": {
+    "syllables": "emit",
+    "ipa": "/iˈmɪt/"
+  },
+  "glow": {
+    "syllables": "glow",
+    "ipa": "/ɡləʊ/"
+  },
+  "accustom": {
+    "syllables": "accustom",
+    "ipa": ""
+  },
+  "surreal": {
+    "syllables": "surreal",
+    "ipa": ""
+  },
+  "deployment": {
+    "syllables": "deployment",
+    "ipa": "/dɪˈplɔɪmənt/"
+  },
+  "standout": {
+    "syllables": "standout",
+    "ipa": ""
+  },
+  "privilege": {
+    "syllables": "pri·vi·le·ge",
+    "ipa": "/ˈpɹɪv(ɪ)lɪdʒ/"
+  },
+  "mourn": {
+    "syllables": "mourn",
+    "ipa": "/mɔːn/"
+  },
+  "reluctant": {
+    "syllables": "re·luctant",
+    "ipa": "/ɹɪˈlʌktənt/"
+  },
+  "chuckle": {
+    "syllables": "chuckle",
+    "ipa": "/ˈt͡ʃʌkəl/"
+  },
+  "siege": {
+    "syllables": "siege",
+    "ipa": "/siːdʒ/"
+  },
+  "organised": {
+    "syllables": "orga·ni·sed",
+    "ipa": ""
+  },
+  "superior": {
+    "syllables": "su·pe·rior",
+    "ipa": "/suːˈpɪəɹi.ə(ɹ)/"
+  },
+  "briefing": {
+    "syllables": "briefing",
+    "ipa": "/ˈbɹiːfɪŋ/"
+  },
+  "methodical": {
+    "syllables": "metho·di·cal",
+    "ipa": ""
+  },
+  "contingency": {
+    "syllables": "contingency",
+    "ipa": "/kənˈtɪndʒənsi/"
+  },
+  "backup": {
+    "syllables": "backup",
+    "ipa": "/ˈbækˌʌp/"
+  },
+  "attain": {
+    "syllables": "attain",
+    "ipa": "/əˈteɪn/"
+  },
+  "scope": {
+    "syllables": "sco·pe",
+    "ipa": "/ˈskoʊp/"
+  },
+  "crucial": {
+    "syllables": "cru·cial",
+    "ipa": "/ˈkɹuː.ʃəl/"
+  },
+  "subside": {
+    "syllables": "subsi·de",
+    "ipa": ""
+  },
+  "afraid": {
+    "syllables": "afraid",
+    "ipa": "/əˈfɹeɪd/"
+  },
+  "remain": {
+    "syllables": "re·main",
+    "ipa": "/ɹɪˈmeɪn/"
+  },
+  "landscape": {
+    "syllables": "landsca·pe",
+    "ipa": "/ˈlandskeɪp/"
+  },
+  "gauge": {
+    "syllables": "gauge",
+    "ipa": "/ˈɡeɪdʒ/"
+  },
+  "habit": {
+    "syllables": "ha·bit",
+    "ipa": "/ˈhæbət/"
+  },
+  "horizon": {
+    "syllables": "ho·ri·zon",
+    "ipa": "/həˈɹaɪzən/"
+  },
+  "daylight": {
+    "syllables": "daylight",
+    "ipa": "/ˈdeɪlaɪt/"
+  },
+  "smoke": {
+    "syllables": "smo·ke",
+    "ipa": "/sməʊk/"
+  },
+  "morale": {
+    "syllables": "mo·ra·le",
+    "ipa": "/məˈɹæl/"
+  },
+  "survey": {
+    "syllables": "survey",
+    "ipa": ""
+  },
+  "repair": {
+    "syllables": "re·pair",
+    "ipa": "/ɹɪˈpɛə/"
+  },
+  "owe": {
+    "syllables": "owe",
+    "ipa": "/əʊ/"
+  },
+  "gravity": {
+    "syllables": "gra·vi·ty",
+    "ipa": "/ˈɡɹævɪti/"
+  },
+  "bear": {
+    "syllables": "bear",
+    "ipa": "/bɛə(ɹ)/"
+  },
+  "quip": {
+    "syllables": "quip",
+    "ipa": "/kwɪp/"
+  },
+  "mundane": {
+    "syllables": "munda·ne",
+    "ipa": "/mʌnˈdeɪn/"
+  },
+  "subscribe": {
+    "syllables": "subscri·be",
+    "ipa": "/səbˈskɹaɪb/"
+  },
+  "newsletter": {
+    "syllables": "newsletter",
+    "ipa": "/ˈnjuːzˌlɛtə/"
+  },
+  "detail": {
+    "syllables": "de·tail",
+    "ipa": "/ˈdiːteɪl/"
+  },
+  "absorb": {
+    "syllables": "absorb",
+    "ipa": "/əbˈsɔːb/"
+  },
+  "peripheral": {
+    "syllables": "pe·riphe·ral",
+    "ipa": "/pəˈɹɪf(ə)ɹ(ə)l/"
+  },
+  "coordinator": {
+    "syllables": "coordi·na·tor",
+    "ipa": ""
+  },
+  "heroic": {
+    "syllables": "he·roic",
+    "ipa": "/hɪˈɹəʊ.ɪk/"
+  },
+  "linger": {
+    "syllables": "linger",
+    "ipa": "/ˈlɪŋɡə/"
+  },
+  "substantial": {
+    "syllables": "substantial",
+    "ipa": "/səbˈstænʃəl/"
+  },
+  "vegetation": {
+    "syllables": "ve·ge·ta·tion",
+    "ipa": "/ˌvɛd͡ʒəˈteɪʃən/"
+  },
+  "warmer": {
+    "syllables": "warmer",
+    "ipa": "/ˈwɔːmə/"
+  },
+  "tentatively": {
+    "syllables": "tenta·ti·ve·ly",
+    "ipa": "/ˈtɛntətɪvli/"
+  },
+  "grasp": {
+    "syllables": "grasp",
+    "ipa": "/ɡɹɑːsp/"
+  },
+  "confirm": {
+    "syllables": "confirm",
+    "ipa": "/kənˈfɜːm/"
+  },
+  "pull back": {
+    "syllables": "pull back",
+    "ipa": ""
+  },
+  "rebuild": {
+    "syllables": "re·build",
+    "ipa": "/ˈɹiːbɪld/"
+  },
+  "identical": {
+    "syllables": "identi·cal",
+    "ipa": "/aɪˈdɛntɪkl̩/"
+  },
+  "warm": {
+    "syllables": "warm",
+    "ipa": "/wɔːm/"
+  },
+  "human": {
+    "syllables": "hu·man",
+    "ipa": "/ˈhjuː.mən/"
+  },
+  "belonging": {
+    "syllables": "be·longing",
+    "ipa": "/bɪˈlɒŋɪŋ/"
+  },
+  "isolated": {
+    "syllables": "iso·la·ted",
+    "ipa": "/ˈaɪsəleɪtɪd/"
+  },
+  "administer": {
+    "syllables": "admi·nister",
+    "ipa": "/ədˈmɪnɪstɚ/"
+  },
+  "stabilise": {
+    "syllables": "sta·bi·li·se",
+    "ipa": ""
+  },
+  "imperial": {
+    "syllables": "impe·rial",
+    "ipa": "/ɪmˈpɪ.ɹi.əl/"
+  },
+  "eunuch": {
+    "syllables": "eunuch",
+    "ipa": "/ˈjuː.nək/"
+  },
+  "vacancy": {
+    "syllables": "va·cancy",
+    "ipa": "/ˈveɪkənsi/"
+  },
+  "proficient": {
+    "syllables": "pro·fi·cient",
+    "ipa": "/pɹəˈfɪʃ.ənt/"
+  },
+  "custodian": {
+    "syllables": "custo·dian",
+    "ipa": ""
+  },
+  "pore over": {
+    "syllables": "po·re· o·ver",
+    "ipa": ""
+  },
+  "superstition": {
+    "syllables": "su·persti·tion",
+    "ipa": "/ˌs(j)u.pə(ɹ)ˈstɪ.ʃn̩/"
+  },
+  "prudent": {
+    "syllables": "pru·dent",
+    "ipa": "/ˈpɹuːdənt/"
+  },
+  "laugh softly": {
+    "syllables": "laugh softly",
+    "ipa": ""
+  },
+  "quarters": {
+    "syllables": "quarters",
+    "ipa": "/ˈkwɔːtəz/"
+  },
+  "periphery": {
+    "syllables": "pe·riphe·ry",
+    "ipa": "/pəˈɹɪfəɹi/"
+  },
+  "austere": {
+    "syllables": "auste·re",
+    "ipa": "/ɒstɪə(ɹ)/"
+  },
+  "shadowy": {
+    "syllables": "sha·do·wy",
+    "ipa": "/ˈʃæd.əʊ.i/"
+  },
+  "assessment": {
+    "syllables": "assessment",
+    "ipa": ""
+  },
+  "stocked": {
+    "syllables": "stocked",
+    "ipa": ""
+  },
+  "sterile": {
+    "syllables": "ste·ri·le",
+    "ipa": "/ˈstɛɹaɪl/"
+  },
+  "archive": {
+    "syllables": "archi·ve",
+    "ipa": "/ˈɑɹkaɪv/"
+  },
+  "treatise": {
+    "syllables": "treati·se",
+    "ipa": "/ˈtɹiːtɪs/"
+  },
+  "dubious": {
+    "syllables": "du·bious",
+    "ipa": "/ˈdjuːbi.əs/"
+  },
+  "theoretical": {
+    "syllables": "theore·ti·cal",
+    "ipa": "/ˌθi.əˈɹɛtɪkəl/"
+  },
+  "fever": {
+    "syllables": "fe·ver",
+    "ipa": "/ˈfiːvə/"
+  },
+  "empirical": {
+    "syllables": "empi·ri·cal",
+    "ipa": "/ɪmˈpɪɹɪkəl/"
+  },
+  "inconsistency": {
+    "syllables": "inconsistency",
+    "ipa": "/ˌɪnkənˈsɪst(ə)nsi/"
+  },
+  "state": {
+    "syllables": "sta·te",
+    "ipa": "/steɪt/"
+  },
+  "note": {
+    "syllables": "no·te",
+    "ipa": "/nəʊt/"
+  },
+  "memorandum": {
+    "syllables": "me·mo·randum",
+    "ipa": ""
+  },
+  "routine": {
+    "syllables": "routi·ne",
+    "ipa": "/ɹuːˈtiːn/"
+  },
+  "interact": {
+    "syllables": "inte·ract",
+    "ipa": "/ɪntəɹˈækt/"
+  },
+  "cumulative": {
+    "syllables": "cu·mu·la·ti·ve",
+    "ipa": "/ˈkjuːmjʊlətɪv/"
+  },
+  "toxicity": {
+    "syllables": "to·xi·ci·ty",
+    "ipa": "/tɒkˈsɪsəti/"
+  },
+  "lethargic": {
+    "syllables": "lethargic",
+    "ipa": "/ləˈθɑɹdʒɪk/"
+  },
+  "diagnosis": {
+    "syllables": "diagno·sis",
+    "ipa": "/daɪəɡˈnəʊsɪs/"
+  },
+  "retract": {
+    "syllables": "retract",
+    "ipa": "/ɹəˈtɹækt/"
+  },
+  "bypass": {
+    "syllables": "by·pass",
+    "ipa": "/ˈbaɪpɑːs/"
+  },
+  "conduit": {
+    "syllables": "conduit",
+    "ipa": "/ˈkɒnd(j)ʊɪt/"
+  },
+  "insubordination": {
+    "syllables": "insu·bordi·na·tion",
+    "ipa": ""
+  },
+  "returned": {
+    "syllables": "re·turned",
+    "ipa": "/ɹɪˈtəːnd/"
+  },
+  "plausible": {
+    "syllables": "plausible",
+    "ipa": "/ˈplɔːz.ə.bəl/"
+  },
+  "exempt": {
+    "syllables": "exempt",
+    "ipa": "/ɛɡˈzɛm(p)t/"
+  },
+  "hierarchy": {
+    "syllables": "hierarchy",
+    "ipa": "/ˈhaɪ.ə.ɹɑː(ɹ).ki/"
+  },
+  "rationale": {
+    "syllables": "ra·tiona·le",
+    "ipa": "/ɹæ.ʃəˈnɑːl/"
+  },
+  "contradictory": {
+    "syllables": "contra·dicto·ry",
+    "ipa": "/ˌkɑntɹəˈdɪktəɹi/"
+  },
+  "acknowledgement": {
+    "syllables": "acknowledge·ment",
+    "ipa": ""
+  },
+  "summons": {
+    "syllables": "summons",
+    "ipa": "/ˈsʌ.mənz/"
+  },
+  "sudden": {
+    "syllables": "sudden",
+    "ipa": "/ˈsʌdən/"
+  },
+  "memorial": {
+    "syllables": "me·mo·rial",
+    "ipa": "/məˈmoʊɹi.əl/"
+  },
+  "inscrutable": {
+    "syllables": "inscru·table",
+    "ipa": "/ˌɪnˈskɹuːtəbl/"
+  },
+  "perpetually": {
+    "syllables": "perpe·tually",
+    "ipa": "/pəˈpɛtjʊəli/"
+  },
+  "pharmaceutical": {
+    "syllables": "pharma·ceuti·cal",
+    "ipa": "/ˌfɑɹməˈs(j)utɪkl̩/"
+  },
+  "tutored": {
+    "syllables": "tu·to·red",
+    "ipa": ""
+  },
+  "inference": {
+    "syllables": "infe·rence",
+    "ipa": "/ˈɪn.fə.ɹəns/"
+  },
+  "interaction": {
+    "syllables": "inte·raction",
+    "ipa": "/ˌɪntəɹˈækʃən/"
+  },
+  "cross-reference": {
+    "syllables": "cross-re·fe·rence",
+    "ipa": ""
+  },
+  "compendium": {
+    "syllables": "compendium",
+    "ipa": ""
+  },
+  "commentary": {
+    "syllables": "commenta·ry",
+    "ipa": ""
+  },
+  "substantiate": {
+    "syllables": "substantiate",
+    "ipa": "/səbˈstanʃɪeɪt/"
+  },
+  "indirect": {
+    "syllables": "indi·rect",
+    "ipa": "/ˌɪndaɪˈɹɛkt/"
+  },
+  "infer": {
+    "syllables": "infer",
+    "ipa": "/ɪnˈfɜː/"
+  },
+  "intent": {
+    "syllables": "intent",
+    "ipa": "/ɪnˈtɛnt/"
+  },
+  "heed": {
+    "syllables": "heed",
+    "ipa": "/hiːd/"
+  },
+  "repeat": {
+    "syllables": "re·peat",
+    "ipa": ""
+  },
+  "groundwork": {
+    "syllables": "groundwork",
+    "ipa": ""
+  },
+  "dominance": {
+    "syllables": "do·mi·nance",
+    "ipa": "/ˈdɒmɪnəns/"
+  },
+  "consultation": {
+    "syllables": "consulta·tion",
+    "ipa": "/ˌkɒnsl̩ˈteɪʃən/"
+  },
+  "tolerant": {
+    "syllables": "to·le·rant",
+    "ipa": "/ˈtɒləɹənt/"
+  },
+  "affront": {
+    "syllables": "affront",
+    "ipa": "/əˈfɹʌnt/"
+  },
+  "tedious": {
+    "syllables": "te·dious",
+    "ipa": "/ˈtiː.dɪəs/"
+  },
+  "rumour": {
+    "syllables": "ru·mour",
+    "ipa": "/ˈɹuːmə(ɹ)/"
+  },
+  "confound": {
+    "syllables": "confound",
+    "ipa": "/kənˈfaʊnd/"
+  },
+  "constitution": {
+    "syllables": "consti·tu·tion",
+    "ipa": "/ˌkɒnstɪˈtjuːʃən/"
+  },
+  "observation": {
+    "syllables": "observa·tion",
+    "ipa": "/ˌɒbzəˈveɪʃ(ə)n/"
+  },
+  "clinical": {
+    "syllables": "cli·ni·cal",
+    "ipa": "/ˈklɪnɪkəl/"
+  },
+  "even-toned": {
+    "syllables": "even-to·ned",
+    "ipa": ""
+  },
+  "complicated": {
+    "syllables": "compli·ca·ted",
+    "ipa": "/ˈkɒmplɪkeɪtɪd/"
+  },
+  "intermittent": {
+    "syllables": "intermittent",
+    "ipa": "/ˌɪntəˈmɪtn̩t/"
+  },
+  "paralysis": {
+    "syllables": "pa·ra·ly·sis",
+    "ipa": "/pəˈɹæləsəs/"
+  },
+  "distinguish": {
+    "syllables": "distinguish",
+    "ipa": "/dɪsˈtɪŋɡwɪʃ/"
+  },
+  "regular": {
+    "syllables": "re·gu·lar",
+    "ipa": "/ˈɹɛɡjʊlə/"
+  },
+  "originate": {
+    "syllables": "ori·gi·na·te",
+    "ipa": "/əˈɹɪdʒɪneɪt/"
+  },
+  "profile": {
+    "syllables": "pro·fi·le",
+    "ipa": "/ˈpɹəʊfaɪl/"
+  },
+  "toxic": {
+    "syllables": "to·xic",
+    "ipa": "/ˈtɒk.sɪk/"
+  },
+  "ceremonial": {
+    "syllables": "ce·re·mo·nial",
+    "ipa": ""
+  },
+  "reasoning": {
+    "syllables": "reaso·ning",
+    "ipa": "/ˈɹiːzənɪŋ/"
+  },
+  "botanical": {
+    "syllables": "bo·ta·ni·cal",
+    "ipa": ""
+  },
+  "mimic": {
+    "syllables": "mi·mic",
+    "ipa": "/ˈmɪm.ɪk/"
+  },
+  "build up": {
+    "syllables": "build up",
+    "ipa": ""
+  },
+  "traceable": {
+    "syllables": "tra·ceable",
+    "ipa": "/ˈtɹeɪsəbəl/"
+  },
+  "nappendix": {
+    "syllables": "nappendix",
+    "ipa": ""
+  },
+  "atypical": {
+    "syllables": "aty·pi·cal",
+    "ipa": "/eɪ.ˈtɪp.ɪ.kəl/"
+  },
+  "appeal": {
+    "syllables": "appeal",
+    "ipa": "/əˈpiːl/"
+  },
+  "dietary": {
+    "syllables": "dieta·ry",
+    "ipa": "/ˈdaɪətɹi/"
+  },
+  "methodically": {
+    "syllables": "metho·di·cally",
+    "ipa": ""
+  },
+  "pattern": {
+    "syllables": "pattern",
+    "ipa": "/ˈpat(ə)n/"
+  },
+  "derivative": {
+    "syllables": "de·ri·va·ti·ve",
+    "ipa": "/dɪˈɹɪvətɪv/"
+  },
+  "compatible": {
+    "syllables": "compa·tible",
+    "ipa": "/kəmˈpætəbəl/"
+  },
+  "mask": {
+    "syllables": "mask",
+    "ipa": "/mæsk/"
+  },
+  "unattributed": {
+    "syllables": "unattri·bu·ted",
+    "ipa": ""
+  },
+  "specify": {
+    "syllables": "spe·ci·fy",
+    "ipa": "/ˈspɛsɪfaɪ/"
+  },
+  "protocol": {
+    "syllables": "pro·to·col",
+    "ipa": "/ˈpɹəʊtəˌkɒl/"
+  },
+  "tap": {
+    "syllables": "tap",
+    "ipa": "/tæp/"
+  },
+  "habitual": {
+    "syllables": "ha·bi·tual",
+    "ipa": "/-tjʊ-/"
+  },
+  "procurement": {
+    "syllables": "pro·cu·re·ment",
+    "ipa": "/pɹəˈkjʊə.mənt/"
+  },
+  "anomaly": {
+    "syllables": "ano·ma·ly",
+    "ipa": "/əˈnɒməlɪ/"
+  },
+  "approval": {
+    "syllables": "appro·val",
+    "ipa": "/əˈpɹuːvəl/"
+  },
+  "involuntary": {
+    "syllables": "invo·lunta·ry",
+    "ipa": "/ɪnˈvɒl.ən.tɹi/"
+  },
+  "decline": {
+    "syllables": "decli·ne",
+    "ipa": "/dɪˈklaɪn/"
+  },
+  "insidious": {
+    "syllables": "insi·dious",
+    "ipa": "/ɪnˈsɪdi.əs/"
+  },
+  "banal": {
+    "syllables": "ba·nal",
+    "ipa": "/bəˈnæl/"
+  },
+  "deft": {
+    "syllables": "deft",
+    "ipa": "/dɛft/"
+  },
+  "sanction": {
+    "syllables": "sanction",
+    "ipa": "/ˈsæŋkʃən/"
+  },
+  "mandate": {
+    "syllables": "manda·te",
+    "ipa": "/ˈmæn.deɪt/"
+  },
+  "ndecode": {
+    "syllables": "nde·co·de",
+    "ipa": ""
+  },
+  "proof": {
+    "syllables": "proof",
+    "ipa": "/pɹʉːf/"
+  },
+  "consultant": {
+    "syllables": "consultant",
+    "ipa": "/kənˈsʌltənt/"
+  },
+  "title": {
+    "syllables": "title",
+    "ipa": "/ˈtaɪtl̩/"
+  },
+  "expound": {
+    "syllables": "expound",
+    "ipa": "/ɪkˈspaʊnd/"
+  },
+  "practical": {
+    "syllables": "practi·cal",
+    "ipa": "/ˈpɹæktɪkəl/"
+  },
+  "willing": {
+    "syllables": "willing",
+    "ipa": "/ˈwɪlɪŋ/"
+  },
+  "subordinate": {
+    "syllables": "su·bordi·na·te",
+    "ipa": ""
+  },
+  "decision": {
+    "syllables": "de·ci·sion",
+    "ipa": "/dɪˈsɪʒən/"
+  },
+  "dishonest": {
+    "syllables": "disho·nest",
+    "ipa": "/dɪˈsɒnɪst/"
+  },
+  "designation": {
+    "syllables": "de·signa·tion",
+    "ipa": "/dɛzɪɡˈneɪʃən/"
+  },
+  "incorporate": {
+    "syllables": "incorpo·ra·te",
+    "ipa": "/ɪŋˈkɔɹpɚe(ɪ)t/"
+  },
+  "acquiesce": {
+    "syllables": "acquiesce",
+    "ipa": "/ˌækwiˈɛs/"
+  },
+  "negotiation": {
+    "syllables": "ne·go·tiation",
+    "ipa": "/nɪˌɡəʊʃiˈeɪʃən/"
+  },
+  "conventional": {
+    "syllables": "conventional",
+    "ipa": "/kənˈvɛnʃənl/"
+  },
+  "acclimate": {
+    "syllables": "accli·ma·te",
+    "ipa": "/ə.ˈklaɪ.mət/"
+  },
+  "seamlessly": {
+    "syllables": "seamlessly",
+    "ipa": ""
+  },
+  "remarkably": {
+    "syllables": "re·markably",
+    "ipa": "/ɹɪˈmɑːkəbli/"
+  },
+  "administrative": {
+    "syllables": "admi·nistra·ti·ve",
+    "ipa": "/ədˈmɪ.nɪs.tɹəˌtɪv/"
+  },
+  "muted": {
+    "syllables": "mu·ted",
+    "ipa": ""
+  },
+  "size up": {
+    "syllables": "si·ze· up",
+    "ipa": ""
+  },
+  "bluntly": {
+    "syllables": "bluntly",
+    "ipa": "/ˈblʌntli/"
+  },
+  "ponder": {
+    "syllables": "ponder",
+    "ipa": "/ˈpɒn.də(ɹ)/"
+  },
+  "implicated": {
+    "syllables": "impli·ca·ted",
+    "ipa": ""
+  },
+  "exile": {
+    "syllables": "exi·le",
+    "ipa": "/ˈɛkˌsaɪl/"
+  },
+  "victim": {
+    "syllables": "victim",
+    "ipa": "/ˈvɪktəm/"
+  },
+  "calculus": {
+    "syllables": "calcu·lus",
+    "ipa": "/ˈkæl.kjʊ.ləs/"
+  },
+  "innocence": {
+    "syllables": "inno·cence",
+    "ipa": "/ˈɪnəsn̩s/"
+  },
+  "override": {
+    "syllables": "overri·de",
+    "ipa": "/əʊ.vəˈɹaɪd/"
+  },
+  "convenience": {
+    "syllables": "conve·nience",
+    "ipa": "/kənˈviːnɪəns/"
+  },
+  "mechanics": {
+    "syllables": "mecha·nics",
+    "ipa": ""
+  },
+  "remorseful": {
+    "syllables": "re·morse·ful",
+    "ipa": "/ɹɪˈmɔː(ɹ)sfʊl/"
+  },
+  "endorse": {
+    "syllables": "endorse",
+    "ipa": "/ɪnˈdɔːs/"
+  },
+  "accomplice": {
+    "syllables": "accompli·ce",
+    "ipa": "/ə.ˈkʌm.plɪs/"
+  },
+  "audacious": {
+    "syllables": "auda·cious",
+    "ipa": "/ɔːˈdeɪʃəs/"
+  },
+  "celebratory": {
+    "syllables": "ce·lebra·to·ry",
+    "ipa": "/ˈsɛləbɹəˌtɔːɹi/"
+  },
+  "capitulate": {
+    "syllables": "ca·pi·tu·la·te",
+    "ipa": "/kəˈpɪ.tjʊ.leɪt/"
+  },
+  "uniform": {
+    "syllables": "uni·form",
+    "ipa": "/ˈjuːnɪfɔːm/"
+  },
+  "envision": {
+    "syllables": "envi·sion",
+    "ipa": ""
+  },
+  "embed": {
+    "syllables": "embed",
+    "ipa": "/əmˈbɛd/"
+  },
+  "allocation": {
+    "syllables": "allo·ca·tion",
+    "ipa": ""
+  },
+  "stipend": {
+    "syllables": "sti·pend",
+    "ipa": "/-pn̩d/"
+  },
+  "unprejudiced": {
+    "syllables": "unpre·ju·di·ced",
+    "ipa": ""
+  },
+  "option": {
+    "syllables": "option",
+    "ipa": "/ˈɒpʃən/"
+  },
+  "compromise": {
+    "syllables": "compro·mi·se",
+    "ipa": "/ˈkɒmpɹəˌmaɪz/"
+  },
+  "layered": {
+    "syllables": "layered",
+    "ipa": ""
+  },
+  "right": {
+    "syllables": "right",
+    "ipa": "/ˈɹaɪt/"
+  },
+  "detain": {
+    "syllables": "de·tain",
+    "ipa": "/dɪˈteɪn/"
+  },
+  "revision": {
+    "syllables": "re·vi·sion",
+    "ipa": "/riˈvɪ.ʒ(ə)n/"
+  },
+  "systematic": {
+    "syllables": "syste·ma·tic",
+    "ipa": "/ˌsɪs.təˈmæt.ɪk/"
+  },
+  "audit": {
+    "syllables": "audit",
+    "ipa": "/ɔː.dɪt/"
+  },
+  "erroneous": {
+    "syllables": "erro·neous",
+    "ipa": "/ɛɹˈəʊ.nɪ.əs/"
+  },
+  "dosage": {
+    "syllables": "do·sa·ge",
+    "ipa": ""
+  },
+  "contraindication": {
+    "syllables": "contraindi·ca·tion",
+    "ipa": ""
+  },
+  "edition": {
+    "syllables": "edi·tion",
+    "ipa": "/əˈdɪʃən/"
+  },
+  "labour": {
+    "syllables": "la·bour",
+    "ipa": "/ˈleɪ.bə/"
+  },
+  "resigned": {
+    "syllables": "re·signed",
+    "ipa": "/ɹɪˈzaɪnd/"
+  },
+  "pioneer": {
+    "syllables": "pioneer",
+    "ipa": "/ˌpaɪəˈnɪəɹ/"
+  },
+  "transform": {
+    "syllables": "transform",
+    "ipa": "/tɹænzˈfɔːm/"
+  },
+  "curate": {
+    "syllables": "cu·ra·te",
+    "ipa": "/-ɹɪt/"
+  },
+  "criminal": {
+    "syllables": "cri·mi·nal",
+    "ipa": "/ˈkɹɪmənəl/"
+  },
+  "serial": {
+    "syllables": "se·rial",
+    "ipa": "/ˈsɪəɹiːəɫ/"
+  },
+  "case file": {
+    "syllables": "ca·se fi·le",
+    "ipa": ""
+  },
+  "default": {
+    "syllables": "de·fault",
+    "ipa": "/dɪˈfɔːlt/"
+  },
+  "contaminate": {
+    "syllables": "conta·mi·na·te",
+    "ipa": "/kənˈtæmɪneɪt/"
+  },
+  "bias": {
+    "syllables": "bias",
+    "ipa": "/ˈbaɪəs/"
+  },
+  "template": {
+    "syllables": "templa·te",
+    "ipa": "/ˈtɛm.pleɪt/"
+  },
+  "rundown": {
+    "syllables": "rundown",
+    "ipa": ""
+  },
+  "cordon": {
+    "syllables": "cordon",
+    "ipa": "/kɔː(ɹ)dən/"
+  },
+  "lead investigator": {
+    "syllables": "lead investi·ga·tor",
+    "ipa": ""
+  },
+  "unnerve": {
+    "syllables": "unnerve",
+    "ipa": ""
+  },
+  "hypothesis": {
+    "syllables": "hy·pothe·sis",
+    "ipa": "/-əsəs/"
+  },
+  "premeditated": {
+    "syllables": "pre·me·di·ta·ted",
+    "ipa": ""
+  },
+  "criteria": {
+    "syllables": "cri·te·ria",
+    "ipa": "/kɹaɪˈtɪəɹ.i.ə/"
+  },
+  "detached": {
+    "syllables": "de·tached",
+    "ipa": "/dɪˈtæt͡ʃt/"
+  },
+  "obsessive": {
+    "syllables": "obsessi·ve",
+    "ipa": "/əbˈsɛsɪv/"
+  },
+  "escalate": {
+    "syllables": "esca·la·te",
+    "ipa": "/ˈɛs.kə.leɪt/"
+  },
+  "target": {
+    "syllables": "target",
+    "ipa": "/tɑːɡɪt/"
+  },
+  "compulsion": {
+    "syllables": "compulsion",
+    "ipa": "/kəmˈpʌl.ʃən/"
+  },
+  "adjust": {
+    "syllables": "adjust",
+    "ipa": "/əˈdʒʌst/"
+  },
+  "frame": {
+    "syllables": "fra·me",
+    "ipa": "/fɹeɪm/"
+  },
+  "compose": {
+    "syllables": "compo·se",
+    "ipa": "/kəmˈpəʊz/"
+  },
+  "update": {
+    "syllables": "upda·te",
+    "ipa": ""
+  },
+  "notch": {
+    "syllables": "notch",
+    "ipa": "/nɒtʃ/"
+  },
+  "misconception": {
+    "syllables": "misconception",
+    "ipa": "/ˌmɪskənˈsɛp.ʃən/"
+  },
+  "oversimplify": {
+    "syllables": "oversimpli·fy",
+    "ipa": ""
+  },
+  "drive": {
+    "syllables": "dri·ve",
+    "ipa": "/dɹaɪv/"
+  },
+  "imprint": {
+    "syllables": "imprint",
+    "ipa": "/ˈɪm.pɹɪnt/"
+  },
+  "preference": {
+    "syllables": "pre·fe·rence",
+    "ipa": "/ˈpɹɛf(ə)ɹ(ə)ns/"
+  },
+  "fixation": {
+    "syllables": "fi·xa·tion",
+    "ipa": "/fɪksˈeɪʃən/"
+  },
+  "internal": {
+    "syllables": "internal",
+    "ipa": "/ɪnˈtɝnəl/"
+  },
+  "forecast": {
+    "syllables": "fo·re·cast",
+    "ipa": "/ˈfɔːkɑːst/"
+  },
+  "deviate": {
+    "syllables": "de·viate",
+    "ipa": "/ˈdiːvi.ət/"
+  },
+  "curious": {
+    "syllables": "cu·rious",
+    "ipa": "/ˈkjɔː-/"
+  },
+  "forceful": {
+    "syllables": "force·ful",
+    "ipa": "/ˈfɔɹsfəl/"
+  },
+  "discomfort": {
+    "syllables": "discomfort",
+    "ipa": "/dɪsˈkʌmfət/"
+  },
+  "armour": {
+    "syllables": "armour",
+    "ipa": "/ˈɑː.mə/"
+  },
+  "irregularity": {
+    "syllables": "irre·gu·la·ri·ty",
+    "ipa": "/ɪ.ˌrɛ.ɡjə.ˈlæ.rə.ti/"
+  },
+  "urban": {
+    "syllables": "urban",
+    "ipa": "/ˈɜːbən/"
+  },
+  "singular": {
+    "syllables": "singu·lar",
+    "ipa": "/ˈsɪŋɡjʊlə/"
+  },
+  "intimacy": {
+    "syllables": "inti·ma·cy",
+    "ipa": "/ˈɪn.tɪ.mə.si/"
+  },
+  "exact": {
+    "syllables": "exact",
+    "ipa": "/ɪɡˈzækt/"
+  },
+  "unease": {
+    "syllables": "unease",
+    "ipa": ""
+  },
+  "personal": {
+    "syllables": "perso·nal",
+    "ipa": "/ˈpɜː.sən.əl/"
+  },
+  "compartmentalise": {
+    "syllables": "compartmenta·li·se",
+    "ipa": ""
+  },
+  "trace back": {
+    "syllables": "tra·ce back",
+    "ipa": ""
+  },
+  "recuse": {
+    "syllables": "re·cu·se",
+    "ipa": "/ɹɪˈkjuːz/"
+  },
+  "pressure": {
+    "syllables": "pressu·re",
+    "ipa": "[ˈpɹɛʃ.ə(ɹ)]"
+  },
+  "enquire": {
+    "syllables": "enquire",
+    "ipa": "/ɪŋˈkwaɪə/"
+  },
+  "pry": {
+    "syllables": "pry",
+    "ipa": "/pɹaɪ/"
+  },
+  "username": {
+    "syllables": "userna·me",
+    "ipa": ""
+  },
+  "exchange": {
+    "syllables": "exchange",
+    "ipa": "/ɛksˈtʃeɪndʒ/"
+  },
+  "confide": {
+    "syllables": "confi·de",
+    "ipa": "/kənˈfaɪd/"
+  },
+  "potential": {
+    "syllables": "po·tential",
+    "ipa": "/pəˈtɛnʃəl/"
+  },
+  "visceral": {
+    "syllables": "visce·ral",
+    "ipa": "/ˈvɪsəɹəl/"
+  },
+  "agitation": {
+    "syllables": "agi·ta·tion",
+    "ipa": "/ad͡ʒɪˈteɪʃ(ə)n/"
+  },
+  "random": {
+    "syllables": "random",
+    "ipa": "/ˈɹændəm/"
+  },
+  "specifically": {
+    "syllables": "spe·ci·fi·cally",
+    "ipa": "/spəˈsɪf.ɪk.li/"
+  },
+  "seek": {
+    "syllables": "seek",
+    "ipa": "/siːk/"
+  },
+  "real-world": {
+    "syllables": "real-world",
+    "ipa": ""
+  },
+  "objectivity": {
+    "syllables": "objecti·vi·ty",
+    "ipa": "/ˌɒbd͡ʒɛkˈtɪvɪti/"
+  },
+  "undermine": {
+    "syllables": "undermi·ne",
+    "ipa": "/ʌndəˈmaɪn/"
+  },
+  "toneless": {
+    "syllables": "to·ne·less",
+    "ipa": ""
+  },
+  "diagnostic": {
+    "syllables": "diagnostic",
+    "ipa": "/daɪəˈɡnɒstɪk/"
+  },
+  "judgement": {
+    "syllables": "judge·ment",
+    "ipa": "/dʒʌdʒmənt/"
+  },
+  "impact": {
+    "syllables": "impact",
+    "ipa": ""
+  },
+  "fair": {
+    "syllables": "fair",
+    "ipa": "/feː(ə)/"
+  },
+  "accurate": {
+    "syllables": "accu·ra·te",
+    "ipa": "/ˈæk.jə.ɹɪt/"
+  },
+  "cost": {
+    "syllables": "cost",
+    "ipa": "/ˈkɒst/"
+  },
+  "convince": {
+    "syllables": "convince",
+    "ipa": "/kənˈvɪns/"
+  },
+  "unresolved": {
+    "syllables": "unre·solved",
+    "ipa": ""
+  },
+  "briefing room": {
+    "syllables": "briefing room",
+    "ipa": ""
+  },
+  "reprieve": {
+    "syllables": "reprieve",
+    "ipa": "/ɹɪˈpɹiːv/"
+  },
+  "black": {
+    "syllables": "black",
+    "ipa": "/blak/"
+  },
+  "validation": {
+    "syllables": "va·li·da·tion",
+    "ipa": "/ˌvæl.əˈdeɪ.ʃən/"
+  },
+  "breakthrough": {
+    "syllables": "breakthrough",
+    "ipa": "/ˈbɹeɪkθɹuː/"
+  },
+  "oblique": {
+    "syllables": "obli·que",
+    "ipa": "/əˈbliːk/"
+  },
+  "specific": {
+    "syllables": "spe·ci·fic",
+    "ipa": "/spəˈsɪf.ɪk/"
+  },
+  "forensic": {
+    "syllables": "fo·rensic",
+    "ipa": "/fəˈɹɛn.sɪk/"
+  },
+  "obscurity": {
+    "syllables": "obscu·ri·ty",
+    "ipa": "/əbˈskjɔːɹɪti/"
+  },
+  "pause": {
+    "syllables": "pause",
+    "ipa": "/pɔːz/"
+  },
+  "profiling": {
+    "syllables": "pro·fi·ling",
+    "ipa": ""
+  },
+  "inquiry": {
+    "syllables": "inquiry",
+    "ipa": "/ɪnˈkwaɪəɹi/"
+  },
+  "consolation": {
+    "syllables": "conso·la·tion",
+    "ipa": "/ˌkɒn.səˈleɪ.ʃən/"
+  },
+  "conduct": {
+    "syllables": "conduct",
+    "ipa": "/kənˈdʌkt/"
+  },
+  "interrogation": {
+    "syllables": "interro·ga·tion",
+    "ipa": "/ɪnˌteɹ.əˈɡeɪ.ʃən/"
+  },
+  "build rapport": {
+    "syllables": "build rapport",
+    "ipa": ""
+  },
+  "verbalise": {
+    "syllables": "verba·li·se",
+    "ipa": ""
+  },
+  "register": {
+    "syllables": "re·gister",
+    "ipa": "/ˈɹɛdʒ.ɪs.tə/"
+  },
+  "empathy": {
+    "syllables": "empathy",
+    "ipa": "/ˈɛmpəθi/"
+  },
+  "confrontational": {
+    "syllables": "confronta·tional",
+    "ipa": ""
+  },
+  "connect": {
+    "syllables": "connect",
+    "ipa": "/kəˈnɛkt/"
+  },
+  "exposed": {
+    "syllables": "expo·sed",
+    "ipa": ""
+  },
+  "retreat": {
+    "syllables": "retreat",
+    "ipa": "/ɹəˈtɹiːt/"
+  },
+  "deduce": {
+    "syllables": "de·du·ce",
+    "ipa": "/dɪˈdjuːs/"
+  },
+  "loneliness": {
+    "syllables": "lo·ne·li·ness",
+    "ipa": "/ˈloʊnlinəs/"
+  },
+  "locate": {
+    "syllables": "lo·ca·te",
+    "ipa": "/ləʊˈkeɪt/"
+  },
+  "brave": {
+    "syllables": "bra·ve",
+    "ipa": "/bɹeɪv/"
+  },
+  "ease": {
+    "syllables": "ease",
+    "ipa": "/iːz/"
+  },
+  "charge": {
+    "syllables": "charge",
+    "ipa": "/t͡ʃɑːd͡ʒ/"
+  },
+  "prosecution": {
+    "syllables": "pro·se·cu·tion",
+    "ipa": "/ˌpɹɑ.səˈkju.ʃən/"
+  },
+  "psychological assessment": {
+    "syllables": "psycho·lo·gi·cal assessment",
+    "ipa": ""
+  },
+  "cognitive": {
+    "syllables": "cogni·ti·ve",
+    "ipa": "/ˈkɒɡnɪtɪv/"
+  },
+  "analysis": {
+    "syllables": "ana·ly·sis",
+    "ipa": "/əˈnælɪsɪs/"
+  },
+  "motivation": {
+    "syllables": "mo·ti·va·tion",
+    "ipa": ""
+  },
+  "jurisdiction": {
+    "syllables": "ju·risdiction",
+    "ipa": "/d͡ʒɔːɹɪsˈdɪkʃən/"
+  },
+  "deposition": {
+    "syllables": "de·po·si·tion",
+    "ipa": "/dɛpəˈzɪʃən/"
+  },
+  "paradox": {
+    "syllables": "pa·ra·dox",
+    "ipa": "/ˈpaɹədɒks/"
+  },
+  "foundation": {
+    "syllables": "founda·tion",
+    "ipa": "/faʊnˈdeɪʃən/"
+  },
+  "genuinely": {
+    "syllables": "ge·nuine·ly",
+    "ipa": ""
+  },
+  "credit": {
+    "syllables": "cre·dit",
+    "ipa": "/ˈkɹɛdɪt/"
+  },
+  "toast": {
+    "syllables": "toast",
+    "ipa": "/təʊst/"
+  },
+  "session": {
+    "syllables": "session",
+    "ipa": "/ˈsɛʃən/"
+  },
+  "lecture": {
+    "syllables": "lectu·re",
+    "ipa": "/ˈlɛk.t͡ʃə/"
+  },
+  "structured": {
+    "syllables": "structu·red",
+    "ipa": ""
+  },
+  "followup": {
+    "syllables": "follo·wup",
+    "ipa": ""
+  },
+  "productive": {
+    "syllables": "pro·ducti·ve",
+    "ipa": "/pɹəˈdʌktɪv/"
+  },
+  "disturb": {
+    "syllables": "disturb",
+    "ipa": "/dɪsˈtɜːb/"
+  },
+  "particular": {
+    "syllables": "parti·cu·lar",
+    "ipa": "/pəˈtɪkjələ/"
+  },
+  "humour": {
+    "syllables": "hu·mour",
+    "ipa": "/ˈhjuː.mə(ɹ)/"
+  },
+  "charming": {
+    "syllables": "charming",
+    "ipa": "/ˈtʃɑː(ɹ).mɪŋ/"
+  },
+  "examination": {
+    "syllables": "exa·mi·na·tion",
+    "ipa": "/ɪɡˌzæmɪˈneɪʃən/"
+  },
+  "notebook": {
+    "syllables": "no·te·book",
+    "ipa": "/ˈnəʊtˌbʊk/"
+  },
+  "sketch": {
+    "syllables": "sketch",
+    "ipa": "/skɛtʃ/"
+  },
+  "professional": {
+    "syllables": "pro·fessional",
+    "ipa": "/pɹəˈfɛʃənəl/"
+  },
+  "interest": {
+    "syllables": "inte·rest",
+    "ipa": "/ˈɪntəɹɪst/"
+  },
+  "seminar": {
+    "syllables": "se·mi·nar",
+    "ipa": ""
+  },
+  "pattern recognition": {
+    "syllables": "pattern re·cogni·tion",
+    "ipa": ""
+  },
+  "high-functioning": {
+    "syllables": "high-functioning",
+    "ipa": ""
+  },
+  "spontaneity": {
+    "syllables": "sponta·neity",
+    "ipa": "/ˈspɒn.tə.neɪ.ə.ti/"
+  },
+  "access": {
+    "syllables": "access",
+    "ipa": "/ˈæksɛs/"
+  },
+  "familiar": {
+    "syllables": "fa·mi·liar",
+    "ipa": "/fəˈmɪl.i.ə/"
+  },
+  "shock": {
+    "syllables": "shock",
+    "ipa": "/ʃɒk/"
+  },
+  "uncomfortable": {
+    "syllables": "uncomfortable",
+    "ipa": "/ʌnˈkʌm.fə.tə.bəl/"
+  },
+  "startling": {
+    "syllables": "startling",
+    "ipa": "/ˈstɑː.tl̩.ɪŋ/"
+  },
+  "audience": {
+    "syllables": "audience",
+    "ipa": "/ˈɔːdi.əns/"
+  },
+  "prepared": {
+    "syllables": "pre·pa·red",
+    "ipa": "/pɹɪˈpɛəd/"
+  },
+  "crowded": {
+    "syllables": "crowded",
+    "ipa": "/ˈkɹaʊdɪd/"
+  },
+  "low": {
+    "syllables": "low",
+    "ipa": "/ləʊ/"
+  },
+  "available": {
+    "syllables": "available",
+    "ipa": "/əˈveɪləb(ə)l/"
+  },
+  "amber": {
+    "syllables": "amber",
+    "ipa": "/ˈam.bə/"
+  },
+  "commonplace": {
+    "syllables": "commonpla·ce",
+    "ipa": "/ˈkɒmənˌpleɪs/"
+  },
+  "atmospheric": {
+    "syllables": "atmosphe·ric",
+    "ipa": ""
+  },
+  "background noise": {
+    "syllables": "background noise",
+    "ipa": ""
+  },
+  "relaxed": {
+    "syllables": "re·la·xed",
+    "ipa": "/ɹɪˈlækst/"
+  },
+  "casual conversation": {
+    "syllables": "ca·sual conversa·tion",
+    "ipa": ""
+  },
+  "allegation": {
+    "syllables": "alle·ga·tion",
+    "ipa": "/ˌæl.əˈɡeɪ.ʃən/"
+  },
+  "recognition": {
+    "syllables": "re·cogni·tion",
+    "ipa": "/ˌɹɛkəɡˈnɪʃən/"
+  },
+  "comfortable": {
+    "syllables": "comfortable",
+    "ipa": "/ˈkʌm.fə.tə.bəl/"
+  },
+  "wall": {
+    "syllables": "wall",
+    "ipa": "/wɔːl/"
+  },
+  "soften": {
+    "syllables": "soften",
+    "ipa": "/ˈsɑfən/"
+  },
+  "stay": {
+    "syllables": "stay",
+    "ipa": "/steɪ/"
+  },
+  "visible": {
+    "syllables": "vi·sible",
+    "ipa": "/ˈvɪzəb(ə)l/"
+  }
+}
