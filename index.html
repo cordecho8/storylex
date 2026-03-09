@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-  <title>StoryLex</title>
+  <title>Sage English</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -288,7 +288,7 @@
 <!-- ACCESS GATE OVERLAY -->
 <div id="gate">
   <div class="gate-card">
-    <div class="gate-logo"><div class="gate-logo-dot"></div>StoryLex</div>
+    <div class="gate-logo"><div class="gate-logo-dot"></div>Sage English</div>
     <div class="gate-sub">故事词汇学习 · Story Vocab</div>
     <div class="gate-label">Enter your access code</div>
     <div class="gate-input-wrap">
@@ -305,14 +305,14 @@
     </div>
     <div class="gate-error" id="gateError"></div>
     <button class="gate-btn" id="gateBtn">Unlock Access →</button>
-    <div class="gate-footer">Each code is for one reader only.<br>Purchase a code at [your link here].</div>
+    <div class="gate-footer">Each code is for one reader only.<br>Purchase a code at sageenglish.study.</div>
   </div>
 </div>
 
 <header>
   <div class="hd-left">
     <button class="menu-btn" id="menuBtn">☰</button>
-    <div class="logo"><div class="logo-dot"></div>StoryLex</div>
+    <div class="logo"><div class="logo-dot"></div>Sage English</div>
   </div>
   <div class="kokoro-status">
     <div class="status-dot" id="statusDot"></div>
@@ -325,11 +325,11 @@
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-top">
-      <div class="sidebar-label">StoryLex · 故事库</div>
+      <div class="sidebar-label">Sage English · 故事库</div>
     </div>
     <div class="chapter-list" id="chapterList"></div>
     <div class="sidebar-footer">
-      <button class="all-srs-btn" id="allSrsBtn">Review All Due Cards · 复习</button>
+      <button class="all-srs-btn" id="allSrsBtn">复习待学词汇</button>
     </div>
   </aside>
 
@@ -350,7 +350,7 @@
 // ── ACCESS GATE ───────────────────────────────────────────────────────────────
 // Auth state is stored in localStorage so the user stays logged in
 // across sessions unless they manually clear their browser data.
-const AUTH_KEY = 'sl_auth_v1';
+const AUTH_KEY = 'se_auth_v1';
 
 function isAuthed() {
   try { return !!localStorage.getItem(AUTH_KEY); } catch(e) { return false; }
@@ -447,7 +447,7 @@ function bootGate() {
 bootGate();
 
 // ── SRS ENGINE (SM-2 simplified) ─────────────────────────────────────────────
-const SRS_KEY = 'sl_srs_v2';
+const SRS_KEY = 'se_srs_v2';
 function srsLoad() { try { return JSON.parse(localStorage.getItem(SRS_KEY)||'{}'); } catch(e) { return {}; } }
 function srsSave(d) { try { localStorage.setItem(SRS_KEY, JSON.stringify(d)); } catch(e) {} }
 
