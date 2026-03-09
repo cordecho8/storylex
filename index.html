@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4f0; --surface: #ffffff; --surface2: #f0efe9; --border: #e4e2da;
+      --bg: #f5f4f0; --surface: #fdfcf9; --surface2: #f0efe9; --border: #e4e2da;
       --text: #1c1b18; --muted: #7c7a72;
       --accent: #2a6049; --accent-light: #e0ede7; --accent-hover: #1e4a37;
       --yellow: #fef3c0; --yellow-border: #f5c842; --yellow-active: #fde68a;
@@ -16,11 +16,36 @@
       --green: #16a34a; --green-light: #dcfce7;
       --red: #dc2626; --red-light: #fee2e2;
       --orange: #ea580c; --orange-light: #ffedd5;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
       --shadow-lg: 0 8px 40px rgba(0,0,0,.12);
+      --shadow-card: 0 4px 24px rgba(42,96,73,.07), 0 1px 4px rgba(0,0,0,.05);
       --sw: 280px;
+      --story-size: 17px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; }
+
+    /* Subtle SVG noise texture on bg */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      color: var(--text); min-height: 100vh; font-size: 15px;
+    }
+
+    /* ── STREAK COUNTER ──────────────────────────────────────────────────── */
+    .streak-wrap { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #b45309; }
+    .streak-flame { font-size: 14px; }
+    .streak-days { font-variant-numeric: tabular-nums; }
+
+    /* ── SIDEBAR DEPTH ───────────────────────────────────────────────────── */
+    .sidebar {
+      background: #f8f7f3;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.25,1.4,.5,1);
+      box-shadow: inset -1px 0 0 rgba(255,255,255,.6);
+    }
 
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -37,7 +62,6 @@
 
     .layout { display: grid; grid-template-columns: var(--sw) 1fr; height: calc(100vh - 44px); margin-top: 44px; }
 
-    .sidebar { background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.25s ease; }
     .sidebar-top { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); }
     .sidebar-logo { font-family: 'Lora', serif; font-size: 17px; font-weight: 500; color: var(--accent); display: flex; align-items: center; gap: 7px; margin-bottom: 1px; }
     .sidebar-logo-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
@@ -74,16 +98,58 @@
     .story-chapters { overflow: hidden; max-height: 0; transition: max-height 0.28s cubic-bezier(.4,0,.2,1); }
     .story-group.open .story-chapters { max-height: 1200px; }
 
-    .main { overflow-y: auto; padding: 32px 44px; }
+    .main { overflow-y: auto; padding: 28px 36px; }
     .empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px; text-align: center; color: var(--muted); }
     .empty-icon { font-size: 40px; opacity: 0.2; margin-bottom: 4px; }
     .empty h3 { font-family: 'Lora', serif; font-size: 22px; color: var(--text); font-weight: 500; }
     .empty p { font-size: 13px; max-width: 260px; line-height: 1.75; color: var(--muted); }
 
-    .chapter-view { max-width: 680px; }
-    .chapter-header { padding-bottom: 22px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
-    .ch-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; color: var(--accent); margin-bottom: 7px; opacity: 0.85; }
-    .ch-title { font-family: 'Lora', serif; font-size: 29px; font-weight: 500; line-height: 1.28; color: var(--text); }
+    .chapter-view { max-width: 660px; }
+
+    /* ── CHAPTER HERO HEADER ─────────────────────────────────────────────── */
+    .chapter-header {
+      padding: 28px 32px 26px;
+      margin-bottom: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle green accent stripe at top */
+    .chapter-header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    }
+    .ch-eyebrow {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+      font-weight: 700; color: var(--accent); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ch-eyebrow::after {
+      content: ''; flex: 1; max-width: 40px; height: 1px;
+      background: var(--accent); opacity: 0.3;
+    }
+    .ch-title {
+      font-family: 'Lora', serif; font-size: 28px; font-weight: 500;
+      line-height: 1.25; color: var(--text); margin-bottom: 14px;
+    }
+    .ch-meta-row {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .ch-meta-pill {
+      font-size: 11px; color: var(--muted); background: var(--surface2);
+      padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border);
+    }
+    /* Streak badge in header */
+    .streak-badge {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; color: #d97706;
+      background: #fef3c0; border: 1px solid #fde68a;
+      padding: 3px 9px; border-radius: 20px; margin-left: auto;
+    }
 
     /* Underline tabs — cleaner, editorial feel */
     .tabs { display: flex; gap: 0; background: none; padding: 0; border-radius: 0; width: 100%; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
@@ -91,14 +157,61 @@
     .tab:hover { color: var(--text); }
     .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
-    .story-box { background: var(--surface); border: none; border-radius: 0; padding: 4px 0 20px; margin-bottom: 0; }
-    .story-text { font-family: 'Lora', serif; font-size: 17px; line-height: 2.05; color: var(--text); }
-    .story-text p { margin-bottom: 1.4em; }
-    .story-text p:last-child { margin-bottom: 0; }
+    /* ── READING WELL ────────────────────────────────────────────────────── */
+    .story-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 36px 36px;
+      margin-bottom: 0;
+      box-shadow: 0 2px 16px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.03);
+      /* Subtle inner top shadow to simulate depth */
+      position: relative;
+    }
+    .story-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,.9) 50%, transparent 95%);
+      border-radius: 14px 14px 0 0;
+    }
+    .story-text {
+      font-family: 'Lora', serif;
+      font-size: var(--story-size);
+      line-height: 2.05;
+      color: var(--text);
+    }
+    .story-text p {
+      margin-bottom: 0;
+      padding-bottom: 1.5em;
+      text-indent: 2em;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+    /* First paragraph: no indent, optional drop cap */
+    .story-text p:first-child { text-indent: 0; }
+    .story-text p:first-child::first-letter {
+      font-family: 'Lora', serif;
+      font-size: 3.4em;
+      font-weight: 500;
+      line-height: 0.8;
+      float: left;
+      margin: 0.05em 0.1em 0 0;
+      color: var(--accent);
+    }
+    .story-text p:last-child { padding-bottom: 0; }
 
-    /* ── SRS CARD — elevated, warm ─────────────────────────────────────── */
-    @keyframes cardReveal { from { opacity:0; transform: translateY(6px) scale(0.99); } to { opacity:1; transform: translateY(0) scale(1); } }
-    @keyframes cardFlip  { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform: translateY(0); } }
+    /* ── TAB FADE + CARD TRANSITIONS ────────────────────────────────────── */
+    @keyframes tabFadeIn  { from { opacity:0; transform: translateY(5px); } to { opacity:1; transform: translateY(0); } }
+    @keyframes cardReveal { from { opacity:0; transform: translateY(8px) scale(0.98); } to { opacity:1; transform: translateY(0) scale(1); } }
+    #tabBody { animation: tabFadeIn 0.18s ease both; }
+
+    /* ── FONT SIZE TOGGLE ────────────────────────────────────────────────── */
+    .font-controls { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .font-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: none; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; font-weight: 600; line-height: 1; }
+    .font-btn:hover { background: var(--surface2); color: var(--text); }
+    .font-btn.sz-sm { font-size: 11px; }
+    .font-btn.sz-lg { font-size: 15px; }
 
     .vocab-chip { display: inline-flex; align-items: center; background: var(--yellow); border-bottom: 2px solid var(--yellow-border); border-radius: 3px; padding: 1px 2px 0 3px; cursor: pointer; transition: background 0.12s; white-space: nowrap; gap: 0; }
     .vocab-chip:hover, .vocab-chip:active { background: var(--yellow-active); }
@@ -114,7 +227,7 @@
     .vocab-chip.playing, .vocab-blank.playing, .srs-play.playing { animation: pulse 0.5s 2; }
     .vocab-row.playing td { background: var(--yellow) !important; }
 
-    .vtable { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); font-size: 14px; }
+    .vtable { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); font-size: 14px; box-shadow: 0 2px 12px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03); }
     .vtable thead tr { background: var(--surface2); border-bottom: 1px solid var(--border); }
     .vtable th { padding: 9px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; color: var(--muted); }
     .vtable tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
@@ -132,23 +245,36 @@
     .srs-fb { padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-family: 'Inter', sans-serif; font-size: 11px; cursor: pointer; transition: all 0.12s; color: var(--muted); }
     .srs-fb.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-    .srs-card {
+    /* 3D flip card */
+    .flip-scene { width: 100%; perspective: 900px; margin-bottom: 12px; }
+    .flip-card {
+      width: 100%; position: relative; min-height: 210px;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+    }
+    .flip-card.flipped { transform: rotateX(180deg); }
+    .flip-front, .flip-back {
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: 18px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px 32px 30px;
-      text-align: center;
-      margin-bottom: 12px;
-      min-height: 210px;
+      box-shadow: 0 4px 20px rgba(42,96,73,.07), 0 1px 4px rgba(0,0,0,.05);
+      padding: 36px 32px 30px; text-align: center; min-height: 210px;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-      box-shadow: 0 4px 24px rgba(42,96,73,.07), 0 1px 4px rgba(0,0,0,.05);
-      animation: cardReveal 0.2s ease both;
+    }
+    .flip-back { position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: rotateX(180deg); }
+
+    .srs-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 36px 32px 30px; text-align: center; margin-bottom: 12px; min-height: 210px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+      box-shadow: var(--shadow-card); animation: cardReveal 0.22s ease both;
     }
     .srs-ch { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); }
-    .srs-word { font-family: 'Lora', serif; font-size: 38px; font-weight: 500; letter-spacing: -0.5px; animation: cardFlip 0.18s ease both; }
+    .srs-word { font-family: 'Lora', serif; font-size: 38px; font-weight: 500; letter-spacing: -0.5px; }
     .srs-ctx { font-family: 'Lora', serif; font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 460px; font-style: italic; }
     .srs-ctx .bw { color: var(--accent); font-weight: 500; font-style: normal; }
-    .srs-meaning { font-size: 20px; color: var(--accent); font-weight: 500; padding: 9px 22px; background: var(--accent-light); border-radius: 8px; animation: cardFlip 0.18s ease both; }
+    .srs-meaning { font-size: 20px; color: var(--accent); font-weight: 500; padding: 9px 22px; background: var(--accent-light); border-radius: 8px; }
     .srs-play { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; font-size: 15px; color: white; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
     .srs-play:hover { background: var(--accent-hover); transform: scale(1.08); box-shadow: 0 3px 12px rgba(42,96,73,.3); }
     .srs-prog { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
@@ -157,11 +283,23 @@
     .srs-reveal:hover { opacity: 0.88; transform: translateY(-1px); }
     .srs-reveal:active { transform: translateY(0); }
 
-    /* Asymmetric grade buttons — "Got it!" is visually primary */
+    /* Grade slide-off animations */
+    @keyframes gradeRight { to { opacity:0; transform: translateX(70px) scale(0.94) rotateZ(3deg); } }
+    @keyframes gradeLeft  { to { opacity:0; transform: translateX(-70px) scale(0.94) rotateZ(-3deg); } }
+    @keyframes gradeDown  { to { opacity:0; transform: translateY(30px) scale(0.95); } }
+    .card-exit-right { animation: gradeRight 0.2s ease forwards; }
+    .card-exit-left  { animation: gradeLeft  0.2s ease forwards; }
+    .card-exit-down  { animation: gradeDown  0.2s ease forwards; }
+
+    /* Grade tick flash */
+    @keyframes tickPop { 0%{opacity:0;transform:translate(-50%,-50%) scale(0.4)} 45%{opacity:1;transform:translate(-50%,-50%) scale(1.25)} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.05)} }
+    .grade-tick { position: fixed; top: 42%; left: 50%; pointer-events: none; z-index: 999; font-size: 56px; animation: tickPop 0.5s ease forwards; }
+
+    /* Asymmetric grade buttons */
     .srs-grades { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 8px; width: 100%; }
     .srs-g { padding: 13px 8px; border-radius: 12px; border: none; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; }
     .srs-g:hover { transform: translateY(-2px); }
-    .srs-g:active { transform: translateY(0); }
+    .srs-g:active { transform: translateY(0) scale(0.97); }
     .srs-g .gl { display: block; font-size: 10px; opacity: 0.65; margin-top: 3px; }
     .srs-g.again { background: var(--red-light); color: var(--red); }
     .srs-g.again:hover { background: var(--red); color: white; box-shadow: 0 4px 12px rgba(220,38,38,.2); }
@@ -171,7 +309,20 @@
     .srs-g.good:hover { background: var(--accent-hover); box-shadow: 0 4px 14px rgba(42,96,73,.3); }
     .srs-g.good .gl { opacity: 0.75; }
 
-    .srs-done { text-align: center; padding: 52px 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 4px 24px rgba(42,96,73,.07); }
+    /* Session summary */
+    .srs-summary { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 44px 28px 32px; text-align: center; box-shadow: var(--shadow-card); animation: cardReveal 0.25s ease both; }
+    .srs-summary .sum-icon { font-size: 50px; display: block; margin-bottom: 14px; }
+    .srs-summary h3 { font-family: 'Lora', serif; font-size: 24px; font-weight: 500; margin-bottom: 6px; }
+    .srs-summary .sum-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.65; }
+    .sum-stats { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+    .sum-stat { padding: 12px 18px; border-radius: 12px; background: var(--surface2); min-width: 76px; }
+    .sum-stat .sv { font-family: 'Lora', serif; font-size: 26px; font-weight: 600; line-height: 1; }
+    .sum-stat .sl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-top: 4px; }
+    .sum-stat.s-good .sv { color: var(--accent); }
+    .sum-stat.s-hard .sv { color: var(--orange); }
+    .sum-stat.s-again .sv { color: var(--red); }
+
+    .srs-done { text-align: center; padding: 52px 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-card); }
     .srs-done .di { font-size: 52px; margin-bottom: 14px; }
     .srs-done h3 { font-family: 'Lora', serif; font-size: 24px; margin-bottom: 8px; }
     .srs-done p { font-size: 14px; color: var(--muted); margin-bottom: 22px; line-height: 1.6; }
@@ -229,8 +380,14 @@
       .srs-g .gl { font-size: 10px; }
 
       /* Chapter header */
-      .ch-title { font-size: 22px; }
-      .chapter-header { padding-bottom: 16px; margin-bottom: 16px; }
+      .ch-title { font-size: 21px; }
+      .chapter-header { padding: 20px 20px 18px; margin-bottom: 20px; }
+      .ch-meta-row { gap: 8px; }
+
+      /* Reading well: less padding on mobile */
+      .story-box { padding: 22px 20px 26px; }
+      /* Drop cap too large on mobile */
+      .story-text p:first-child::first-letter { font-size: 2.8em; }
 
       /* Tabs: scrollable on very small screens */
       .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; }
@@ -823,7 +980,33 @@ function markChRead(chId) {
   const d = progLoad();
   if(!d[chId]) d[chId] = { wordsHeard:[], tabsVisited:[] };
   d[chId].read = true;
+  // Record today's date for streak tracking
+  const today = new Date().toISOString().slice(0,10);
+  d[chId].readDate = today;
+  // Update streak log
+  try {
+    const STREAK_KEY = 'se_streak_v1';
+    let log = JSON.parse(localStorage.getItem(STREAK_KEY)||'[]');
+    if(!log.includes(today)) { log.push(today); localStorage.setItem(STREAK_KEY, JSON.stringify(log)); }
+  } catch(e) {}
   progSave(d);
+}
+
+function calcStreak() {
+  try {
+    const STREAK_KEY = 'se_streak_v1';
+    const log = JSON.parse(localStorage.getItem(STREAK_KEY)||'[]');
+    if(!log.length) return 0;
+    const days = log.map(d=>new Date(d).getTime()).sort((a,b)=>b-a);
+    const today = new Date(); today.setHours(0,0,0,0);
+    let streak = 0, check = today.getTime();
+    for(const d of days) {
+      const day = new Date(d); day.setHours(0,0,0,0);
+      if(day.getTime()===check) { streak++; check -= 86400000; }
+      else if(day.getTime() < check) break;
+    }
+    return streak;
+  } catch(e) { return 0; }
 }
 
 let progressToastTimer = null;
@@ -849,8 +1032,10 @@ let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='all', srsAllMode=false;
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init() {
   if (window.CHAPTERS) chapters=[...window.CHAPTERS];
-  // Auto-open the first story group
   if (chapters.length) openStoryId = chapters[0].story_id || 'story1';
+  // Restore font size preference
+  const savedSize = parseInt(localStorage.getItem('se_fontsize')||'17');
+  document.documentElement.style.setProperty('--story-size', savedSize+'px');
   renderSidebar();
   if (chapters.length) selectChapter(chapters[0].id);
   checkAudio();
@@ -1131,25 +1316,69 @@ function renderMain() {
   const prevCh = chIdx > 0 ? chapters[chIdx-1] : null;
   const nextCh = chIdx < chapters.length-1 ? chapters[chIdx+1] : null;
 
+  // Streak calculation
+  const streak = calcStreak();
+  const srsData = srsLoad();
+  const introduced = vocab.filter(v=>{ const c=srsData[v.word.toLowerCase()]; return c&&c.introduced; });
+
   main.innerHTML=`
     <div class="chapter-view">
       <div class="chapter-header">
-        <div class="ch-eyebrow">${esc(ch.story_title||'')} · ${vocab.length} vocabulary words</div>
+        <div class="ch-eyebrow">${esc(ch.story_title||'Chapter')}</div>
         <div class="ch-title">${esc(ch.title)}</div>
+        <div class="ch-meta-row">
+          <span class="ch-meta-pill">${vocab.length} 个词汇</span>
+          ${introduced.length>0 ? `<span class="ch-meta-pill" style="color:var(--accent);border-color:var(--accent-light);background:var(--accent-light)">${introduced.length} 已加入复习</span>` : ''}
+          ${isChRead(ch.id) ? `<span class="ch-meta-pill" style="color:var(--accent)">✓ 已读</span>` : ''}
+          ${streak>0 ? `<span class="streak-badge"><span class="streak-flame">🔥</span><span class="streak-days">${streak} 天</span></span>` : ''}
+        </div>
       </div>
-      <div class="tabs">
+      <div class="tabs" id="tabBar">
         <button class="tab${activeTab==='read'?' active':''}" data-t="read">阅读</button>
         <button class="tab${activeTab==='recall'?' active':''}" data-t="recall">默写</button>
         <button class="tab${activeTab==='vocab'?' active':''}" data-t="vocab">词汇</button>
         <button class="tab${activeTab==='practice'?' active':''}" data-t="practice">练习</button>
         <button class="tab${activeTab==='bookmarks'?' active':''}" data-t="bookmarks">🔖</button>
+        <div class="font-controls" id="fontControls" style="display:none">
+          <button class="font-btn sz-sm" id="fontDn" title="Smaller">A−</button>
+          <button class="font-btn sz-lg" id="fontUp" title="Larger">A+</button>
+        </div>
       </div>
       <div id="tabBody"></div>
     </div>`;
 
+  // Font size controls
+  const FONT_KEY = 'se_fontsize';
+  let storySize = parseInt(localStorage.getItem(FONT_KEY)||'17');
+  function applyFontSize(sz) {
+    storySize = Math.min(22, Math.max(13, sz));
+    localStorage.setItem(FONT_KEY, storySize);
+    document.documentElement.style.setProperty('--story-size', storySize+'px');
+  }
+  applyFontSize(storySize);
+
+  function updateFontControlsVisibility() {
+    const fc = document.getElementById('fontControls');
+    if(fc) fc.style.display = activeTab==='read' ? 'flex' : 'none';
+  }
+
   main.querySelectorAll('.tab').forEach(t=>{
-    t.onclick=()=>{ activeTab=t.dataset.t; main.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.t===activeTab)); renderTab(ch,vocab); };
+    t.onclick=()=>{
+      activeTab=t.dataset.t;
+      main.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.t===activeTab));
+      updateFontControlsVisibility();
+      // Re-animate tabBody on switch
+      const tb = document.getElementById('tabBody');
+      if(tb) { tb.style.animation='none'; void tb.offsetWidth; tb.style.animation=''; }
+      renderTab(ch,vocab);
+    };
   });
+
+  const fontDn = document.getElementById('fontDn');
+  const fontUp = document.getElementById('fontUp');
+  if(fontDn) fontDn.onclick = () => applyFontSize(storySize - 1);
+  if(fontUp) fontUp.onclick = () => applyFontSize(storySize + 1);
+  updateFontControlsVisibility();
 
   renderTab(ch,vocab);
 }
@@ -1378,15 +1607,31 @@ function buildSrsSession(vocabList, wrap) {
   }
 
   srsQueue=[...queue].sort(()=>Math.random()-0.5);
-  srsIdx=0; srsRevealed=false;
+  srsIdx=0; srsRevealed=false; sessionGrades={good:0,hard:0,again:0};
   renderCard(vocabList);
 }
+
+// Session grade tracking
+let sessionGrades = { good: 0, hard: 0, again: 0 };
 
 function renderCard(vocabList) {
   const area=document.getElementById('cardArea');
   if(!area) return;
   if(srsIdx>=srsQueue.length) {
-    area.innerHTML=`<div class="srs-done"><div class="di">✅</div><h3>本轮完成</h3><p>已复习 ${srsQueue.length} 个词。</p><button class="btn btn-ghost" onclick="renderMain()">再来一轮</button></div>`;
+    // Session summary
+    const total = srsQueue.length;
+    area.innerHTML=`
+      <div class="srs-summary">
+        <span class="sum-icon">${sessionGrades.again===0 ? '🏆' : sessionGrades.good > sessionGrades.again ? '🌟' : '💪'}</span>
+        <h3>本轮完成</h3>
+        <div class="sum-sub">复习了 <strong>${total}</strong> 个词${total>0?' · 继续保持！':''}</div>
+        <div class="sum-stats">
+          <div class="sum-stat s-good"><div class="sv">${sessionGrades.good}</div><div class="sl">掌握</div></div>
+          <div class="sum-stat s-hard"><div class="sv">${sessionGrades.hard}</div><div class="sl">有难度</div></div>
+          <div class="sum-stat s-again"><div class="sv">${sessionGrades.again}</div><div class="sl">再试</div></div>
+        </div>
+        <button class="btn btn-ghost" onclick="sessionGrades={good:0,hard:0,again:0};renderMain()">再来一轮</button>
+      </div>`;
     renderSidebar(); return;
   }
 
@@ -1396,18 +1641,60 @@ function renderCard(vocabList) {
   const ctx=ch?getContext(ch.story,v.word):'';
 
   if(!srsRevealed) {
+    // Show flip-scene with only front face visible
     area.innerHTML=`
-      <div class="srs-card">
-        <div class="srs-ch">${esc(v.chTitle||'')}</div>
-        <div class="srs-meaning">${esc(v.meaning)}</div>
-        <div class="srs-prog">${prog}</div>
+      <div class="flip-scene" id="flipScene">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-front">
+            <div class="srs-ch">${esc(v.chTitle||'')}</div>
+            <div class="srs-meaning">${esc(v.meaning)}</div>
+            <div class="srs-prog">${prog}</div>
+          </div>
+          <div class="flip-back">
+            <div class="srs-ch">${esc(v.chTitle||'')}</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="srs-word">${esc(v.word)}</div>
+              <button class="srs-play" id="srsPlayBtnB">🔊</button>
+            </div>
+            <div class="srs-meaning">${esc(v.meaning)}</div>
+            ${ctx?`<div class="srs-ctx">${ctx.replace('__B__',`<span class="bw">${esc(v.word)}</span>`)}</div>`:''}
+            <div class="srs-prog">${prog}</div>
+          </div>
+        </div>
       </div>
-      <button class="srs-reveal" id="revBtn">Reveal English word →</button>`;
-    document.getElementById('revBtn').onclick=()=>{ srsRevealed=true; playWord(v.word,null); renderCard(vocabList); };
+      <button class="srs-reveal" id="revBtn" style="opacity:1">Reveal English word →</button>
+      <div class="srs-grades" id="gradeArea" style="opacity:0;pointer-events:none;transition:opacity 0.2s">
+        <button class="srs-g again" id="gAgain">Again<span class="gl">Didn't know</span></button>
+        <button class="srs-g hard"  id="gHard">Hard<span class="gl">Struggled</span></button>
+        <button class="srs-g good"  id="gGood">Got it!<span class="gl">Knew it</span></button>
+      </div>`;
+
+    const revBtn = document.getElementById('revBtn');
+    revBtn.onclick=()=>{
+      // Flip the card
+      document.getElementById('flipCard').classList.add('flipped');
+      revBtn.style.opacity='0'; revBtn.style.pointerEvents='none';
+      playWord(v.word, null);
+      // After flip completes, show grade buttons
+      setTimeout(()=>{
+        revBtn.style.display='none';
+        const ga=document.getElementById('gradeArea');
+        if(ga){ ga.style.opacity='1'; ga.style.pointerEvents='auto'; }
+        srsRevealed=true;
+        wireGradeButtons(vocabList, v);
+      }, 420);
+    };
+    // Pre-wire play button on back face (may already be rendered)
+    setTimeout(()=>{
+      const pb=document.getElementById('srsPlayBtnB');
+      if(pb) pb.onclick=()=>playWord(v.word,pb);
+    }, 50);
+
   } else {
+    // Already revealed — just show back + grade buttons (e.g. after re-render)
     const ctxHtml=ctx?ctx.replace('__B__',`<span class="bw">${esc(v.word)}</span>`):'';
     area.innerHTML=`
-      <div class="srs-card">
+      <div class="srs-card" id="activeCard">
         <div class="srs-ch">${esc(v.chTitle||'')}</div>
         <div style="display:flex;align-items:center;gap:12px">
           <div class="srs-word">${esc(v.word)}</div>
@@ -1419,16 +1706,39 @@ function renderCard(vocabList) {
       </div>
       <div class="srs-grades">
         <button class="srs-g again" id="gAgain">Again<span class="gl">Didn't know</span></button>
-        <button class="srs-g hard" id="gHard">Hard<span class="gl">Struggled</span></button>
-        <button class="srs-g good" id="gGood">Got it!<span class="gl">Knew it</span></button>
+        <button class="srs-g hard"  id="gHard">Hard<span class="gl">Struggled</span></button>
+        <button class="srs-g good"  id="gGood">Got it!<span class="gl">Knew it</span></button>
       </div>`;
-
     document.getElementById('srsPlayBtn').onclick=()=>playWord(v.word,document.getElementById('srsPlayBtn'));
-    const grade=g=>{ srsGrade(v.word.toLowerCase(),g); srsIdx++; srsRevealed=false; renderCard(vocabList); renderSidebar(); };
-    document.getElementById('gAgain').onclick=()=>grade(0);
-    document.getElementById('gHard').onclick=()=>grade(1);
-    document.getElementById('gGood').onclick=()=>grade(2);
+    wireGradeButtons(vocabList, v);
   }
+}
+
+function wireGradeButtons(vocabList, v) {
+  function grade(g, exitClass, tick) {
+    // Track session
+    if(g===2) sessionGrades.good++;
+    else if(g===1) sessionGrades.hard++;
+    else sessionGrades.again++;
+
+    // Animate card exit
+    const card = document.getElementById('activeCard') || document.getElementById('flipCard');
+    if(card) {
+      card.classList.add(exitClass);
+      // Flash tick
+      const el=document.createElement('div');
+      el.className='grade-tick'; el.textContent=tick;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 550);
+      setTimeout(()=>{ srsGrade(v.word.toLowerCase(),g); srsIdx++; srsRevealed=false; renderCard(vocabList); renderSidebar(); }, 200);
+    } else {
+      srsGrade(v.word.toLowerCase(),g); srsIdx++; srsRevealed=false; renderCard(vocabList); renderSidebar();
+    }
+  }
+  const gA=document.getElementById('gAgain'), gH=document.getElementById('gHard'), gG=document.getElementById('gGood');
+  if(gA) gA.onclick=()=>grade(0,'card-exit-left','✗');
+  if(gH) gH.onclick=()=>grade(1,'card-exit-down','～');
+  if(gG) gG.onclick=()=>grade(2,'card-exit-right','✓');
 }
 
 // ── HTML BUILDERS ─────────────────────────────────────────────────────────────
