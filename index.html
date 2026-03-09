@@ -11,7 +11,7 @@
       --bg: #f5f4f0; --surface: #fdfcf9; --surface2: #f0efe9; --border: #e4e2da;
       --text: #1c1b18; --muted: #7c7a72;
       --accent: #2a6049; --accent-light: #e0ede7; --accent-hover: #1e4a37;
-      --yellow: #fef3c0; --yellow-border: #f5c842; --yellow-active: #fde68a;
+      --yellow: #fef3c0; --yellow-border: #e8b84b; --yellow-active: #fde68a;
       --blue-bg: #eff6ff; --blue-border: #93c5fd;
       --green: #16a34a; --green-light: #dcfce7;
       --red: #dc2626; --red-light: #fee2e2;
@@ -23,15 +23,44 @@
       --sw: 280px;
       --story-size: 17px;
     }
+    [data-theme="dark"] {
+      --bg: #141412; --surface: #1c1b18; --surface2: #242420; --border: #2e2d28;
+      --text: #e8e5dc; --muted: #7a7870;
+      --accent: #3d8a68; --accent-light: #1a3328; --accent-hover: #4da07a;
+      --yellow: #2a2410; --yellow-border: #8a6d1a; --yellow-active: #352d14;
+      --blue-bg: #0f1829; --blue-border: #2a4a7f;
+      --green: #22c55e; --green-light: #0a2818;
+      --red: #f87171; --red-light: #2a0f0f;
+      --orange: #fb923c; --orange-light: #2a1408;
+      --shadow-card: 0 4px 24px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.2);
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* Subtle SVG noise texture on bg */
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       color: var(--text); min-height: 100vh; font-size: 15px;
+      transition: background-color 0.3s, color 0.3s;
     }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #141412; --surface: #1c1b18; --surface2: #242420; --border: #2e2d28;
+        --text: #e8e5dc; --muted: #7a7870;
+        --accent: #3d8a68; --accent-light: #1a3328; --accent-hover: #4da07a;
+        --yellow: #2a2410; --yellow-border: #8a6d1a; --yellow-active: #352d14;
+        --blue-bg: #0f1829; --blue-border: #2a4a7f;
+        --green: #22c55e; --green-light: #0a2818;
+        --red: #f87171; --red-light: #2a0f0f;
+        --orange: #fb923c; --orange-light: #2a1408;
+        --shadow-card: 0 4px 24px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.2);
+      }
+    }
+
+    /* ── DARK MODE TOGGLE ────────────────────────────────────────────────── */
+    .dark-toggle { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--muted); transition: all 0.15s; }
+    .dark-toggle:hover { background: var(--surface2); color: var(--text); }
 
     /* ── STREAK COUNTER ──────────────────────────────────────────────────── */
     .streak-wrap { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #b45309; }
@@ -215,15 +244,60 @@
     .font-btn.sz-sm { font-size: 11px; }
     .font-btn.sz-lg { font-size: 15px; }
 
-    .vocab-chip { display: inline-flex; align-items: center; background: var(--yellow); border-bottom: 2px solid var(--yellow-border); border-radius: 3px; padding: 1px 2px 0 3px; cursor: pointer; transition: background 0.12s; white-space: nowrap; gap: 0; }
-    .vocab-chip:hover, .vocab-chip:active { background: var(--yellow-active); }
-    .vocab-chip .meaning { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: #92610a; margin-left: 2px; }
-    .vocab-chip .snd { font-size: 15px; margin-left: 4px; opacity: 0.7; line-height: 1; padding: 2px 3px; border-radius: 3px; cursor: pointer; transition: opacity 0.1s, background 0.1s; flex-shrink: 0; }
-    .vocab-chip .snd:hover { opacity: 1; background: rgba(0,0,0,0.06); }
-    .vocab-blank { display: inline-block; background: var(--blue-bg); border-bottom: 2px solid var(--blue-border); border-radius: 3px; padding: 1px 12px 0; cursor: pointer; min-width: 54px; min-height: 21px; transition: background 0.12s; white-space: nowrap; }
-    .vocab-blank:hover, .vocab-blank:active { background: #dbeafe; }
-    .vocab-blank .wr { display: none; font-size: 13px; font-weight: 600; color: #1d4ed8; font-family: 'Inter', sans-serif; }
-    .vocab-blank.revealed .wr { display: inline; }
+    /* ── VOCAB CHIP — word only, clean underline ─────────────────────────── */
+    .vocab-chip {
+      display: inline;
+      background: none;
+      border-bottom: 1.5px solid var(--yellow-border);
+      border-radius: 0;
+      padding: 0;
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s;
+      white-space: normal;
+      color: inherit;
+    }
+    .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
+    .vocab-chip:active { background: var(--yellow-active); }
+    /* Hide inline meaning — shown only in popup/tooltip */
+    .vocab-chip .meaning { display: none; }
+    /* Speaker icon — tiny, only visible on hover */
+    .vocab-chip .snd {
+      display: inline-block; font-size: 10px; margin-left: 2px;
+      opacity: 0; line-height: 1; padding: 0 1px;
+      cursor: pointer; transition: opacity 0.1s; vertical-align: middle;
+    }
+    .vocab-chip:hover .snd { opacity: 0.5; }
+    .vocab-chip .snd:hover { opacity: 1 !important; }
+    /* SRS state: tiny dot after word */
+    .vocab-chip::after { content:''; display:inline-block; width:4px; height:4px; border-radius:50%; margin-left:2px; vertical-align:middle; opacity:0; }
+    .vocab-chip.srs-learning::after { background: #3b82f6; opacity:0.7; }
+    .vocab-chip.srs-known::after { background: var(--green); opacity:0.7; }
+    /* Bookmarked state */
+    .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
+    .vocab-chip.bookmarked:hover { background: var(--accent-light); }
+
+    /* ── VOCAB BLANK (默写) ───────────────────────────────────────────────── */
+    .vocab-blank {
+      display: inline-flex; align-items: center;
+      background: var(--blue-bg); border-bottom: 2px solid var(--blue-border);
+      border-radius: 3px; padding: 1px 4px 0; cursor: pointer;
+      min-width: 60px; min-height: 22px; transition: all 0.15s; white-space: nowrap;
+      font-family: 'Lora', serif; font-size: inherit; color: var(--text);
+      position: relative;
+    }
+    .vocab-blank.typing-active {
+      background: none; border-bottom: 2px solid var(--accent);
+      min-width: 80px; cursor: text;
+    }
+    .vocab-blank.correct { background: var(--green-light); border-bottom-color: var(--green); color: var(--green); cursor: default; }
+    .vocab-blank.wrong   { background: var(--red-light);   border-bottom-color: var(--red);   cursor: pointer; }
+    .vocab-blank .wr { font-size: inherit; font-weight: 600; color: var(--accent); font-family: 'Lora', serif; }
+    .vocab-blank .blank-input {
+      background: none; border: none; outline: none;
+      font-family: 'Lora', serif; font-size: inherit; color: var(--text);
+      min-width: 60px; width: auto; padding: 0;
+    }
+    .vocab-blank .blank-hint { font-size: 11px; color: var(--muted); margin-left: 4px; font-family: 'Inter', sans-serif; }
 
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
     .vocab-chip.playing, .vocab-blank.playing, .srs-play.playing { animation: pulse 0.5s 2; }
@@ -585,10 +659,89 @@
     }
     .progress-toast.out { animation: toastOut 0.2s ease forwards; }
 
-    /* vocab-chip srs state dots */
-    .vocab-chip::after { content:''; display:inline-block; width:5px; height:5px; border-radius:50%; margin-left:3px; vertical-align:middle; opacity:0; }
-    .vocab-chip.srs-learning::after { background: #3b82f6; opacity:1; }
-    .vocab-chip.srs-known::after { background: var(--green); opacity:1; }
+    /* ── ONBOARDING TOOLTIPS ─────────────────────────────────────────────── */
+    .onboard-overlay { position: fixed; inset: 0; z-index: 800; pointer-events: none; }
+    .onboard-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.5); pointer-events: all; }
+    .onboard-tip {
+      position: absolute; background: var(--text); color: #f5f4f0;
+      border-radius: 12px; padding: 16px 18px; max-width: 280px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
+      pointer-events: all; z-index: 801;
+      animation: tipIn 0.25s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes tipIn { from { opacity:0; transform: scale(0.92) translateY(6px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .onboard-tip::before {
+      content: ''; position: absolute; width: 10px; height: 10px;
+      background: var(--text); transform: rotate(45deg);
+    }
+    .onboard-tip.arrow-top::before { top: -5px; left: 24px; }
+    .onboard-tip.arrow-bottom::before { bottom: -5px; left: 24px; }
+    .onboard-tip.arrow-left::before { left: -5px; top: 20px; }
+    .onboard-step { font-size: 10px; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .onboard-title { font-family: 'Lora', serif; font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+    .onboard-body { font-size: 13px; color: #9ca3af; line-height: 1.6; margin-bottom: 14px; }
+    .onboard-actions { display: flex; gap: 8px; align-items: center; }
+    .onboard-next { padding: 7px 16px; background: var(--accent); color: white; border: none; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
+    .onboard-skip { font-size: 11px; color: #6b7280; background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; padding: 4px; }
+    .onboard-dots { display: flex; gap: 5px; margin-left: auto; }
+    .onboard-dot { width: 5px; height: 5px; border-radius: 50%; background: #374151; }
+    .onboard-dot.active { background: var(--accent); }
+
+    /* ── GLOBAL VOCAB VIEW ───────────────────────────────────────────────── */
+    .gvocab-wrap { max-width: 700px; }
+    .gvocab-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+    .gvocab-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 500; }
+    .gvocab-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+    .gvf { padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-family: 'Inter', sans-serif; font-size: 11px; cursor: pointer; transition: all 0.12s; color: var(--muted); }
+    .gvf.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .gvocab-search { width: 100%; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text); outline: none; margin-bottom: 16px; transition: border-color 0.15s; }
+    .gvocab-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+    .gvocab-empty { text-align: center; padding: 48px 24px; color: var(--muted); font-size: 14px; }
+
+    /* ── GATE SPLIT SCREEN ───────────────────────────────────────────────── */
+    #gate { flex-direction: row; }
+    .gate-left {
+      flex: 0 0 380px; display: flex; align-items: center; justify-content: center;
+      padding: 48px 40px; border-right: 1px solid #1e1e1b;
+    }
+    .gate-right {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 40px; overflow: hidden; position: relative;
+    }
+    .gate-preview {
+      max-width: 480px; width: 100%;
+      background: #1a1a17; border: 1px solid #2a2a26;
+      border-radius: 16px; padding: 28px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    .gate-preview-label {
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #3d8068; font-weight: 600; margin-bottom: 12px;
+    }
+    .gate-preview-title {
+      font-family: 'Lora', serif; font-size: 18px; color: #e8e5dc;
+      margin-bottom: 18px; line-height: 1.3; font-weight: 500;
+    }
+    .gate-preview-text {
+      font-family: 'Lora', serif; font-size: 14px; line-height: 2.1;
+      color: #8a8880; text-align: justify; hyphens: auto;
+    }
+    /* Vocab highlight in preview */
+    .gpv-word {
+      color: #e8e5dc; border-bottom: 1.5px solid #5a7a5a;
+      cursor: default;
+    }
+    .gate-preview-tagline {
+      margin-top: 18px; padding-top: 16px; border-top: 1px solid #2a2a26;
+      font-size: 12px; color: #4a4a45; line-height: 1.6;
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .gate-preview-tagline span { display: flex; align-items: center; gap: 5px; }
+    @media (max-width: 800px) {
+      #gate { flex-direction: column; }
+      .gate-left { flex: none; border-right: none; border-bottom: 1px solid #1e1e1b; padding: 32px 28px; width: 100%; }
+      .gate-right { display: none; }
+    }
 
     /* ── ACCESS GATE ─────────────────────────────────────────────────────── */
     #gate {
@@ -687,18 +840,16 @@
 <body>
 
 <div id="gate">
+  <!-- LEFT: Login panel -->
+  <div class="gate-left">
   <div class="gate-card">
     <div class="gate-logo">
-      <!-- Sage English mark: open book + sage leaf + flame -->
       <svg class="gate-logo-icon" width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Open book pages -->
         <path d="M50 72 C50 72 22 60 18 38 L18 30 C18 30 22 28 30 32 C38 36 50 40 50 40" stroke="#3d8068" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         <path d="M50 72 C50 72 78 60 82 38 L82 30 C82 30 78 28 70 32 C62 36 50 40 50 40" stroke="#3d8068" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         <line x1="50" y1="40" x2="50" y2="72" stroke="#3d8068" stroke-width="2.4" stroke-linecap="round"/>
-        <!-- Left sage leaf -->
         <path d="M38 50 C28 44 24 34 32 28 C36 32 40 40 38 50Z" stroke="#3d8068" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         <line x1="38" y1="50" x2="33" y2="35" stroke="#3d8068" stroke-width="1.6" stroke-linecap="round"/>
-        <!-- Flame -->
         <path d="M50 38 C50 38 44 30 47 22 C49 16 52 14 52 14 C52 14 52 20 55 23 C58 26 60 22 60 22 C60 22 62 30 56 36 C54 38 52 39 50 38Z" stroke="#3d8068" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         <path d="M50 38 C50 38 48 33 50 29 C51 27 53 28 53 31 C53 34 51 37 50 38Z" stroke="#3d8068" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
@@ -707,19 +858,24 @@
     </div>
     <div class="gate-label">Enter your access code</div>
     <div class="gate-input-wrap">
-      <input
-        id="gateInput"
-        class="gate-input"
-        type="text"
-        maxlength="8"
-        placeholder="XXXXXXXX"
-        autocomplete="off"
-        autocorrect="off"
-        spellcheck="false"
-      />
+      <input id="gateInput" class="gate-input" type="text" maxlength="8" placeholder="XXXXXXXX" autocomplete="off" autocorrect="off" spellcheck="false"/>
     </div>
     <div class="gate-error" id="gateError"></div>
     <button class="gate-btn" id="gateBtn">Unlock Access →</button>
+  </div>
+  </div>
+  <!-- RIGHT: Product preview -->
+  <div class="gate-right">
+    <div class="gate-preview">
+      <div class="gate-preview-label">故事词汇学习 · Story Vocab</div>
+      <div class="gate-preview-title">The Lighthouse Keeper's Secret</div>
+      <div class="gate-preview-text">Every evening, old Thomas would <span class="gpv-word">ascend</span> the spiral staircase to light the lamp. The <span class="gpv-word">solitude</span> never bothered him — he had learned to find <span class="gpv-word">solace</span> in the rhythm of the waves. But tonight, something was different. A ship had appeared on the <span class="gpv-word">horizon</span>, moving with strange <span class="gpv-word">urgency</span> toward the rocks.</div>
+      <div class="gate-preview-tagline">
+        <span>📖 Read real stories</span>
+        <span>✦ Learn vocabulary in context</span>
+        <span>🔁 Spaced repetition review</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -739,9 +895,12 @@
       Sage English
     </span>
   </div>
-  <div class="kokoro-status">
-    <div class="status-dot" id="statusDot"></div>
-    <span id="statusLabel">checking…</span>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+    <div class="kokoro-status">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusLabel">checking…</span>
+    </div>
   </div>
 </header>
 
@@ -766,7 +925,8 @@
     </div>
     <div class="chapter-list" id="chapterList"></div>
     <div class="sidebar-footer">
-      <button class="all-srs-btn" id="allSrsBtn">复习待学词汇</button>
+      <button class="all-srs-btn" id="allSrsBtn" style="margin-bottom:6px">复习待学词汇</button>
+      <button class="all-srs-btn" id="globalVocabBtn" style="background:var(--surface2);color:var(--muted);margin-bottom:0">📚 全部词汇库</button>
     </div>
   </aside>
 
@@ -1068,6 +1228,7 @@ function showProgressToast(msg) {
 let chapters=[], activeId=null, activeTab='read', openStoryId=null;
 let currentAudio=null, currentPlayingEl=null;
 let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='all', srsAllMode=false;
+let globalVocabMode=false, gvFilter='all';
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init() {
@@ -1341,6 +1502,9 @@ function selectChapter(id) {
 function renderMain() {
   const main=document.getElementById('main');
 
+  // Global vocab view
+  if(globalVocabMode) { renderGlobalVocab(); return; }
+
   // All-chapters SRS
   if(srsAllMode || (!activeId && activeTab==='practice')) {
     main.innerHTML='<div class="srs-wrap" id="srsWrap"></div>';
@@ -1505,15 +1669,69 @@ function renderTab(ch,vocab) {
     }
     renderChNav(body, ch, vocab);
   } else if(activeTab==='recall') {
-    body.innerHTML=`<div class="hint-bar">点击任意<span style="background:var(--blue-bg);border-bottom:2px solid var(--blue-border);padding:1px 8px;border-radius:3px;">空格</span>来揭示并听单词。</div><div class="story-box"><div class="story-text">${buildRecallHTML(ch.story)}</div></div>`;
-    body.querySelectorAll('.vocab-blank').forEach(b=>{
-      b.onclick=()=>{
-        b.classList.add('revealed');
+    body.innerHTML=`<div class="hint-bar">在空格处输入英文单词，按 <strong>Enter</strong> 确认。</div><div class="story-box"><div class="story-text" id="recallText">${buildRecallHTML(ch.story)}</div></div>`;
+    const blanks = [...body.querySelectorAll('.vocab-blank')];
+    let currentIdx = 0;
+
+    function focusBlank(idx) {
+      if(idx >= blanks.length) return;
+      currentIdx = idx;
+      const b = blanks[idx];
+      if(b.classList.contains('correct')) { focusBlank(idx+1); return; }
+      // Build input inside blank
+      if(!b.querySelector('.blank-input')) {
+        b.classList.add('typing-active');
+        b.innerHTML = `<input class="blank-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="…" />`;
+        const inp = b.querySelector('.blank-input');
+        // Auto-size input
+        inp.addEventListener('input', () => {
+          inp.style.width = Math.max(60, inp.value.length * 10 + 20) + 'px';
+        });
+        inp.addEventListener('keydown', e => {
+          if(e.key === 'Enter' || e.key === 'Tab') {
+            e.preventDefault();
+            checkBlank(b, inp.value, idx);
+          }
+        });
+        // Size input based on answer length hint
+        inp.style.width = Math.max(60, b.dataset.w.length * 10 + 20) + 'px';
+        setTimeout(() => inp.focus(), 30);
+      } else {
+        b.querySelector('.blank-input').focus();
+      }
+    }
+
+    function checkBlank(b, val, idx) {
+      const correct = b.dataset.w.toLowerCase().trim();
+      const attempt = val.toLowerCase().trim();
+      b.classList.remove('typing-active');
+      if(attempt === correct) {
+        b.classList.add('correct');
+        b.innerHTML = `<span class="wr">${esc(b.dataset.w)}</span>`;
         playWord(b.dataset.w, b);
-        // Show word popup for bookmark/review on both mobile and desktop
-        showWordPopup(b.dataset.w, b.dataset.m, ch.id, ch.title, b);
-      };
+        showProgressToast('✓ 正确！');
+        // Play chime
+        playChime(880, 0.08, 'sine');
+        setTimeout(() => focusBlank(idx + 1), 300);
+      } else {
+        b.classList.add('wrong');
+        const inp = b.querySelector('.blank-input');
+        if(inp) inp.style.borderColor = 'var(--red)';
+        showProgressToast(`✗ 答案是: ${b.dataset.w}`);
+        // Show correct answer briefly then allow retry
+        setTimeout(() => {
+          b.classList.remove('wrong');
+          b.innerHTML = '';
+          focusBlank(idx);
+        }, 1800);
+      }
+    }
+
+    blanks.forEach((b, idx) => {
+      b.onclick = () => { if(!b.classList.contains('correct')) focusBlank(idx); };
     });
+    // Focus first blank
+    setTimeout(() => focusBlank(0), 100);
     renderChNav(body, ch, vocab);
   } else if(activeTab==='vocab') {
     body.innerHTML=`<div class="vtitle">${vocab.length} 词 · 点击行播放</div>
@@ -1660,9 +1878,10 @@ function renderCard(vocabList) {
   if(srsIdx>=srsQueue.length) {
     // Session summary
     const total = srsQueue.length;
+    const isPerfect = sessionGrades.again===0;
     area.innerHTML=`
       <div class="srs-summary">
-        <span class="sum-icon">${sessionGrades.again===0 ? '🏆' : sessionGrades.good > sessionGrades.again ? '🌟' : '💪'}</span>
+        <span class="sum-icon">${isPerfect ? '🏆' : sessionGrades.good > sessionGrades.again ? '🌟' : '💪'}</span>
         <h3>本轮完成</h3>
         <div class="sum-sub">复习了 <strong>${total}</strong> 个词${total>0?' · 继续保持！':''}</div>
         <div class="sum-stats">
@@ -1672,7 +1891,10 @@ function renderCard(vocabList) {
         </div>
         <button class="btn btn-ghost" onclick="sessionGrades={good:0,hard:0,again:0};renderMain()">再来一轮</button>
       </div>`;
-    renderSidebar(); return;
+    renderSidebar();
+    // Play completion chime
+    setTimeout(playSessionCompleteChime, 150);
+    return;
   }
 
   const v=srsQueue[srsIdx];
@@ -1783,7 +2005,7 @@ function wireGradeButtons(vocabList, v) {
 
 // ── HTML BUILDERS ─────────────────────────────────────────────────────────────
 function buildReadHTML(story) {
-  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-text">${esc(w.trim())}<span class="meaning">(${esc(m.trim())})</span></span><span class="snd" data-w="${esc(w.trim())}">🔊</span></span>`)}</p>`).join('');
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-text">${esc(w.trim())}</span><span class="snd" data-w="${esc(w.trim())}">🔊</span></span>`)}</p>`).join('');
 }
 
 function buildRecallHTML(story) {
@@ -1804,9 +2026,230 @@ function checkAudio() {
   a.load();
 }
 
+// ── DARK MODE ─────────────────────────────────────────────────────────────────
+const DARK_KEY = 'se_dark_v1';
+function initDarkMode() {
+  const saved = localStorage.getItem(DARK_KEY);
+  if(saved === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  else if(saved === 'light') document.documentElement.setAttribute('data-theme','light');
+  updateDarkToggle();
+}
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    || (!document.documentElement.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if(isDark) {
+    document.documentElement.setAttribute('data-theme','light');
+    localStorage.setItem(DARK_KEY,'light');
+  } else {
+    document.documentElement.setAttribute('data-theme','dark');
+    localStorage.setItem(DARK_KEY,'dark');
+  }
+  updateDarkToggle();
+}
+function updateDarkToggle() {
+  const btn = document.getElementById('darkToggle');
+  if(!btn) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    || (!document.documentElement.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  btn.textContent = isDark ? '☀️' : '🌙';
+  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+}
+document.getElementById('darkToggle').onclick = toggleDark;
+initDarkMode();
+function playChime(freq=660, vol=0.12, type='sine') {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = type; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+    osc.start(); osc.stop(ctx.currentTime + 0.6);
+    setTimeout(() => ctx.close(), 700);
+  } catch(e) {}
+}
+function playSessionCompleteChime() {
+  // Three-note ascending chime
+  setTimeout(() => playChime(523, 0.1), 0);
+  setTimeout(() => playChime(659, 0.1), 160);
+  setTimeout(() => playChime(784, 0.14), 320);
+}
+
+// ── ONBOARDING ────────────────────────────────────────────────────────────────
+const ONBOARD_KEY = 'se_onboarded_v1';
+const ONBOARD_STEPS = [
+  {
+    target: '.story-box',
+    title: '阅读真实故事',
+    body: '高亮词汇可点击查看释义，轻触 🔊 播放发音。',
+    arrow: 'arrow-top', offsetX: 20, offsetY: 12
+  },
+  {
+    target: '[data-t="practice"]',
+    title: '练习记忆',
+    body: '看到中文释义，回想英文单词。加入复习队列后每天自动安排。',
+    arrow: 'arrow-top', offsetX: 0, offsetY: 8
+  },
+  {
+    target: '[data-t="recall"]',
+    title: '默写听写',
+    body: '看故事原文，在空格处输入英文单词，按 Enter 确认答案。',
+    arrow: 'arrow-top', offsetX: 0, offsetY: 8
+  }
+];
+
+function startOnboarding() {
+  if(localStorage.getItem(ONBOARD_KEY)) return;
+  // Only start after a chapter is open
+  if(!activeId) return;
+  let step = 0;
+  showOnboardStep(step);
+
+  function showOnboardStep(i) {
+    removeOnboard();
+    if(i >= ONBOARD_STEPS.length) { localStorage.setItem(ONBOARD_KEY,'1'); return; }
+    const s = ONBOARD_STEPS[i];
+    const targetEl = document.querySelector(s.target);
+    if(!targetEl) { showOnboardStep(i+1); return; }
+    const rect = targetEl.getBoundingClientRect();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'onboard-overlay';
+    const backdrop = document.createElement('div');
+    backdrop.className = 'onboard-backdrop';
+
+    const tip = document.createElement('div');
+    tip.className = `onboard-tip ${s.arrow}`;
+    tip.innerHTML = `
+      <div class="onboard-step">步骤 ${i+1} / ${ONBOARD_STEPS.length}</div>
+      <div class="onboard-title">${s.title}</div>
+      <div class="onboard-body">${s.body}</div>
+      <div class="onboard-actions">
+        <button class="onboard-next" id="onboardNext">${i < ONBOARD_STEPS.length-1 ? '下一步 →' : '开始学习 ✓'}</button>
+        <button class="onboard-skip" id="onboardSkip">跳过</button>
+        <div class="onboard-dots">${ONBOARD_STEPS.map((_,j)=>`<div class="onboard-dot${j===i?' active':''}"></div>`).join('')}</div>
+      </div>`;
+
+    // Position tip near target
+    const tipLeft = Math.min(rect.left + s.offsetX, window.innerWidth - 300);
+    const tipTop = s.arrow === 'arrow-top' ? rect.bottom + s.offsetY : rect.top - 160;
+    tip.style.left = Math.max(12, tipLeft) + 'px';
+    tip.style.top = Math.max(12, tipTop) + 'px';
+
+    overlay.appendChild(backdrop);
+    overlay.appendChild(tip);
+    document.body.appendChild(overlay);
+
+    document.getElementById('onboardNext').onclick = () => showOnboardStep(i+1);
+    document.getElementById('onboardSkip').onclick = () => { localStorage.setItem(ONBOARD_KEY,'1'); removeOnboard(); };
+    backdrop.onclick = () => { localStorage.setItem(ONBOARD_KEY,'1'); removeOnboard(); };
+  }
+
+  function removeOnboard() {
+    document.querySelectorAll('.onboard-overlay').forEach(el => el.remove());
+  }
+}
+
+// ── GLOBAL VOCAB VIEW ─────────────────────────────────────────────────────────
+function renderGlobalVocab() {
+  const main = document.getElementById('main');
+  const allVocab = allVocabList();
+  const srsData = srsLoad();
+
+  function filtered() {
+    return allVocab.filter(v => {
+      const state = wordState(v.word.toLowerCase());
+      if(gvFilter === 'due') return srsData[v.word.toLowerCase()]?.introduced;
+      if(gvFilter === 'known') return state === 'known';
+      if(gvFilter === 'new') return state === 'new';
+      return true;
+    });
+  }
+
+  function render(search = '') {
+    const items = filtered().filter(v =>
+      !search || v.word.toLowerCase().includes(search.toLowerCase()) || v.meaning.toLowerCase().includes(search.toLowerCase())
+    );
+    const tbody = document.getElementById('gvtbody');
+    if(!tbody) return;
+    if(!items.length) {
+      tbody.innerHTML = `<tr><td colspan="4" class="gvocab-empty">没有词汇</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = items.map(v => {
+      const state = wordState(v.word.toLowerCase());
+      const stateColor = state==='known'?'var(--green)':state==='learning'?'#3b82f6':'var(--muted)';
+      const stateLabel = state==='known'?'已掌握':state==='learning'?'学习中':'未学';
+      const inSrs = srsData[v.word.toLowerCase()]?.introduced;
+      return `<tr class="vocab-row" data-w="${esc(v.word)}" data-m="${esc(v.meaning)}">
+        <td><div class="td-word"><button class="play-btn" data-w="${esc(v.word)}">▶</button>${esc(v.word)}</div></td>
+        <td>${esc(v.meaning)}</td>
+        <td style="font-size:11px;color:${stateColor};font-weight:500">${stateLabel}</td>
+        <td><button class="vocab-srs-btn${inSrs?' srs-in':''}" data-w="${esc(v.word)}" data-m="${esc(v.meaning)}">${inSrs?'✓ 复习':'☆ 复习'}</button></td>
+      </tr>`;
+    }).join('');
+    tbody.querySelectorAll('.play-btn').forEach(b => { b.onclick=e=>{e.stopPropagation();playWord(b.dataset.w,b.closest('tr'));}; });
+    tbody.querySelectorAll('.vocab-srs-btn').forEach(btn => {
+      btn.onclick = e => {
+        e.stopPropagation();
+        srsGrade(btn.dataset.w.toLowerCase(), 0);
+        btn.classList.add('srs-in'); btn.textContent='✓ 复习';
+        showProgressToast('☆ 已加入复习');
+      };
+    });
+    tbody.querySelectorAll('.vocab-row').forEach(r => { r.onclick=e=>{ if(e.target.closest('button')) return; playWord(r.dataset.w,r); }; });
+  }
+
+  const totalDue = allVocab.filter(v=>srsData[v.word.toLowerCase()]?.introduced).length;
+  const totalKnown = allVocab.filter(v=>wordState(v.word.toLowerCase())==='known').length;
+
+  main.innerHTML = `
+    <div class="gvocab-wrap">
+      <div class="gvocab-header">
+        <div>
+          <div class="gvocab-title">全部词汇库</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">${allVocab.length} 个词 · ${totalKnown} 已掌握 · ${totalDue} 在复习中</div>
+        </div>
+        <button class="btn btn-ghost" id="gvBack" style="font-size:12px">← 返回</button>
+      </div>
+      <div class="gvocab-filters" style="margin-bottom:14px">
+        <button class="gvf${gvFilter==='all'?' active':''}" data-f="all">全部 (${allVocab.length})</button>
+        <button class="gvf${gvFilter==='due'?' active':''}" data-f="due">复习中 (${totalDue})</button>
+        <button class="gvf${gvFilter==='known'?' active':''}" data-f="known">已掌握 (${totalKnown})</button>
+        <button class="gvf${gvFilter==='new'?' active':''}" data-f="new">未学 (${allVocab.length-totalKnown-allVocab.filter(v=>wordState(v.word.toLowerCase())==='learning').length})</button>
+      </div>
+      <input class="gvocab-search" id="gvSearch" placeholder="搜索词汇或释义…" type="text" autocomplete="off"/>
+      <table class="vtable">
+        <thead><tr><th>单词</th><th>释义</th><th>状态</th><th>复习</th></tr></thead>
+        <tbody id="gvtbody"></tbody>
+      </table>
+    </div>`;
+
+  render();
+
+  document.getElementById('gvBack').onclick = () => { globalVocabMode=false; renderMain(); };
+  document.getElementById('gvSearch').addEventListener('input', e => render(e.target.value));
+  document.querySelectorAll('.gvf').forEach(btn => {
+    btn.onclick = () => { gvFilter = btn.dataset.f; renderGlobalVocab(); };
+  });
+}
+
+document.getElementById('globalVocabBtn').onclick = () => {
+  globalVocabMode = true;
+  renderGlobalVocab();
+  closeSidebar();
+};
+
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeSidebar(); hideTip(); } });
 
 init();
+
+// After init, trigger onboarding when first chapter opens
+document.addEventListener('click', e => {
+  const ch = e.target.closest('.ch-item');
+  if(ch) setTimeout(startOnboarding, 700);
+}, true);
 </script>
 </body>
 </html>
