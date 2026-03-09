@@ -8,31 +8,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4f0; --surface: #fdfcf9; --surface2: #f0efe9; --border: #e4e2da;
-      --text: #1c1b18; --muted: #7c7a72;
-      --accent: #2a6049; --accent-light: #e0ede7; --accent-hover: #1e4a37;
-      --yellow: #fef3c0; --yellow-border: #e8b84b; --yellow-active: #fde68a;
-      --blue-bg: #eff6ff; --blue-border: #93c5fd;
-      --green: #16a34a; --green-light: #dcfce7;
-      --red: #dc2626; --red-light: #fee2e2;
-      --orange: #ea580c; --orange-light: #ffedd5;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,.12);
-      --shadow-card: 0 4px 24px rgba(42,96,73,.07), 0 1px 4px rgba(0,0,0,.05);
+      /* ── Light: warm cream / aged paper ── */
+      --bg: #f2ede4;
+      --surface: #faf7f2;
+      --surface2: #ede8df;
+      --border: #ddd7cc;
+      --text: #2c2820;
+      --muted: #8a8178;
+      --accent: #5c7a4e;       /* muted sage green */
+      --accent-light: #e4ede0;
+      --accent-hover: #44602f;
+      --yellow: #f9eed4;        /* warm amber highlight */
+      --yellow-border: #c49a3c; /* warm amber underline */
+      --yellow-active: #f0dba8;
+      --blue-bg: #eef3f7;
+      --blue-border: #8aafc8;
+      --green: #4a8c3f;
+      --green-light: #dff0d8;
+      --red: #c0392b;
+      --red-light: #fae0dc;
+      --orange: #c0622a;
+      --orange-light: #faeadc;
+      --shadow-sm: 0 1px 3px rgba(44,40,32,.06), 0 1px 2px rgba(44,40,32,.04);
+      --shadow-md: 0 4px 16px rgba(44,40,32,.08), 0 1px 4px rgba(44,40,32,.04);
+      --shadow-lg: 0 8px 40px rgba(44,40,32,.12);
+      --shadow-card: 0 4px 24px rgba(92,122,78,.07), 0 1px 4px rgba(44,40,32,.05);
       --sw: 280px;
       --story-size: 17px;
     }
     [data-theme="dark"] {
-      --bg: #141412; --surface: #1c1b18; --surface2: #242420; --border: #2e2d28;
-      --text: #e8e5dc; --muted: #7a7870;
-      --accent: #3d8a68; --accent-light: #1a3328; --accent-hover: #4da07a;
-      --yellow: #2a2410; --yellow-border: #8a6d1a; --yellow-active: #352d14;
-      --blue-bg: #0f1829; --blue-border: #2a4a7f;
-      --green: #22c55e; --green-light: #0a2818;
-      --red: #f87171; --red-light: #2a0f0f;
-      --orange: #fb923c; --orange-light: #2a1408;
-      --shadow-card: 0 4px 24px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.2);
+      /* ── Dark: deep warm charcoal, not blue-black ── */
+      --bg: #1a1814;
+      --surface: #221f1b;
+      --surface2: #2a2722;
+      --border: #353028;
+      --text: #e6dfd4;
+      --muted: #7d7568;
+      --accent: #7aaa62;
+      --accent-light: #1e2e18;
+      --accent-hover: #92c478;
+      --yellow: #2e2510;
+      --yellow-border: #8a6a20;
+      --yellow-active: #3a2e12;
+      --blue-bg: #141d24;
+      --blue-border: #3a5a78;
+      --green: #5aaa48;
+      --green-light: #0d2210;
+      --red: #e07060;
+      --red-light: #2e1210;
+      --orange: #d4804a;
+      --orange-light: #2a1810;
+      --shadow-card: 0 4px 24px rgba(0,0,0,.35), 0 1px 4px rgba(0,0,0,.25);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -46,15 +72,15 @@
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #141412; --surface: #1c1b18; --surface2: #242420; --border: #2e2d28;
-        --text: #e8e5dc; --muted: #7a7870;
-        --accent: #3d8a68; --accent-light: #1a3328; --accent-hover: #4da07a;
-        --yellow: #2a2410; --yellow-border: #8a6d1a; --yellow-active: #352d14;
-        --blue-bg: #0f1829; --blue-border: #2a4a7f;
-        --green: #22c55e; --green-light: #0a2818;
-        --red: #f87171; --red-light: #2a0f0f;
-        --orange: #fb923c; --orange-light: #2a1408;
-        --shadow-card: 0 4px 24px rgba(0,0,0,.3), 0 1px 4px rgba(0,0,0,.2);
+        --bg: #1a1814; --surface: #221f1b; --surface2: #2a2722; --border: #353028;
+        --text: #e6dfd4; --muted: #7d7568;
+        --accent: #7aaa62; --accent-light: #1e2e18; --accent-hover: #92c478;
+        --yellow: #2e2510; --yellow-border: #8a6a20; --yellow-active: #3a2e12;
+        --blue-bg: #141d24; --blue-border: #3a5a78;
+        --green: #5aaa48; --green-light: #0d2210;
+        --red: #e07060; --red-light: #2e1210;
+        --orange: #d4804a; --orange-light: #2a1810;
+        --shadow-card: 0 4px 24px rgba(0,0,0,.35), 0 1px 4px rgba(0,0,0,.25);
       }
     }
 
@@ -69,11 +95,11 @@
 
     /* ── SIDEBAR DEPTH ───────────────────────────────────────────────────── */
     .sidebar {
-      background: #f8f7f3;
+      background: var(--surface);
       border-right: 1px solid var(--border);
       display: flex; flex-direction: column; overflow: hidden;
       transition: transform 0.32s cubic-bezier(.25,1.4,.5,1);
-      box-shadow: inset -1px 0 0 rgba(255,255,255,.6);
+      box-shadow: inset -1px 0 0 rgba(255,255,255,.4);
     }
 
     header {
@@ -244,36 +270,62 @@
     .font-btn.sz-sm { font-size: 11px; }
     .font-btn.sz-lg { font-size: 15px; }
 
-    /* ── VOCAB CHIP — word only, clean underline ─────────────────────────── */
+    /* ── VOCAB CHIP — word with ruby-style meaning above ────────────────── */
     .vocab-chip {
       display: inline;
+      position: relative;
       background: none;
       border-bottom: 1.5px solid var(--yellow-border);
       border-radius: 0;
       padding: 0;
       cursor: pointer;
       transition: border-color 0.12s, background 0.12s;
-      white-space: normal;
       color: inherit;
+      /* ruby emulation: use vertical-align baseline so inline chars work */
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /* Hide inline meaning — shown only in popup/tooltip */
-    .vocab-chip .meaning { display: none; }
-    /* Speaker icon — tiny, only visible on hover */
+    /* The English word text */
+    .vocab-chip .chip-text {
+      display: inline;
+    }
+    /* Chinese meaning — small, sits just above the word like ruby text */
+    .vocab-chip .meaning {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--yellow-border);
+      text-align: center;
+      letter-spacing: 0.1px;
+      margin-bottom: 1px;
+      opacity: 0.85;
+      white-space: nowrap;
+    }
+    /* Wrapper to stack meaning above word */
+    .vocab-chip .chip-inner {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: bottom;
+      line-height: inherit;
+    }
+    /* Speaker icon — compact, subtle */
     .vocab-chip .snd {
-      display: inline-block; font-size: 10px; margin-left: 2px;
-      opacity: 0; line-height: 1; padding: 0 1px;
+      display: inline-block; font-size: 9px; margin-left: 1px;
+      opacity: 0; line-height: 1; padding: 0;
       cursor: pointer; transition: opacity 0.1s; vertical-align: middle;
     }
-    .vocab-chip:hover .snd { opacity: 0.5; }
+    .vocab-chip:hover .snd { opacity: 0.45; }
     .vocab-chip .snd:hover { opacity: 1 !important; }
-    /* SRS state: tiny dot after word */
-    .vocab-chip::after { content:''; display:inline-block; width:4px; height:4px; border-radius:50%; margin-left:2px; vertical-align:middle; opacity:0; }
-    .vocab-chip.srs-learning::after { background: #3b82f6; opacity:0.7; }
-    .vocab-chip.srs-known::after { background: var(--green); opacity:0.7; }
+    /* SRS state: tiny dot */
+    .vocab-chip::after { content:''; display:inline-block; width:3px; height:3px; border-radius:50%; margin-left:2px; vertical-align:middle; opacity:0; }
+    .vocab-chip.srs-learning::after { background: #6899c4; opacity:0.8; }
+    .vocab-chip.srs-known::after { background: var(--green); opacity:0.8; }
     /* Bookmarked state */
     .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
+    .vocab-chip.bookmarked .meaning { color: var(--accent); }
     .vocab-chip.bookmarked:hover { background: var(--accent-light); }
 
     /* ── VOCAB BLANK (默写) ───────────────────────────────────────────────── */
@@ -542,13 +594,18 @@
       position: fixed; z-index: 500;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.14), 0 2px 8px rgba(0,0,0,.06);
+      border-radius: 16px;
+      box-shadow:
+        0 2px 8px rgba(44,40,32,.06),
+        0 8px 24px rgba(44,40,32,.12),
+        0 0 0 1px rgba(255,255,255,.5) inset;
       padding: 0;
-      min-width: 200px;
+      min-width: 220px;
+      max-width: 260px;
       opacity: 0;
-      transform: translateY(4px) scale(0.97);
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: translateY(6px) scale(0.96);
+      transform-origin: top center;
+      transition: opacity 0.18s cubic-bezier(.16,1,.3,1), transform 0.18s cubic-bezier(.16,1,.3,1);
       pointer-events: none;
       overflow: hidden;
     }
@@ -557,33 +614,71 @@
       transform: translateY(0) scale(1);
       pointer-events: all;
     }
-    .wp-word-row {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 14px 8px;
-      border-bottom: 1px solid var(--border);
+    /* Tiny caret/arrow pointing at the word */
+    #wordPopup::before {
+      content: '';
+      position: absolute;
+      top: var(--arrow-top, -5px);
+      bottom: var(--arrow-bottom, auto);
+      left: var(--arrow-left, 50%);
+      transform: rotate(45deg);
+      width: 9px; height: 9px;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-radius: 2px 0 0 0;
     }
-    .wp-word { font-family: 'Lora', serif; font-size: 17px; font-weight: 500; flex: 1; }
-    .wp-meaning { font-size: 11px; color: var(--muted); padding: 0 14px 8px; border-bottom: 1px solid var(--border); }
+    .wp-header {
+      padding: 14px 16px 10px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .wp-word-col { flex: 1; min-width: 0; }
+    .wp-word {
+      font-family: 'Lora', serif; font-size: 19px; font-weight: 500;
+      color: var(--text); line-height: 1.2; margin-bottom: 3px;
+    }
+    .wp-meaning {
+      font-size: 12px; color: var(--muted); line-height: 1.4;
+    }
     .wp-play-btn {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--accent); border: none; cursor: pointer;
-      font-size: 10px; color: white; display: flex; align-items: center; justify-content: center;
-      transition: all 0.12s; flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent-light); border: 1px solid transparent;
+      cursor: pointer; font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.14s; flex-shrink: 0; color: var(--accent);
+      margin-top: 1px;
     }
-    .wp-play-btn:hover { background: var(--accent-hover); transform: scale(1.08); }
-    .wp-actions { padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+    .wp-play-btn:hover {
+      background: var(--accent); color: white;
+      transform: scale(1.05);
+      box-shadow: 0 3px 10px rgba(92,122,78,.3);
+    }
+    .wp-divider {
+      height: 1px; background: var(--border); margin: 0 12px;
+      opacity: 0.6;
+    }
+    .wp-actions {
+      padding: 8px;
+      display: flex; gap: 6px;
+    }
     .wp-action {
-      display: flex; align-items: center; gap: 8px;
-      padding: 7px 9px; border-radius: 7px; border: none;
-      font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
-      cursor: pointer; transition: all 0.1s; color: var(--text); background: none;
-      text-align: left; width: 100%;
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px;
+      padding: 9px 6px; border-radius: 10px; border: 1px solid var(--border);
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+      cursor: pointer; transition: all 0.13s; color: var(--muted); background: none;
+      text-align: center; line-height: 1.2;
     }
-    .wp-action:hover { background: var(--surface2); }
-    .wp-action.active { color: var(--accent); }
-    .wp-action.srs-action { color: var(--accent); }
-    .wp-action.srs-action:hover { background: var(--accent-light); }
-    .wp-action-icon { font-size: 13px; width: 18px; text-align: center; }
+    .wp-action:hover {
+      background: var(--surface2); color: var(--text);
+      border-color: var(--border);
+      transform: translateY(-1px);
+    }
+    .wp-action.active { color: var(--accent); border-color: var(--accent-light); background: var(--accent-light); }
+    .wp-action.srs-action { }
+    .wp-action.srs-action:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent-light); }
+    .wp-action-icon { font-size: 15px; line-height: 1; }
 
     /* ── BOOKMARK TAB ────────────────────────────────────────────────────── */
     .bookmarks-wrap { max-width: 700px; }
@@ -613,10 +708,6 @@
     .bk-srs:hover { background: var(--accent); color: white; }
     .bk-remove { width: 24px; height: 24px; border-radius: 50%; background: none; border: none; cursor: pointer; font-size: 14px; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
     .bk-remove:hover { background: var(--red-light); color: var(--red); }
-
-    /* bookmarked state on vocab-chip */
-    .vocab-chip.bookmarked { background: var(--accent-light); border-bottom-color: var(--accent); }
-    .vocab-chip.bookmarked .meaning { color: var(--accent); }
 
     /* vocab table bookmark btn */
     .bk-star { width: 26px; height: 26px; border-radius: 6px; background: none; border: none; cursor: pointer; font-size: 13px; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
@@ -964,11 +1055,14 @@
   </div>
 </div>
 <div id="wordPopup">
-  <div class="wp-word-row">
-    <div class="wp-word" id="wpWord"></div>
+  <div class="wp-header">
+    <div class="wp-word-col">
+      <div class="wp-word" id="wpWord"></div>
+      <div class="wp-meaning" id="wpMeaning"></div>
+    </div>
     <button class="wp-play-btn" id="wpPlayBtn">🔊</button>
   </div>
-  <div class="wp-meaning" id="wpMeaning"></div>
+  <div class="wp-divider"></div>
   <div class="wp-actions">
     <button class="wp-action" id="wpBookmark">
       <span class="wp-action-icon" id="wpBkIcon">🔖</span>
@@ -1242,7 +1336,7 @@ function init() {
   checkAudio();
   document.getElementById('menuBtn').onclick=toggleSidebar;
   document.getElementById('overlay').onclick=closeSidebar;
-  document.getElementById('allSrsBtn').onclick=()=>{ srsAllMode=true; activeId=null; activeTab='practice'; srsFilter='due'; renderMain(); closeSidebar(); };
+  document.getElementById('allSrsBtn').onclick=()=>{ srsAllMode=true; globalVocabMode=false; activeId=null; activeTab='practice'; srsFilter='due'; renderMain(); closeSidebar(); };
 }
 
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
@@ -1379,15 +1473,33 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 function positionPopup(el) {
   const r = el.getBoundingClientRect();
-  const pw = 210, ph = 130;
-  let left = r.left + r.width/2 - pw/2;
-  let top = r.bottom + 8;
-  if(left < 8) left = 8;
-  if(left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8;
-  if(top + ph > window.innerHeight - 8) top = r.top - ph - 8;
+  const pw = 240, ph = 120;
+  // Center popup over the word
+  let left = r.left + r.width / 2 - pw / 2;
+  let top = r.bottom + 12;
+  let arrowDir = 'down'; // arrow points up (popup is below word)
+  // Flip upward if too close to bottom
+  if (top + ph > window.innerHeight - 16) {
+    top = r.top - ph - 12;
+    arrowDir = 'up';
+  }
+  if (left < 12) left = 12;
+  if (left + pw > window.innerWidth - 12) left = window.innerWidth - pw - 12;
   wordPopup.style.left = left + 'px';
   wordPopup.style.top = top + 'px';
   wordPopup.style.width = pw + 'px';
+  // Position the CSS arrow to point at the word
+  const arrowLeft = Math.max(16, Math.min(pw - 24, r.left + r.width / 2 - left - 5));
+  wordPopup.style.setProperty('--arrow-left', arrowLeft + 'px');
+  if (arrowDir === 'up') {
+    wordPopup.style.setProperty('--arrow-top', 'auto');
+    wordPopup.style.setProperty('--arrow-bottom', '-5px');
+    wordPopup.style.transformOrigin = 'bottom center';
+  } else {
+    wordPopup.style.setProperty('--arrow-top', '-5px');
+    wordPopup.style.setProperty('--arrow-bottom', 'auto');
+    wordPopup.style.transformOrigin = 'top center';
+  }
 }
 
 function hideWordPopup() { wordPopup.classList.remove('show'); }
@@ -1467,6 +1579,7 @@ function renderSidebar() {
       <span class="story-chevron">▼</span>`;
     header.onclick = () => {
       openStoryId = isOpen ? null : sid;
+      globalVocabMode = false;
       renderSidebar();
     };
 
@@ -1492,7 +1605,7 @@ function renderSidebar() {
 }
 
 function selectChapter(id) {
-  activeId=id; activeTab='read'; srsAllMode=false;
+  activeId=id; activeTab='read'; srsAllMode=false; globalVocabMode=false;
   const ch = chapters.find(c=>c.id===id);
   if (ch) openStoryId = ch.story_id || 'story1';
   renderSidebar(); renderMain();
@@ -1569,6 +1682,7 @@ function renderMain() {
   main.querySelectorAll('.tab').forEach(t=>{
     t.onclick=()=>{
       activeTab=t.dataset.t;
+      globalVocabMode=false;
       main.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.t===activeTab));
       updateFontControlsVisibility();
       // Re-animate tabBody on switch
@@ -2005,7 +2119,7 @@ function wireGradeButtons(vocabList, v) {
 
 // ── HTML BUILDERS ─────────────────────────────────────────────────────────────
 function buildReadHTML(story) {
-  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-text">${esc(w.trim())}</span><span class="snd" data-w="${esc(w.trim())}">🔊</span></span>`)}</p>`).join('');
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-inner"><span class="meaning">${esc(m.trim())}</span><span class="chip-text">${esc(w.trim())}</span></span><span class="snd" data-w="${esc(w.trim())}">🔊</span></span>`)}</p>`).join('');
 }
 
 function buildRecallHTML(story) {
