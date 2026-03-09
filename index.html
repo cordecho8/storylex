@@ -177,9 +177,123 @@
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* ── ACCESS GATE ─────────────────────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0e0e0c;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+    #gate.hidden { display: none; }
+
+    .gate-card {
+      width: 100%; max-width: 360px; padding: 0 24px;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      animation: gateIn 0.55s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes gateIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .gate-logo {
+      font-family: 'Lora', serif;
+      font-size: 28px; font-weight: 500;
+      color: #f5f4f0;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .gate-logo-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #2a6049;
+      box-shadow: 0 0 12px #2a604988;
+    }
+    .gate-sub {
+      font-size: 12px; color: #555550; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 40px;
+    }
+
+    .gate-label {
+      width: 100%;
+      font-size: 10px; font-weight: 600; letter-spacing: 1.2px;
+      text-transform: uppercase; color: #555550;
+      margin-bottom: 8px;
+    }
+
+    .gate-input-wrap {
+      width: 100%; position: relative; margin-bottom: 10px;
+    }
+    .gate-input {
+      width: 100%;
+      background: #1a1a17; border: 1px solid #2e2e29;
+      border-radius: 10px; padding: 14px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px; font-weight: 500; letter-spacing: 4px;
+      color: #f5f4f0; text-align: center; text-transform: uppercase;
+      outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+      caret-color: #2a6049;
+    }
+    .gate-input::placeholder { letter-spacing: 2px; font-size: 13px; color: #3a3a35; font-weight: 400; }
+    .gate-input:focus { border-color: #2a6049; box-shadow: 0 0 0 3px #2a604922; }
+    .gate-input.error { border-color: #dc2626; box-shadow: 0 0 0 3px #dc262622; animation: shake 0.35s ease; }
+    .gate-input.success { border-color: #16a34a; box-shadow: 0 0 0 3px #16a34a22; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60% { transform: translateX(-6px); }
+      40%,80% { transform: translateX(6px); }
+    }
+
+    .gate-btn {
+      width: 100%; padding: 14px;
+      background: #2a6049; border: none; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.5px; color: white; cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-bottom: 16px;
+    }
+    .gate-btn:hover { background: #1e4a37; }
+    .gate-btn:active { transform: scale(0.98); }
+    .gate-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .gate-error {
+      font-size: 12px; color: #ef4444;
+      min-height: 18px; text-align: center;
+      margin-bottom: 8px; transition: opacity 0.2s;
+    }
+
+    .gate-footer {
+      font-size: 11px; color: #38382f; text-align: center; margin-top: 8px;
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
+
+<!-- ACCESS GATE OVERLAY -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo"><div class="gate-logo-dot"></div>StoryLex</div>
+    <div class="gate-sub">沈先生的首席合约</div>
+    <div class="gate-label">Enter your access code</div>
+    <div class="gate-input-wrap">
+      <input
+        id="gateInput"
+        class="gate-input"
+        type="text"
+        maxlength="8"
+        placeholder="XXXXXXXX"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+    </div>
+    <div class="gate-error" id="gateError"></div>
+    <button class="gate-btn" id="gateBtn">Unlock Access →</button>
+    <div class="gate-footer">Each code is for one reader only.<br>Purchase a code at [your link here].</div>
+  </div>
+</div>
 
 <header>
   <div class="hd-left">
@@ -217,7 +331,107 @@
 <div class="tooltip" id="tooltip"><span class="tw" id="tipW"></span><span class="tm" id="tipM"></span></div>
 
 <script src="data/chapters.js"></script>
+<script src="codes.js"></script>
 <script>
+// ── ACCESS GATE ───────────────────────────────────────────────────────────────
+// Auth state is stored in localStorage so the user stays logged in
+// across sessions unless they manually clear their browser data.
+const AUTH_KEY = 'sl_auth_v1';
+
+function isAuthed() {
+  try { return !!localStorage.getItem(AUTH_KEY); } catch(e) { return false; }
+}
+
+function saveAuth(code) {
+  try { localStorage.setItem(AUTH_KEY, code); } catch(e) {}
+}
+
+function validateCode(input) {
+  const clean = input.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  // Must be 4 letters + 4 digits, ending in 88, no 4s anywhere
+  if (!/^[A-Z]{4}[0-9]{4}$/.test(clean)) return false;
+  if (/4/.test(clean)) return false;
+  if (!clean.endsWith('88')) return false;
+  return (typeof VALID_CODES !== 'undefined') && VALID_CODES.includes(clean);
+}
+
+function bootGate() {
+  const gate = document.getElementById('gate');
+
+  // Already authenticated — hide gate immediately and launch app
+  if (isAuthed()) {
+    gate.classList.add('hidden');
+    return;
+  }
+
+  // Show gate, wire up interactions
+  const input = document.getElementById('gateInput');
+  const btn   = document.getElementById('gateBtn');
+  const err   = document.getElementById('gateError');
+
+  // Auto-format: uppercase + strip non-alphanumeric as user types
+  input.addEventListener('input', () => {
+    const pos = input.selectionStart;
+    input.value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    input.setSelectionRange(pos, pos);
+    input.classList.remove('error');
+    err.textContent = '';
+  });
+
+  // Submit on Enter
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') attemptUnlock();
+  });
+
+  btn.addEventListener('click', attemptUnlock);
+
+  function attemptUnlock() {
+    const code = input.value.trim().toUpperCase();
+
+    if (code.length === 0) {
+      showError('Please enter your access code.');
+      return;
+    }
+    if (code.length !== 8) {
+      showError('Code must be 8 characters (4 letters + 4 numbers).');
+      shakeInput();
+      return;
+    }
+    if (!validateCode(code)) {
+      showError('Invalid code. Please check and try again.');
+      shakeInput();
+      return;
+    }
+
+    // Valid — save and launch
+    input.classList.add('success');
+    err.style.color = '#16a34a';
+    err.textContent = 'Code accepted! Loading…';
+    btn.disabled = true;
+
+    saveAuth(code);
+
+    setTimeout(() => {
+      gate.style.transition = 'opacity 0.4s ease';
+      gate.style.opacity = '0';
+      setTimeout(() => { gate.classList.add('hidden'); gate.style.opacity = ''; }, 400);
+    }, 600);
+  }
+
+  function showError(msg) {
+    err.style.color = '#ef4444';
+    err.textContent = msg;
+  }
+
+  function shakeInput() {
+    input.classList.remove('error');
+    void input.offsetWidth; // force reflow to restart animation
+    input.classList.add('error');
+  }
+}
+
+bootGate();
+</script>
 // ── SRS ENGINE (SM-2 simplified) ─────────────────────────────────────────────
 const SRS_KEY = 'sl_srs_v2';
 function srsLoad() { try { return JSON.parse(localStorage.getItem(SRS_KEY)||'{}'); } catch(e) { return {}; } }
