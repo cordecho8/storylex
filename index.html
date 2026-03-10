@@ -303,31 +303,26 @@
       It takes up ONLY the space of the English word — no extra height.
     */
     .vocab-chip .chip-inner {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      vertical-align: bottom;
-      line-height: 1;
+      display: inline-block;
+      position: relative;
+      line-height: inherit;
     }
-    /*
-      Chinese annotation in normal flow — sits directly above the English word.
-      Never overlaps adjacent lines. margin-bottom controls the gap.
-    */
     .vocab-chip .meaning {
-      display: block;
+      position: absolute;
+      bottom: 68%;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: 14.5px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
       white-space: nowrap;
       pointer-events: none;
       letter-spacing: 0.05px;
-      margin-bottom: 6px;
     }
     .vocab-chip .chip-text {
-      display: block;
-      line-height: 1.4;
+      display: inline;
     }
     /* SRS dot */
     .vocab-chip::after {
