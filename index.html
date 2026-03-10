@@ -298,20 +298,24 @@
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /* chip-inner sizes to the English word only */
+    /*
+      chip-inner: inline-block so position:relative works as anchor.
+      It takes up ONLY the space of the English word — no extra height.
+    */
     .vocab-chip .chip-inner {
       display: inline-block;
       position: relative;
       line-height: inherit;
     }
-    /* annotation floats above — absolutely positioned so it never widens the chip */
+    /* annotation: absolute so it never affects chip width;
+       centered over the English word; closer gap via bottom value */
     .vocab-chip .meaning {
       position: absolute;
-      bottom: 100%;
-      left: 0;
-      margin-bottom: 2px;
+      bottom: 52%;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: 14.5px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
