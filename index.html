@@ -289,39 +289,45 @@
       display: inline;
       position: relative;
       background: none;
+      border-bottom: 1.5px solid var(--yellow-border);
       border-radius: 0;
       padding: 0;
       cursor: pointer;
-      transition: background 0.12s;
+      transition: border-color 0.12s, background 0.12s;
       color: inherit;
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /* chip-inner is the anchor — sized to the English word only */
+    /*
+      chip-inner: inline-block so position:relative works as anchor.
+      It takes up ONLY the space of the English word — no extra height.
+    */
     .vocab-chip .chip-inner {
-      display: inline-block;
-      position: relative;
-      line-height: inherit;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      vertical-align: bottom;
+      line-height: 1;
     }
-    /* annotation absolutely positioned — never affects chip width */
+    /*
+      Chinese annotation in normal flow — sits directly above the English word.
+      Never overlaps adjacent lines. margin-bottom controls the gap.
+    */
     .vocab-chip .meaning {
-      position: absolute;
-      bottom: 68%;
-      left: 50%;
-      transform: translateX(-50%);
+      display: block;
       font-family: 'Inter', sans-serif;
-      font-size: 14.5px;
+      font-size: 11px;
       font-weight: 500;
       line-height: 1;
       color: var(--yellow-border);
       white-space: nowrap;
       pointer-events: none;
       letter-spacing: 0.05px;
+      margin-bottom: 2px;
     }
-    /* border only under the English word, not the annotation */
     .vocab-chip .chip-text {
-      display: inline;
-      border-bottom: 1.5px solid var(--yellow-border);
+      display: block;
+      line-height: 1.4;
     }
     /* SRS dot */
     .vocab-chip::after {
@@ -331,7 +337,7 @@
     }
     .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
     .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
-    .vocab-chip.bookmarked .chip-text { border-bottom-color: var(--accent); }
+    .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
     .vocab-chip.bookmarked .meaning { color: var(--accent); }
     .vocab-chip.bookmarked:hover { background: var(--accent-light); }
 
@@ -393,7 +399,7 @@
     .srs-wrap { max-width: 640px; }
     .srs-filter { display: flex; gap: 6px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
     .srs-fl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
-    .srs-fb { padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-family: 'Inter', sans-serif; font-size: 11px; cursor: pointer; transition: all 0.12s; color: var(--muted); }
+    .srs-fb { padding: 9px 20px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.12s; color: var(--muted); }
     .srs-fb.active { background: var(--accent); color: white; border-color: var(--accent); }
 
     /* 3D flip card */
@@ -430,7 +436,7 @@
     .srs-play:hover { background: var(--accent-hover); transform: scale(1.08); box-shadow: 0 3px 12px rgba(42,96,73,.3); }
     .srs-prog { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
 
-    .srs-reveal { width: 100%; padding: 15px; background: var(--text); color: white; border: none; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 10px; transition: opacity 0.15s, transform 0.1s; letter-spacing: 0.2px; }
+    .srs-reveal { width: 100%; padding: 15px; background: var(--accent); color: white; border: none; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 10px; transition: opacity 0.15s, transform 0.1s; letter-spacing: 0.2px; }
     .srs-reveal:hover { opacity: 0.88; transform: translateY(-1px); }
     .srs-reveal:active { transform: translateY(0); }
 
@@ -447,7 +453,7 @@
     .grade-tick { position: fixed; top: 42%; left: 50%; pointer-events: none; z-index: 999; font-size: 56px; animation: tickPop 0.5s ease forwards; }
 
     /* Asymmetric grade buttons */
-    .srs-grades { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 8px; width: 100%; }
+    .srs-grades { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 8px; width: 100%; margin-top: 18px; }
     .srs-g { padding: 13px 8px; border-radius: 12px; border: none; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; }
     .srs-g:hover { transform: translateY(-2px); }
     .srs-g:active { transform: translateY(0) scale(0.97); }
@@ -1376,7 +1382,7 @@ function showProgressToast(msg) {
 // ── APP STATE ─────────────────────────────────────────────────────────────────
 let chapters=[], activeId=null, activeTab='read', openStoryId=null;
 let currentAudio=null, currentPlayingEl=null;
-let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='all', srsAllMode=false;
+let srsQueue=[], srsIdx=0, srsRevealed=false, srsFilter='all', srsAllMode=false, srsFilterManual=false;
 let globalVocabMode=false, gvFilter='all';
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
@@ -1414,7 +1420,7 @@ function allVocabList() {
 function getContext(story, word) {
   const re=new RegExp(`\\{\\{${word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\|[^}]+\\}\\}`,'i');
   const parts=story.split('\n');
-  for(const p of parts){ if(re.test(p)){ return p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>w.trim().toLowerCase()===word.toLowerCase()?'__B__':w.trim()).trim(); } }
+  for(const p of parts){ if(re.test(p)){ return p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>w.trim().toLowerCase()===word.toLowerCase()?'__B__':m.trim()).trim(); } }
   return '';
 }
 
@@ -1802,7 +1808,7 @@ function selectChapter(id) {
   if(activeId && mainEl) {
     try { localStorage.setItem('se_scroll_'+activeId, mainEl.scrollTop); } catch(e) {}
   }
-  activeId=id; activeTab='read'; srsAllMode=false; globalVocabMode=false;
+  activeId=id; activeTab='read'; srsAllMode=false; globalVocabMode=false; srsFilterManual=false;
   const ch = chapters.find(c=>c.id===id);
   if (ch) openStoryId = ch.story_id || 'story1';
   renderSidebar(); renderMain();
@@ -2065,10 +2071,12 @@ function renderTab(ch,vocab) {
   } else if(activeTab==='bookmarks') {
     renderBookmarksTab(body);
   } else {
-    // Auto-set filter: if any words in this chapter have been added to review, default to ☆复习
     const chVocab=vocab.map(v=>({...v,chId:ch.id,chTitle:ch.title}));
-    const hasIntroduced = chVocab.some(v=>{ const c=srsLoad()[v.word.toLowerCase()]; return c&&c.introduced; });
-    if(hasIntroduced) srsFilter='due'; else srsFilter='all';
+    // Auto-set filter only on first visit to tab, not when user has manually selected
+    if(!srsFilterManual) {
+      const hasIntroduced = chVocab.some(v=>{ const c=srsLoad()[v.word.toLowerCase()]; return c&&c.introduced; });
+      srsFilter = hasIntroduced ? 'due' : 'all';
+    }
     body.innerHTML='<div class="srs-wrap" id="srsWrap"></div>';
     buildSrsSession(chVocab, document.getElementById('srsWrap'));
   }
@@ -2135,8 +2143,8 @@ function buildSrsSession(vocabList, wrap) {
     </div>
     <div id="cardArea"></div>`;
 
-  document.getElementById('fbDue').onclick=()=>{ srsFilter='due'; renderMain(); };
-  document.getElementById('fbAll').onclick=()=>{ srsFilter='all'; renderMain(); };
+  document.getElementById('fbDue').onclick=()=>{ srsFilter='due'; srsFilterManual=true; renderMain(); };
+  document.getElementById('fbAll').onclick=()=>{ srsFilter='all'; srsFilterManual=true; renderMain(); };
 
   if(queue.length===0) {
     document.getElementById('cardArea').innerHTML=`<div class="srs-done"><div class="di">🎉</div><h3>今日已完成</h3><p>暂无待复习卡片。点击下方学习新词汇。</p><button class="btn btn-primary" onclick="srsFilter='all';renderMain()">学习全部 ${vocabList.length} 个词</button></div>`;
@@ -2168,7 +2176,7 @@ function renderCard(vocabList) {
           <div class="sum-stat s-hard"><div class="sv">${sessionGrades.hard}</div><div class="sl">有难度</div></div>
           <div class="sum-stat s-again"><div class="sv">${sessionGrades.again}</div><div class="sl">再试</div></div>
         </div>
-        <button class="btn btn-ghost" onclick="sessionGrades={good:0,hard:0,again:0};renderMain()">再来一轮</button>
+        <button class="btn btn-ghost" onclick="sessionGrades={good:0,hard:0,again:0};srsIdx=0;renderMain()">再来一轮</button>
       </div>`;
     renderSidebar();
     // Play completion chime
