@@ -289,24 +289,21 @@
       display: inline;
       position: relative;
       background: none;
-      border-bottom: 1.5px solid var(--yellow-border);
       border-radius: 0;
       padding: 0;
       cursor: pointer;
-      transition: border-color 0.12s, background 0.12s;
+      transition: background 0.12s;
       color: inherit;
     }
     .vocab-chip:hover { background: var(--yellow); border-radius: 2px; }
     .vocab-chip:active { background: var(--yellow-active); }
-    /*
-      chip-inner: inline-block so position:relative works as anchor.
-      It takes up ONLY the space of the English word — no extra height.
-    */
+    /* chip-inner is the anchor — sized to the English word only */
     .vocab-chip .chip-inner {
       display: inline-block;
       position: relative;
       line-height: inherit;
     }
+    /* annotation absolutely positioned — never affects chip width */
     .vocab-chip .meaning {
       position: absolute;
       bottom: 68%;
@@ -321,8 +318,10 @@
       pointer-events: none;
       letter-spacing: 0.05px;
     }
+    /* border only under the English word, not the annotation */
     .vocab-chip .chip-text {
       display: inline;
+      border-bottom: 1.5px solid var(--yellow-border);
     }
     /* SRS dot */
     .vocab-chip::after {
@@ -332,7 +331,7 @@
     }
     .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
     .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
-    .vocab-chip.bookmarked { border-bottom-color: var(--accent); }
+    .vocab-chip.bookmarked .chip-text { border-bottom-color: var(--accent); }
     .vocab-chip.bookmarked .meaning { color: var(--accent); }
     .vocab-chip.bookmarked:hover { background: var(--accent-light); }
 
