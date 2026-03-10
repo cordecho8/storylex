@@ -306,7 +306,7 @@
       display: inline-flex;
       flex-direction: column;
       align-items: flex-start;
-      vertical-align: bottom;
+      vertical-align: -3px;
       line-height: 1;
     }
     /*
@@ -2072,7 +2072,6 @@ function renderTab(ch,vocab) {
     renderBookmarksTab(body);
   } else {
     const chVocab=vocab.map(v=>({...v,chId:ch.id,chTitle:ch.title}));
-    // Auto-set filter only on first visit to tab, not when user has manually selected
     if(!srsFilterManual) {
       const hasIntroduced = chVocab.some(v=>{ const c=srsLoad()[v.word.toLowerCase()]; return c&&c.introduced; });
       srsFilter = hasIntroduced ? 'due' : 'all';
@@ -2176,7 +2175,7 @@ function renderCard(vocabList) {
           <div class="sum-stat s-hard"><div class="sv">${sessionGrades.hard}</div><div class="sl">有难度</div></div>
           <div class="sum-stat s-again"><div class="sv">${sessionGrades.again}</div><div class="sl">再试</div></div>
         </div>
-        <button class="btn btn-ghost" onclick="sessionGrades={good:0,hard:0,again:0};srsIdx=0;renderMain()">再来一轮</button>
+        <button class="btn btn-ghost" onclick="sessionGrades={good:0,hard:0,again:0};renderMain()">再来一轮</button>
       </div>`;
     renderSidebar();
     // Play completion chime
