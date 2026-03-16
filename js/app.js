@@ -250,5 +250,3 @@ document.addEventListener('click', e => {
   const ch = e.target.closest('.ch-item');
   if(ch) setTimeout(startOnboarding, 700);
 }, true);
-
-init();

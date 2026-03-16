@@ -1,14 +1,14 @@
 :root {
-  /* ── Light: clean cream with vibrant sage accent ── */
+  /* ── Light: warm cream, premium indigo accent ── */
   --bg: #f5f2ec;
   --surface: #ffffff;
   --surface2: #eeeae2;
   --border: #dfd9cf;
   --text: #1a1510;
   --muted: #857d73;
-  --accent: #1a7a45;       /* vibrant forest green */
-  --accent-light: #dff0e8;
-  --accent-hover: #135c33;
+  --accent: #6366f1;       /* premium indigo-violet */
+  --accent-light: #eef2ff;
+  --accent-hover: #4f46e5;
   --yellow: #fdf3d6;        /* warm amber highlight */
   --yellow-border: #b5840a; /* rich amber underline */
   --yellow-active: #f8e5a8;
@@ -23,21 +23,21 @@
   --shadow-sm: 0 1px 4px rgba(26,21,16,.07), 0 1px 2px rgba(26,21,16,.04);
   --shadow-md: 0 4px 18px rgba(26,21,16,.09), 0 1px 4px rgba(26,21,16,.05);
   --shadow-lg: 0 8px 40px rgba(26,21,16,.13);
-  --shadow-card: 0 4px 28px rgba(26,122,69,.08), 0 1px 4px rgba(26,21,16,.06);
+  --shadow-card: 0 4px 28px rgba(99,102,241,.08), 0 1px 4px rgba(26,21,16,.06);
   --sw: 280px;
   --story-size: 17px;
 }
 [data-theme="dark"] {
-  /* ── Dark: deep green-tinged charcoal ── */
-  --bg: #111810;
-  --surface: #192018;
-  --surface2: #202a1e;
-  --border: #2c3a28;
-  --text: #e0eeda;
-  --muted: #7a9e82;
-  --accent: #36cf78;
-  --accent-light: #0c2818;
-  --accent-hover: #52e494;
+  /* ── Dark: deep indigo-black, easy on eyes ── */
+  --bg: #0f0e17;
+  --surface: #17162a;
+  --surface2: #1e1c38;
+  --border: #2e2c50;
+  --text: #e8e8ff;
+  --muted: #8888b8;
+  --accent: #818cf8;
+  --accent-light: #1e1b4b;
+  --accent-hover: #a5b4fc;
   --yellow: #271f08;
   --yellow-border: #a07818;
   --yellow-active: #332810;
@@ -49,7 +49,7 @@
   --red-light: #2e1210;
   --orange: #d4804a;
   --orange-light: #2a1810;
-  --shadow-card: 0 4px 28px rgba(0,0,0,.4), 0 1px 4px rgba(0,0,0,.28);
+  --shadow-card: 0 4px 28px rgba(0,0,0,.45), 0 1px 4px rgba(0,0,0,.3);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -66,15 +66,15 @@ body {
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #111810; --surface: #192018; --surface2: #202a1e; --border: #2c3a28;
-    --text: #e0eeda; --muted: #7a9e82;
-    --accent: #36cf78; --accent-light: #0c2818; --accent-hover: #52e494;
+    --bg: #0f0e17; --surface: #17162a; --surface2: #1e1c38; --border: #2e2c50;
+    --text: #e8e8ff; --muted: #8888b8;
+    --accent: #818cf8; --accent-light: #1e1b4b; --accent-hover: #a5b4fc;
     --yellow: #271f08; --yellow-border: #a07818; --yellow-active: #332810;
     --blue-bg: #141d24; --blue-border: #3a5a78;
     --green: #40c870; --green-light: #0a2214;
     --red: #e07060; --red-light: #2e1210;
     --orange: #d4804a; --orange-light: #2a1810;
-    --shadow-card: 0 4px 28px rgba(0,0,0,.4), 0 1px 4px rgba(0,0,0,.28);
+    --shadow-card: 0 4px 28px rgba(0,0,0,.45), 0 1px 4px rgba(0,0,0,.3);
   }
 }
 
@@ -291,14 +291,13 @@ header::after {
   display: inline;
   position: relative;
   background: none;
-  border-bottom: 2px solid var(--yellow-border);
   border-radius: 0;
   padding: 0;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, border-radius 0.15s;
+  transition: background 0.15s, border-radius 0.15s;
   color: inherit;
 }
-.vocab-chip:hover { background: var(--yellow); border-radius: 3px; border-bottom-color: var(--accent); }
+.vocab-chip:hover { background: var(--yellow); border-radius: 3px; }
 .vocab-chip:active { background: var(--yellow-active); }
 /*
   chip-inner: inline-block so position:relative works as anchor.
@@ -330,7 +329,10 @@ header::after {
 .vocab-chip .chip-text {
   display: block;
   line-height: 1.4;
+  border-bottom: 2px solid var(--yellow-border);
+  transition: border-color 0.15s;
 }
+.vocab-chip:hover .chip-text { border-bottom-color: var(--accent); }
 /* SRS dot */
 .vocab-chip::after {
   content: ''; display: inline-block;
@@ -339,7 +341,7 @@ header::after {
 }
 .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
 .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
-.vocab-chip.bookmarked { border-bottom-color: var(--accent); }
+.vocab-chip.bookmarked .chip-text { border-bottom-color: var(--accent); }
 .vocab-chip.bookmarked .meaning { color: var(--accent); }
 .vocab-chip.bookmarked:hover { background: var(--accent-light); }
 
@@ -470,8 +472,8 @@ header::after {
 .srs-g.again:hover { background: var(--red); color: white; box-shadow: 0 4px 12px rgba(220,38,38,.2); }
 .srs-g.hard { background: var(--orange-light); color: var(--orange); }
 .srs-g.hard:hover { background: var(--orange); color: white; box-shadow: 0 4px 12px rgba(234,88,12,.2); }
-.srs-g.good { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); color: white; font-size: 14px; font-weight: 600; box-shadow: 0 2px 8px rgba(26,122,69,.25); }
-.srs-g.good:hover { background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%); box-shadow: 0 4px 16px rgba(26,122,69,.35); }
+.srs-g.good { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); color: white; font-size: 14px; font-weight: 600; box-shadow: 0 2px 8px rgba(99,102,241,.25); }
+.srs-g.good:hover { background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%); box-shadow: 0 4px 16px rgba(99,102,241,.35); }
 .srs-g.good .gl { opacity: 0.75; }
 
 /* Session summary */
@@ -847,7 +849,7 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 #gate { flex-direction: row; }
 .gate-left {
   flex: 0 0 380px; display: flex; align-items: center; justify-content: center;
-  padding: 48px 40px; border-right: 1px solid #1e1e1b;
+  padding: 48px 40px; border-right: 1px solid #1e1c38;
 }
 .gate-right {
   flex: 1; display: flex; align-items: center; justify-content: center;
@@ -855,13 +857,13 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 }
 .gate-preview {
   max-width: 480px; width: 100%;
-  background: #1a1a17; border: 1px solid #2a2a26;
+  background: #16152a; border: 1px solid #2e2c50;
   border-radius: 16px; padding: 28px 32px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(129,140,248,.08) inset;
 }
 .gate-preview-label {
   font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: #3d8068; font-weight: 600; margin-bottom: 12px;
+  color: #818cf8; font-weight: 600; margin-bottom: 12px;
 }
 .gate-preview-title {
   font-family: 'Lora', serif; font-size: 18px; color: #e8e5dc;
@@ -873,7 +875,7 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 }
 /* Vocab highlight in preview */
 .gpv-word {
-  color: #e8e5dc; border-bottom: 1.5px solid #5a7a5a;
+  color: #e8e8ff; border-bottom: 1.5px solid #818cf8;
   cursor: default;
 }
 .gate-preview-tagline {
@@ -891,7 +893,7 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 /* ── ACCESS GATE ─────────────────────────────────────────────────────── */
 #gate {
   position: fixed; inset: 0; z-index: 9999;
-  background: #0e0e0c;
+  background: #0c0b18;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Inter', sans-serif;
 }
@@ -913,18 +915,18 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 }
 .gate-logo-icon { display: block; }
 .gate-logo-text {
-  font-family: 'Lora', serif;
-  font-size: 30px; font-weight: 500;
-  color: #f5f4f0;
-  letter-spacing: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 28px; font-weight: 700;
+  color: #f0f0ff;
+  letter-spacing: 4px;
   text-transform: uppercase;
   line-height: 1;
 }
 .gate-logo-sub {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 500; letter-spacing: 4px;
-  color: #4a5c55; text-transform: uppercase;
-  margin-top: 2px;
+  font-size: 10px; font-weight: 500; letter-spacing: 5px;
+  color: #818cf8; text-transform: uppercase;
+  margin-top: 4px;
 }
 .gate-logo-dot { display: none; }
 
@@ -940,18 +942,18 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 }
 .gate-input {
   width: 100%;
-  background: #1a1a17; border: 1px solid #2e2e29;
+  background: #1a1930; border: 1px solid #2e2c50;
   border-radius: 10px; padding: 14px 16px;
   font-family: 'Inter', sans-serif;
   font-size: 18px; font-weight: 500; letter-spacing: 4px;
-  color: #f5f4f0; text-align: center; text-transform: uppercase;
+  color: #f0f0ff; text-align: center; text-transform: uppercase;
   outline: none; transition: border-color 0.15s, box-shadow 0.15s;
-  caret-color: #2a6049;
+  caret-color: #818cf8;
 }
-.gate-input::placeholder { letter-spacing: 2px; font-size: 13px; color: #3a3a35; font-weight: 400; }
-.gate-input:focus { border-color: #2a6049; box-shadow: 0 0 0 3px #2a604922; }
+.gate-input::placeholder { letter-spacing: 2px; font-size: 13px; color: #3a3860; font-weight: 400; }
+.gate-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px #6366f122; }
 .gate-input.error { border-color: #dc2626; box-shadow: 0 0 0 3px #dc262622; animation: shake 0.35s ease; }
-.gate-input.success { border-color: #16a34a; box-shadow: 0 0 0 3px #16a34a22; }
+.gate-input.success { border-color: #6366f1; box-shadow: 0 0 0 3px #6366f133; }
 @keyframes shake {
   0%,100% { transform: translateX(0); }
   20%,60% { transform: translateX(-6px); }
@@ -960,15 +962,17 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 
 .gate-btn {
   width: 100%; padding: 14px;
-  background: #2a6049; border: none; border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none; border-radius: 10px;
   font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
   letter-spacing: 0.5px; color: white; cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
+  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
   margin-bottom: 0;
+  box-shadow: 0 4px 20px rgba(99,102,241,.35);
 }
-.gate-btn:hover { background: #1e4a37; }
+.gate-btn:hover { opacity: 0.9; box-shadow: 0 6px 24px rgba(99,102,241,.45); }
 .gate-btn:active { transform: scale(0.98); }
-.gate-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.gate-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .gate-error {
   font-size: 12px; color: #ef4444;
