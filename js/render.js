@@ -1,3 +1,14 @@
+// ── RECENT CHAPTERS ───────────────────────────────────────────────────────────
+const RECENT_KEY = 'se_recent_v1';
+function getRecentChapters() {
+  try { return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); } catch(e) { return []; }
+}
+function addToRecent(chId) {
+  const recent = getRecentChapters().filter(id => id !== chId);
+  recent.unshift(chId);
+  try { localStorage.setItem(RECENT_KEY, JSON.stringify(recent.slice(0, 5))); } catch(e) {}
+}
+
 // ── STORY BLURBS ──────────────────────────────────────────────────────────────
 // Blurbs are stored as story_blurb on the first chapter of each story in chapters.js.
 // This function reads from chapter data so any future story automatically gets its blurb.
@@ -112,6 +123,23 @@ function preloadChapterAssets(ch) {
 function renderSidebar() {
   const list=document.getElementById('chapterList'); list.innerHTML='';
 
+  // Recent chapters section
+  const recentIds = getRecentChapters();
+  const recentChapters = recentIds.map(id => chapters.find(c => c.id === id)).filter(Boolean);
+  if(recentChapters.length > 0) {
+    const sec = document.createElement('div');
+    sec.className = 'recent-section';
+    sec.innerHTML = `<div class="recent-label">最近阅读</div>`;
+    recentChapters.forEach(ch => {
+      const el = document.createElement('div');
+      el.className = 'recent-item' + (ch.id === activeId ? ' active' : '');
+      el.innerHTML = `<div class="recent-item-story">${esc(ch.story_title || '')}</div><div class="recent-item-title">${esc(ch.title)}</div>`;
+      el.onclick = () => { selectChapter(ch.id); closeSidebar(); };
+      sec.appendChild(el);
+    });
+    list.appendChild(sec);
+  }
+
   // Group chapters by story
   const storyMap = new Map();
   chapters.forEach((ch, i) => {
@@ -173,6 +201,9 @@ function selectChapter(id) {
   if(activeId && mainEl) {
     try { localStorage.setItem('se_scroll_'+activeId, mainEl.scrollTop); } catch(e) {}
   }
+  // Persist last visited chapter and recent list
+  try { localStorage.setItem(LAST_CHAPTER_KEY, id); } catch(e) {}
+  addToRecent(id);
   activeId=id; activeTab='read'; srsAllMode=false; globalVocabMode=false; srsFilterManual=false;
   const ch = chapters.find(c=>c.id===id);
   if (ch) openStoryId = ch.story_id || 'story1';
@@ -201,7 +232,7 @@ function renderMain() {
   }
 
   const ch=chapters.find(c=>c.id===activeId);
-  if(!ch) return;
+  if(!ch) { renderHome(); return; }
   const vocab=parseVocab(ch.story);
   const chIdx=chapters.indexOf(ch);
 
@@ -299,6 +330,50 @@ function renderMain() {
   }
 }
 
+// ── HOME SCREEN (Word of Day) ──────────────────────────────────────────────
+function renderHome() {
+  const main = document.getElementById('main');
+  const all = allVocabList();
+  if(!all.length) {
+    main.innerHTML = `<div class="empty"><div class="empty-icon">册</div><h3>开始阅读</h3><p>从左侧选择一个章节，边读边学，每个词都有注音与释义。</p></div>`;
+    return;
+  }
+  const dayIdx = Math.floor(Date.now() / 86400000) % all.length;
+  const wod = all[dayIdx];
+  const inSrs = srsLoad()[wod.word.toLowerCase()]?.introduced;
+  main.innerHTML = `
+    <div class="home-wrap">
+      <div class="home-today-label">今日单词</div>
+      <div class="home-card">
+        <div class="home-word-row">
+          <div class="home-word">${esc(wod.word)}</div>
+          <button class="home-play-btn" id="homePlay">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
+        </div>
+        <div class="home-syllable" id="homeSyllable">${esc(wod.word)}</div>
+        <div class="home-meaning">${esc(wod.meaning)}</div>
+        <div class="home-source">来自：${esc(wod.chTitle)}</div>
+      </div>
+      <button class="home-srs-btn${inSrs ? ' active' : ''}" id="homeAddSrs">${inSrs ? '✓ 已在复习' : '☆ 加入复习'}</button>
+      <div class="home-hint">从左侧选择一个章节，开始阅读故事吧</div>
+    </div>`;
+  document.getElementById('homePlay').onclick = () => playWord(wod.word, document.getElementById('homePlay'));
+  document.getElementById('homeAddSrs').onclick = () => {
+    const d = srsLoad();
+    if(!d[wod.word.toLowerCase()] || !d[wod.word.toLowerCase()].introduced) {
+      srsGrade(wod.word.toLowerCase(), 0);
+    }
+    const btn = document.getElementById('homeAddSrs');
+    if(btn) { btn.textContent = '✓ 已在复习'; btn.classList.add('active'); }
+    showProgressToast('☆ 已加入复习');
+  };
+  fetchWordData(wod.word).then(({ syllables, ipa }) => {
+    const el = document.getElementById('homeSyllable');
+    if(el) el.textContent = ipa ? `${syllables}　${ipa}` : syllables;
+  });
+}
+
 function renderChNav(body, ch, vocab) {
   const chIdx = chapters.indexOf(ch);
   const prevCh = chIdx > 0 ? chapters[chIdx-1] : null;
@@ -351,6 +426,22 @@ function renderTab(ch,vocab) {
           markChRead(ch.id);
           renderSidebar();
           mainEl.removeEventListener('scroll', onScroll);
+          // Inject completion banner
+          const banner = document.createElement('div');
+          banner.className = 'ch-complete-banner';
+          const chIdx2 = chapters.indexOf(ch);
+          const nextChBanner = chIdx2 < chapters.length - 1 ? chapters[chIdx2 + 1] : null;
+          banner.innerHTML = `
+            <span class="ccb-check">✓</span>
+            <span class="ccb-text">已读完本章！</span>
+            ${nextChBanner ? `<button class="ccb-next" id="ccbNext">下一章 →</button>` : `<span class="ccb-end">故事已全部读完 🎉</span>`}`;
+          storyBox.appendChild(banner);
+          if(nextChBanner) {
+            document.getElementById('ccbNext').onclick = () => {
+              try { localStorage.removeItem('se_scroll_'+nextChBanner.id); } catch(e) {}
+              selectChapter(nextChBanner.id);
+            };
+          }
         }
       };
       mainEl.addEventListener('scroll', onScroll);
@@ -909,6 +1000,175 @@ function renderGlobalVocab() {
       render(document.getElementById('gvSearch')?.value || '');
     });
   });
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────────
+let _searchWired = false;
+
+function openSearch() {
+  const modal = document.getElementById('searchModal');
+  const input = document.getElementById('searchInput');
+  modal.classList.add('open');
+  setTimeout(() => input && input.focus(), 80);
+  renderSearchResults('');
+  if(!_searchWired) {
+    _searchWired = true;
+    document.getElementById('searchClose').onclick = closeSearch;
+    document.getElementById('searchBackdrop').onclick = closeSearch;
+    input.addEventListener('input', () => renderSearchResults(input.value.trim()));
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeSearch();
+    });
+  }
+}
+
+function closeSearch() {
+  const modal = document.getElementById('searchModal');
+  const input = document.getElementById('searchInput');
+  if(modal) modal.classList.remove('open');
+  if(input) input.value = '';
+}
+
+function renderSearchResults(q) {
+  const results = document.getElementById('searchResults');
+  if(!results) return;
+  const all = allVocabList();
+  const filtered = q
+    ? all.filter(v => v.word.toLowerCase().includes(q.toLowerCase()) || v.meaning.includes(q))
+    : all.slice(0, 30);
+  if(!filtered.length) {
+    results.innerHTML = `<div style="text-align:center;color:var(--muted);padding:24px;font-size:14px">没有找到"${esc(q)}"</div>`;
+    return;
+  }
+  results.innerHTML = filtered.slice(0, 50).map(v => `
+    <div class="search-result-item" data-chid="${esc(v.chId)}">
+      <div class="sri-word">${esc(v.word)}</div>
+      <div class="sri-meaning">${esc(v.meaning)}</div>
+      <div class="sri-chapter">${esc(v.chTitle)}</div>
+    </div>`).join('');
+  results.querySelectorAll('.search-result-item').forEach(item => {
+    item.onclick = () => { closeSearch(); selectChapter(item.dataset.chid); };
+  });
+}
+
+// ── PROGRESS REPORT ───────────────────────────────────────────────────────────
+function showProgressReport() {
+  const modal = document.getElementById('progressModal');
+  const img = document.getElementById('progressImg');
+  const canvas = generateProgressCanvas();
+  const dataUrl = canvas.toDataURL('image/png');
+  img.src = dataUrl;
+  modal.classList.add('open');
+  document.getElementById('pmClose').onclick = () => modal.classList.remove('open');
+  document.getElementById('progressModalBackdrop').onclick = () => modal.classList.remove('open');
+  document.getElementById('pmDownload').onclick = () => {
+    const a = document.createElement('a');
+    a.href = dataUrl; a.download = 'sage-english-progress.png'; a.click();
+  };
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function generateProgressCanvas() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 600; canvas.height = 320;
+  const ctx = canvas.getContext('2d');
+
+  const known = getKnownCount();
+  const streak = calcStreak();
+  const chaptersRead = chapters.filter(c => isChRead(c.id)).length;
+  const inReview = allVocabList().filter(v => srsLoad()[v.word.toLowerCase()]?.introduced).length;
+  const total = allVocabList().length || 1;
+
+  const theme = document.documentElement.getAttribute('data-theme') || 'light';
+  const isDark = theme === 'dark';
+  const bg = isDark ? '#1a1a2e' : '#f8f7ff';
+  const cardBg = isDark ? '#242442' : '#ffffff';
+  const textPrimary = isDark ? '#f0f0ff' : '#1a1728';
+  const textMuted = isDark ? '#8888aa' : '#888899';
+  const accent = '#6366f1';
+
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, 600, 320);
+
+  // Accent gradient stripe
+  const grad = ctx.createLinearGradient(0, 0, 600, 0);
+  grad.addColorStop(0, '#6366f1'); grad.addColorStop(1, '#8b5cf6');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 600, 6);
+
+  // Card
+  ctx.fillStyle = cardBg;
+  roundRect(ctx, 24, 24, 552, 272, 16);
+  ctx.fill();
+
+  // Header
+  ctx.fillStyle = accent;
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('SAGE', 48, 66);
+  ctx.fillStyle = textMuted;
+  ctx.font = '14px sans-serif';
+  ctx.fillText('English · 我的学习报告', 94, 66);
+
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+  ctx.textAlign = 'right';
+  ctx.fillStyle = textMuted;
+  ctx.font = '12px sans-serif';
+  ctx.fillText(dateStr, 552, 66);
+  ctx.textAlign = 'left';
+
+  // Divider
+  ctx.fillStyle = isDark ? '#333355' : '#ebebf5';
+  ctx.fillRect(48, 80, 504, 1);
+
+  // Stats
+  const stats = [
+    { value: String(known),        label: '词已掌握', color: '#22c55e' },
+    { value: String(streak) + '天', label: '连续学习', color: accent   },
+    { value: String(chaptersRead),  label: '章节已读', color: '#f59e0b' },
+    { value: String(inReview),      label: '词复习中', color: '#3b82f6' },
+  ];
+  const statW = 504 / 4;
+  ctx.textAlign = 'center';
+  stats.forEach((s, i) => {
+    const x = 48 + i * statW + statW / 2;
+    ctx.fillStyle = s.color;
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText(s.value, x, 155);
+    ctx.fillStyle = textMuted;
+    ctx.font = '13px sans-serif';
+    ctx.fillText(s.label, x, 178);
+  });
+  ctx.textAlign = 'left';
+
+  // Progress bar
+  const pct = Math.min(1, known / total);
+  ctx.fillStyle = isDark ? '#333355' : '#ebebf5';
+  roundRect(ctx, 48, 204, 504, 12, 6); ctx.fill();
+  ctx.fillStyle = accent;
+  roundRect(ctx, 48, 204, Math.max(12, Math.round(504 * pct)), 12, 6); ctx.fill();
+
+  ctx.fillStyle = textMuted;
+  ctx.font = '12px sans-serif';
+  ctx.fillText(`${known} / ${total} 词  ·  ${Math.round(pct * 100)}% 掌握`, 48, 234);
+
+  // Footer
+  ctx.fillStyle = textMuted;
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('通过真实故事，学会真正的英语词汇  ·  Sage English', 300, 278);
+  ctx.textAlign = 'left';
+
+  return canvas;
 }
 
 init();

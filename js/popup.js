@@ -56,11 +56,22 @@ async function fetchWordData(word) {
     }
     if(!ipa && entry.phonetic) ipa = entry.phonetic;
     if(ipa && !ipa.startsWith('[') && !ipa.startsWith('/')) ipa = '/' + ipa + '/';
-    const result = { syllables: syllabify(word), ipa };
+    // Extract up to 2 definitions across parts of speech
+    const definitions = [];
+    if(entry.meanings) {
+      for(const m of entry.meanings) {
+        if(definitions.length >= 2) break;
+        const def = m.definitions && m.definitions[0];
+        if(def && def.definition) {
+          definitions.push({ pos: m.partOfSpeech ? m.partOfSpeech.slice(0, 4) : '', def: def.definition });
+        }
+      }
+    }
+    const result = { syllables: syllabify(word), ipa, definitions };
     ipaCache[key] = result;
     return result;
   } catch(e) {
-    const result = { syllables: syllabify(word), ipa: '' };
+    const result = { syllables: syllabify(word), ipa: '', definitions: [] };
     ipaCache[key] = result;
     return result;
   }
@@ -79,6 +90,8 @@ function showWordPopup(word, meaning, chId, chTitle, targetEl) {
     document.getElementById('wpMeaning').textContent = meaning;
     const wpIpa = document.getElementById('wpIpa');
     if(wpIpa) wpIpa.textContent = '';
+    const wpDefs = document.getElementById('wpDefs');
+    if(wpDefs) wpDefs.innerHTML = '';
     updatePopupBookmarkState();
     wordPopup.classList.add('show');
     positionPopup(targetEl);
@@ -89,21 +102,26 @@ function showWordPopup(word, meaning, chId, chTitle, targetEl) {
     if(popupWord === word) playWord(word, null);
   }, 280);
 
-  // Fetch real IPA and update in place — Chinese meaning stays, IPA goes in separate element
-  fetchWordData(word).then(({ syllables: syl, ipa }) => {
+  // Fetch real IPA + definitions and update in place
+  fetchWordData(word).then(({ syllables: syl, ipa, definitions = [] }) => {
     if(popupWord !== word) return; // user moved on
+    const defsHtml = definitions.length
+      ? definitions.map(d => `<div class="wp-def-item"><span class="wp-pos">${d.pos}</span>${d.def}</div>`).join('')
+      : '';
     if(isMobileDevice()) {
       const msWord = document.getElementById('msWord');
       const msIpa = document.getElementById('msIpa');
-      // msMeaning stays as Chinese meaning — don't replace it
+      const msDefs = document.getElementById('msDefs');
       if(msWord) msWord.textContent = syl;
       if(msIpa) msIpa.textContent = ipa || '';
+      if(msDefs) msDefs.innerHTML = defsHtml;
     } else {
       const wpWord = document.getElementById('wpWord');
       const wpIpa = document.getElementById('wpIpa');
-      // wpMeaning stays as Chinese meaning — don't replace it
+      const wpDefs = document.getElementById('wpDefs');
       if(wpWord) wpWord.textContent = syl;
       if(wpIpa) wpIpa.textContent = ipa || '';
+      if(wpDefs) wpDefs.innerHTML = defsHtml;
     }
   });
 }
@@ -116,6 +134,8 @@ function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipa
   document.getElementById('msMeaning').textContent = meaning; // always Chinese meaning
   const msIpa = document.getElementById('msIpa');
   if(msIpa) msIpa.textContent = '';
+  const msDefs = document.getElementById('msDefs');
+  if(msDefs) msDefs.innerHTML = '';
   updateMobileSheetState();
   sheet.classList.add('show');
   // Position near the tapped word, just like desktop popup
