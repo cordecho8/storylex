@@ -6,7 +6,7 @@ function getRecentChapters() {
 function addToRecent(chId) {
   const recent = getRecentChapters().filter(id => id !== chId);
   recent.unshift(chId);
-  try { localStorage.setItem(RECENT_KEY, JSON.stringify(recent.slice(0, 5))); } catch(e) {}
+  try { localStorage.setItem(RECENT_KEY, JSON.stringify(recent.slice(0, 3))); } catch(e) {}
 }
 
 // ── STORY BLURBS ──────────────────────────────────────────────────────────────
@@ -123,17 +123,23 @@ function preloadChapterAssets(ch) {
 function renderSidebar() {
   const list=document.getElementById('chapterList'); list.innerHTML='';
 
-  // Recent chapters section
-  const recentIds = getRecentChapters();
+  // Recent chapters section (last 3)
+  const recentIds = getRecentChapters().slice(0, 3);
   const recentChapters = recentIds.map(id => chapters.find(c => c.id === id)).filter(Boolean);
   if(recentChapters.length > 0) {
     const sec = document.createElement('div');
     sec.className = 'recent-section';
-    sec.innerHTML = `<div class="recent-label">最近阅读</div>`;
+    const labelEl = document.createElement('div');
+    labelEl.className = 'recent-label';
+    labelEl.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.6"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 最近阅读`;
+    sec.appendChild(labelEl);
     recentChapters.forEach(ch => {
       const el = document.createElement('div');
       el.className = 'recent-item' + (ch.id === activeId ? ' active' : '');
-      el.innerHTML = `<div class="recent-item-story">${esc(ch.story_title || '')}</div><div class="recent-item-title">${esc(ch.title)}</div>`;
+      const storyName = ch.story_title || '';
+      el.innerHTML = `
+        ${storyName ? `<div class="recent-item-story">${esc(storyName)}</div>` : ''}
+        <div class="recent-item-title">${esc(ch.title)}</div>`;
       el.onclick = () => { selectChapter(ch.id); closeSidebar(); };
       sec.appendChild(el);
     });
@@ -426,22 +432,6 @@ function renderTab(ch,vocab) {
           markChRead(ch.id);
           renderSidebar();
           mainEl.removeEventListener('scroll', onScroll);
-          // Inject completion banner
-          const banner = document.createElement('div');
-          banner.className = 'ch-complete-banner';
-          const chIdx2 = chapters.indexOf(ch);
-          const nextChBanner = chIdx2 < chapters.length - 1 ? chapters[chIdx2 + 1] : null;
-          banner.innerHTML = `
-            <span class="ccb-check">✓</span>
-            <span class="ccb-text">已读完本章！</span>
-            ${nextChBanner ? `<button class="ccb-next" id="ccbNext">下一章 →</button>` : `<span class="ccb-end">故事已全部读完 🎉</span>`}`;
-          storyBox.appendChild(banner);
-          if(nextChBanner) {
-            document.getElementById('ccbNext').onclick = () => {
-              try { localStorage.removeItem('se_scroll_'+nextChBanner.id); } catch(e) {}
-              selectChapter(nextChBanner.id);
-            };
-          }
         }
       };
       mainEl.addEventListener('scroll', onScroll);
