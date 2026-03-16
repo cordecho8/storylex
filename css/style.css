@@ -51,6 +51,32 @@
   --orange-light: #2a1810;
   --shadow-card: 0 4px 28px rgba(0,0,0,.45), 0 1px 4px rgba(0,0,0,.3);
 }
+[data-theme="purple"] {
+  /* ── Purple: soft lavender, rich violet accents ── */
+  --bg: #f2efff;
+  --surface: #fdfcff;
+  --surface2: #e9e4ff;
+  --border: #d2c9f5;
+  --text: #1b1140;
+  --muted: #7b6ea8;
+  --accent: #7c3aed;
+  --accent-light: #f0ebff;
+  --accent-hover: #6d28d9;
+  --yellow: #fdf4ff;
+  --yellow-border: #a855f7;
+  --yellow-active: #f3e8ff;
+  --blue-bg: #eef0ff;
+  --blue-border: #8b91d4;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --orange: #c2410c;
+  --orange-light: #ffedd5;
+  --shadow-sm: 0 1px 4px rgba(124,58,237,.08), 0 1px 2px rgba(30,18,69,.04);
+  --shadow-md: 0 4px 18px rgba(124,58,237,.10), 0 1px 4px rgba(30,18,69,.05);
+  --shadow-card: 0 4px 28px rgba(124,58,237,.12), 0 1px 4px rgba(30,18,69,.06);
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* Lock page-level scroll bounce on iOS — only inner containers should bounce */
@@ -65,7 +91,8 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  /* Only apply auto-dark when no explicit theme has been chosen */
+  :root:not([data-theme="light"]):not([data-theme="purple"]):not([data-theme="dark"]) {
     --bg: #0f0e17; --surface: #17162a; --surface2: #1e1c38; --border: #2e2c50;
     --text: #e8e8ff; --muted: #8888b8;
     --accent: #818cf8; --accent-light: #1e1b4b; --accent-hover: #a5b4fc;
@@ -78,9 +105,18 @@ body {
   }
 }
 
-/* ── DARK MODE TOGGLE ────────────────────────────────────────────────── */
-.dark-toggle { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--muted); transition: all 0.15s; }
-.dark-toggle:hover { background: var(--surface2); color: var(--text); }
+/* ── THEME TOGGLE ────────────────────────────────────────────────────── */
+.dark-toggle {
+  height: 32px; min-width: 32px; padding: 0 10px;
+  border-radius: 8px; border: 1px solid var(--border);
+  background: none; cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
+  color: var(--muted); transition: all 0.15s; white-space: nowrap;
+}
+.dark-toggle:hover { background: var(--surface2); color: var(--text); border-color: var(--accent); }
+.dark-toggle .theme-icon { font-size: 14px; line-height: 1; }
+.dark-toggle .theme-label { font-size: 11px; letter-spacing: 0.2px; }
 
 /* ── STREAK COUNTER ──────────────────────────────────────────────────── */
 .streak-wrap { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #b45309; }
