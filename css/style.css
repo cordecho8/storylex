@@ -304,9 +304,7 @@ header::after {
   It takes up ONLY the space of the English word — no extra height.
 */
 .vocab-chip .chip-inner {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: inline-block;
   vertical-align: 15px;
   line-height: 1;
 }
@@ -327,7 +325,7 @@ header::after {
   margin-bottom: 2px;
 }
 .vocab-chip .chip-text {
-  display: block;
+  display: inline;
   line-height: 1.4;
   border-bottom: 2px solid var(--yellow-border);
   transition: border-color 0.15s;
@@ -556,8 +554,9 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
   .tabs::-webkit-scrollbar { display: none; }
   .tab { font-size: 12px; padding: 10px 14px; flex-shrink: 0; }
 
-  /* Story text */
-  .story-text { font-size: 15px; line-height: 2.5; padding: 0 4px; }
+  /* Story text — use CSS var so font-size buttons work on iOS */
+  :root { --story-size: 15px; }
+  .story-text { font-size: var(--story-size); line-height: 2.5; padding: 0 4px; }
   .story-box { padding: 18px 14px 24px; }
 
   /* Vocab table: hide due-date column (col 3) on small screens, keep bookmark/review */
