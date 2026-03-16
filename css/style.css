@@ -299,36 +299,21 @@ header::after {
 }
 .vocab-chip:hover { background: var(--yellow); border-radius: 3px; }
 .vocab-chip:active { background: var(--yellow-active); }
-/*
-  chip-inner: inline-block so position:relative works as anchor.
-  It takes up ONLY the space of the English word — no extra height.
-*/
-.vocab-chip .chip-inner {
-  display: inline-block;
-  vertical-align: 15px;
-  line-height: 1;
+.vocab-chip .chip-text {
+  border-bottom: 2px solid var(--yellow-border);
+  transition: border-color 0.15s;
 }
-/*
-  Chinese annotation in normal flow — sits directly above the English word.
-  Never overlaps adjacent lines. margin-bottom controls the gap.
-*/
+/* Chinese annotation sits inline to the right of the English word */
 .vocab-chip .meaning {
-  display: block;
   font-family: 'Inter', sans-serif;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
   color: var(--yellow-border);
   white-space: nowrap;
   pointer-events: none;
-  letter-spacing: 0.1px;
-  margin-bottom: 2px;
-}
-.vocab-chip .chip-text {
-  display: inline;
-  line-height: 1.4;
-  border-bottom: 2px solid var(--yellow-border);
-  transition: border-color 0.15s;
+  margin-left: 3px;
+  vertical-align: 0.15em;
 }
 .vocab-chip:hover .chip-text { border-bottom-color: var(--accent); }
 /* SRS dot */

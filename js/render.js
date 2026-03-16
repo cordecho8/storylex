@@ -2,7 +2,7 @@
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function buildReadHTML(story) {
-  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-inner"><span class="meaning">${esc(m.trim())}</span><span class="chip-text">${esc(w.trim())}</span></span></span>`)}</p>`).join('');
+  return story.split('\n').filter(l=>l.trim()).map(p=>`<p>${p.replace(/\{\{([^|]+)\|([^}]+)\}\}/g,(_,w,m)=>`<span class="vocab-chip" data-w="${esc(w.trim())}" data-m="${esc(m.trim())}"><span class="chip-text">${esc(w.trim())}</span><span class="meaning">${esc(m.trim())}</span></span>`)}</p>`).join('');
 }
 
 function buildRecallHTML(story) {
