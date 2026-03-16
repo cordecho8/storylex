@@ -816,3 +816,5 @@ function renderGlobalVocab() {
     });
   });
 }
+
+init();
