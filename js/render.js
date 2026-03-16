@@ -35,11 +35,14 @@ function preloadChapterAssets(ch) {
   const vocab = parseVocab(ch.story);
   // Preload IPA data for all words in background
   vocab.forEach(v => fetchWordData(v.word));
-  // Preload first 15 audio files
-  vocab.slice(0, 15).forEach(v => {
-    const a = new Audio(af(v.word));
-    a.preload = 'auto';
-    a.load();
+  // Preload first 20 audio files into the shared cache so playback is instant
+  vocab.slice(0, 20).forEach(v => {
+    const key = af(v.word);
+    if(!_audioCache[key]) {
+      const a = new Audio(key);
+      a.preload = 'auto';
+      _audioCache[key] = a;
+    }
   });
 }
 

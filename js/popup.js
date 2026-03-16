@@ -67,6 +67,7 @@ async function fetchWordData(word) {
 }
 
 function showWordPopup(word, meaning, chId, chTitle, targetEl) {
+  closeSidebar(); // dismiss sidebar overlay before showing word popup
   popupWord = word; popupMeaning = meaning; popupChId = chId; popupChTitle = chTitle;
 
   // Show popup immediately with syllables + meaning as placeholder
