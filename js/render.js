@@ -1,8 +1,10 @@
 // ── STORY BLURBS ──────────────────────────────────────────────────────────────
-const STORY_BLURBS = {
-  'story1': '苏暖为救父亲而嫁入豪门，却没想到与冷酷总裁的合约婚姻，竟点燃了真情……',
-  'story2': '傅家少爷独宠一人，外界都说这段婚姻是交易——只有她知道，他的心意早已变了。'
-};
+// Blurbs are stored as story_blurb on the first chapter of each story in chapters.js.
+// This function reads from chapter data so any future story automatically gets its blurb.
+function getStoryBlurb(storyChapters) {
+  const first = storyChapters[0] && storyChapters[0].ch;
+  return (first && first.story_blurb) || '';
+}
 
 // ── WORD MILESTONE ─────────────────────────────────────────────────────────────
 const MILESTONES = [10, 25, 50, 100, 200, 300, 500];
@@ -130,7 +132,7 @@ function renderSidebar() {
 
     const header = document.createElement('div');
     header.className = 'story-header';
-    const blurb = STORY_BLURBS[sid] || '';
+    const blurb = getStoryBlurb(story.chapters);
     header.innerHTML = `
       <div class="story-header-left">
         <div class="story-name">${esc(story.title)}</div>
