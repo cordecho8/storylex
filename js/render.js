@@ -602,14 +602,20 @@ function renderBookmarksTab(body) {
 let sessionGrades = { good: 0, hard: 0, again: 0 };
 
 function buildSrsSession(vocabList, wrap) {
-  const introduced=vocabList.filter(v=>{ const c=srsLoad()[v.word.toLowerCase()]; return c&&c.introduced; });
-  // "due" filter = all words added to review (introduced); "all" = every word in chapter
-  const queue=srsFilter==='due'?introduced:vocabList;
+  const srsData = srsLoad();
+  // SM-2 correct: show cards that are due NOW, or fresh (reps===0 = never successfully reviewed yet).
+  // Words graded Hard/Good have reps>=1 and a future due date — they are excluded until their due date.
+  const due = vocabList.filter(v => {
+    const c = srsData[v.word.toLowerCase()];
+    if(!c || !c.introduced) return false;
+    return c.due <= Date.now() || c.reps === 0;
+  });
+  const queue = srsFilter==='due' ? due : vocabList;
 
   wrap.innerHTML=`
     <div class="srs-filter">
       <span class="srs-fl">显示:</span>
-      <button class="srs-fb${srsFilter==='due'?' active':''}" id="fbDue">☆ 复习中</button>
+      <button class="srs-fb${srsFilter==='due'?' active':''}" id="fbDue">☆ 待复习 (${due.length})</button>
       <button class="srs-fb${srsFilter==='all'?' active':''}" id="fbAll">全部词汇</button>
     </div>
     <div id="cardArea"></div>`;
@@ -1160,5 +1166,9 @@ function generateProgressCanvas() {
 
   return canvas;
 }
+
+// Wire header buttons here — openSearch and showProgressReport are defined in this file
+document.getElementById('headerSearchBtn').onclick = openSearch;
+document.getElementById('progressReportBtn').onclick = showProgressReport;
 
 init();

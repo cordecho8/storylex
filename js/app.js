@@ -101,6 +101,8 @@ function bootGate() {
 bootGate();
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+const LAST_CHAPTER_KEY = 'se_last_chapter_v1';
+
 function init() {
   if (window.CHAPTERS) chapters=[...window.CHAPTERS];
   if (chapters.length) openStoryId = chapters[0].story_id || 'story1';
@@ -108,7 +110,17 @@ function init() {
   const savedSize = parseInt(localStorage.getItem('se_fontsize')||'17');
   document.documentElement.style.setProperty('--story-size', savedSize+'px');
   renderSidebar();
-  if (chapters.length) selectChapter(chapters[0].id);
+
+  // Resume last read chapter, or show home screen for new users
+  const lastChId = localStorage.getItem(LAST_CHAPTER_KEY);
+  const resumeCh = lastChId && chapters.find(c => c.id === lastChId);
+  if (resumeCh) {
+    openStoryId = resumeCh.story_id || 'story1';
+    selectChapter(resumeCh.id);
+  } else {
+    renderMain(); // shows home screen (word of day) when activeId is null
+  }
+
   checkAudio();
   document.getElementById('menuBtn').onclick=toggleSidebar;
   document.getElementById('overlay').onclick=closeSidebar;
@@ -127,6 +139,7 @@ function init() {
     renderGlobalVocab();
     closeSidebar();
   };
+
 }
 
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }

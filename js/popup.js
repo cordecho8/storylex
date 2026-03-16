@@ -33,17 +33,13 @@ function syllabify(word) {
   return result.length > 1 ? result.join('·') : word;
 }
 
-// Fetch from preloaded cache first, then live API, then fallback syllabifier
+// Fetch from live API first (for IPA + definitions), with in-session memory cache.
+// Preload cache (ipa-cache.json) has no definitions so we skip it and use it only as fallback.
 async function fetchWordData(word) {
   const key = word.toLowerCase();
-  // 1. In-memory session cache (already fetched this session)
+  // 1. In-memory session cache (already fetched this session — includes definitions)
   if(ipaCache[key]) return ipaCache[key];
-  // 2. Preloaded cache from data/ipa-cache.json (built by preload-ipa.js)
-  if(window.IPA_CACHE && window.IPA_CACHE[key]) {
-    ipaCache[key] = window.IPA_CACHE[key];
-    return ipaCache[key];
-  }
-  // 3. Live API fetch (fallback for words not in preloaded cache)
+  // 2. Live API fetch (preferred — returns IPA + definitions)
   try {
     const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(key)}`);
     if(!res.ok) throw new Error('not found');
@@ -56,14 +52,21 @@ async function fetchWordData(word) {
     }
     if(!ipa && entry.phonetic) ipa = entry.phonetic;
     if(ipa && !ipa.startsWith('[') && !ipa.startsWith('/')) ipa = '/' + ipa + '/';
-    // Extract up to 2 definitions across parts of speech
+    // Extract up to 3 definitions across different parts of speech
+    // Filter out obscure/archaic meanings (definitions containing "archaic", "dated", etc.)
     const definitions = [];
+    const seenPos = new Set();
     if(entry.meanings) {
       for(const m of entry.meanings) {
-        if(definitions.length >= 2) break;
-        const def = m.definitions && m.definitions[0];
-        if(def && def.definition) {
+        if(definitions.length >= 3) break;
+        if(seenPos.has(m.partOfSpeech)) continue; // one per part of speech
+        for(const def of (m.definitions || [])) {
+          if(!def.definition) continue;
+          const d = def.definition.toLowerCase();
+          if(d.includes('archaic') || d.includes('dated') || d.includes('informal')) continue;
           definitions.push({ pos: m.partOfSpeech ? m.partOfSpeech.slice(0, 4) : '', def: def.definition });
+          seenPos.add(m.partOfSpeech);
+          break;
         }
       }
     }
@@ -71,6 +74,13 @@ async function fetchWordData(word) {
     ipaCache[key] = result;
     return result;
   } catch(e) {
+    // Fall back to preload cache (IPA only, no definitions) if API is unavailable
+    if(window.IPA_CACHE && window.IPA_CACHE[key]) {
+      const pre = window.IPA_CACHE[key];
+      const result = { syllables: pre.syllables || syllabify(word), ipa: pre.ipa || '', definitions: [] };
+      ipaCache[key] = result;
+      return result;
+    }
     const result = { syllables: syllabify(word), ipa: '', definitions: [] };
     ipaCache[key] = result;
     return result;
@@ -105,8 +115,13 @@ function showWordPopup(word, meaning, chId, chTitle, targetEl) {
   // Fetch real IPA + definitions and update in place
   fetchWordData(word).then(({ syllables: syl, ipa, definitions = [] }) => {
     if(popupWord !== word) return; // user moved on
-    const defsHtml = definitions.length
+    // Only show definitions when there are 2+ (single meaning not worth showing separately)
+    const showDefs = definitions.length >= 2;
+    const wpDefsHtml = showDefs
       ? definitions.map(d => `<div class="wp-def-item"><span class="wp-pos">${d.pos}</span>${d.def}</div>`).join('')
+      : '';
+    const msDefsHtml = showDefs
+      ? definitions.map(d => `<div class="ms-def-item"><span class="wp-pos">${d.pos}</span>${d.def}</div>`).join('')
       : '';
     if(isMobileDevice()) {
       const msWord = document.getElementById('msWord');
@@ -114,14 +129,14 @@ function showWordPopup(word, meaning, chId, chTitle, targetEl) {
       const msDefs = document.getElementById('msDefs');
       if(msWord) msWord.textContent = syl;
       if(msIpa) msIpa.textContent = ipa || '';
-      if(msDefs) msDefs.innerHTML = defsHtml;
+      if(msDefs) msDefs.innerHTML = msDefsHtml;
     } else {
       const wpWord = document.getElementById('wpWord');
       const wpIpa = document.getElementById('wpIpa');
       const wpDefs = document.getElementById('wpDefs');
       if(wpWord) wpWord.textContent = syl;
       if(wpIpa) wpIpa.textContent = ipa || '';
-      if(wpDefs) wpDefs.innerHTML = defsHtml;
+      if(wpDefs) wpDefs.innerHTML = wpDefsHtml;
     }
   });
 }
