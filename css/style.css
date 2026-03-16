@@ -360,6 +360,12 @@ header::after {
 }
 .vocab-chip.srs-learning::after { background: #6899c4; opacity: 0.8; }
 .vocab-chip.srs-known::after    { background: var(--green); opacity: 0.8; }
+/* Known words: green underline + muted annotation = "already got this" feel */
+.vocab-chip.srs-known .chip-text { border-bottom-color: var(--green); opacity: 0.7; }
+.vocab-chip.srs-known .meaning { color: var(--green); opacity: 0.6; }
+/* Learning words: blue underline to signal "in progress" */
+.vocab-chip.srs-learning .chip-text { border-bottom-color: #6899c4; }
+.vocab-chip.srs-learning .meaning { color: #6899c4; }
 .vocab-chip.bookmarked .chip-text { border-bottom-color: var(--accent); }
 .vocab-chip.bookmarked .meaning { color: var(--accent); }
 .vocab-chip.bookmarked:hover { background: var(--accent-light); }
@@ -894,16 +900,21 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
   color: #8a8880; text-align: justify; hyphens: auto;
 }
 /* Vocab highlight in preview */
+@keyframes chipGlow { 0%,100% { border-bottom-color: #818cf8; color: #e8e8ff; } 50% { border-bottom-color: #a5b4fc; color: #fff; } }
 .gpv-word {
   color: #e8e8ff; border-bottom: 1.5px solid #818cf8;
-  cursor: default;
+  cursor: default; animation: chipGlow 2.4s ease-in-out infinite;
 }
+.gpv-word:nth-child(2) { animation-delay: 0.5s; }
+.gpv-word:nth-child(3) { animation-delay: 1s; }
+.gpv-word:nth-child(4) { animation-delay: 1.5s; }
+.gpv-word:nth-child(5) { animation-delay: 2s; }
 .gate-preview-tagline {
   margin-top: 18px; padding-top: 16px; border-top: 1px solid #2a2a26;
-  font-size: 12px; color: #4a4a45; line-height: 1.6;
+  font-size: 12px; color: #6a6a70; line-height: 1.6;
   display: flex; gap: 16px; flex-wrap: wrap;
 }
-.gate-preview-tagline span { display: flex; align-items: center; gap: 5px; }
+.gate-preview-tagline span { display: flex; align-items: center; gap: 5px; color: #8888b0; }
 @media (max-width: 800px) {
   #gate { flex-direction: column; }
   .gate-left { flex: none; border-right: none; border-bottom: 1px solid #1e1e1b; padding: 32px 28px; width: 100%; }
@@ -1004,6 +1015,13 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
   font-size: 11px; color: #38382f; text-align: center; margin-top: 8px;
   line-height: 1.7;
 }
+.gate-tagline {
+  font-size: 13px; color: #5a5878; text-align: center;
+  margin-bottom: 32px; margin-top: -28px; line-height: 1.5;
+  letter-spacing: 0.2px;
+}
+.gate-contact { color: #818cf8; text-decoration: none; transition: opacity 0.15s; }
+.gate-contact:hover { opacity: 0.75; text-decoration: underline; }
 
 /* ── DATA MANAGEMENT BUTTONS ─────────────────────────────────────────── */
 .data-mgmt { display: flex; gap: 6px; padding: 0 12px 8px; }
@@ -1013,3 +1031,94 @@ button, [role="button"], .ch-item, .vocab-chip, .vocab-blank, .story-header, .ta
 /* ── KEYBOARD HINT ───────────────────────────────────────────────────── */
 .srs-kbd-hint { text-align: center; font-size: 11px; color: var(--muted); margin-top: 10px; font-family: 'Inter', sans-serif; }
 .srs-kbd-hint kbd { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; font-size: 10px; }
+
+/* ── STORY BLURB IN SIDEBAR ──────────────────────────────────────────── */
+.story-blurb {
+  font-size: 11px; color: var(--muted); line-height: 1.55;
+  margin-top: 5px; font-style: italic; opacity: 0.85;
+  white-space: normal; overflow: visible;
+}
+.story-group.open .story-blurb { color: var(--accent); opacity: 0.7; }
+
+/* ── CHAPTER ROADMAP ─────────────────────────────────────────────────── */
+.ch-roadmap {
+  display: flex; align-items: center; gap: 4px;
+  margin-top: 14px; flex-wrap: nowrap; overflow: hidden;
+}
+.crm-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border); border: 1px solid var(--border);
+  flex-shrink: 0; cursor: pointer; transition: all 0.2s;
+}
+.crm-dot:hover { transform: scale(1.3); }
+.crm-dot.read { background: var(--green); border-color: var(--green); opacity: 0.75; }
+.crm-dot.active {
+  width: 10px; height: 10px;
+  background: var(--accent); border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+  cursor: default;
+}
+.crm-label {
+  font-size: 10px; color: var(--muted); margin-left: 8px;
+  flex-shrink: 0; font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+}
+
+/* ── POPUP IPA LINE ──────────────────────────────────────────────────── */
+.wp-ipa {
+  font-size: 11px; color: var(--muted); font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px; margin-bottom: 2px; min-height: 0;
+  font-style: italic; opacity: 0.75;
+}
+.ms-ipa {
+  font-size: 11px; color: var(--muted); padding: 0 14px 6px;
+  font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
+  font-style: italic; opacity: 0.75;
+}
+/* Always show Chinese meaning as accent color */
+.wp-meaning { color: var(--accent) !important; font-weight: 500 !important; font-size: 13px !important; }
+.ms-meaning { color: var(--accent) !important; font-weight: 600 !important; font-size: 13px !important; padding-bottom: 4px !important; }
+
+/* ── WORD MILESTONE MODAL ────────────────────────────────────────────── */
+@keyframes milestoneIn { from { opacity:0; transform: translate(-50%,-50%) scale(0.75); } to { opacity:1; transform: translate(-50%,-50%) scale(1); } }
+.milestone-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1200;
+}
+.milestone-modal {
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1201; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px 32px; text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,.28); max-width: 320px; width: 88%;
+  animation: milestoneIn 0.4s cubic-bezier(.16,1,.3,1) both;
+}
+.milestone-icon { font-size: 52px; display: block; margin-bottom: 10px; }
+.milestone-count {
+  font-family: 'Lora', serif; font-size: 48px; font-weight: 600;
+  color: var(--accent); line-height: 1; margin-bottom: 4px;
+}
+.milestone-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+.milestone-body { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 22px; }
+.milestone-dismiss {
+  padding: 11px 32px; background: var(--accent); color: white;
+  border: none; border-radius: 10px; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+}
+.milestone-dismiss:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+/* ── READING EXPERIENCE IMPROVEMENTS ────────────────────────────────── */
+/* Warm parchment feel on light theme */
+[data-theme="light"] .story-box {
+  background: linear-gradient(to bottom, #ffffff 0%, #fdfcf7 100%);
+}
+/* Decorative opening ornament before story text */
+.story-text::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, var(--border) 40%, var(--border) 60%, transparent 95%);
+  margin-bottom: 1.8em;
+  opacity: 0.6;
+}
+/* Slightly softer muted tone for story body on light theme for eye comfort */
+[data-theme="light"] .story-text { color: #2a2318; }

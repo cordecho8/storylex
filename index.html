@@ -32,12 +32,14 @@
       <div class="gate-logo-text">SAGE</div>
       <div class="gate-logo-sub">ENGLISH</div>
     </div>
-    <div class="gate-label">Enter your access code</div>
+    <div class="gate-tagline">通过真实故事，学会真正的英语词汇</div>
+    <div class="gate-label">输入你的专属邀请码</div>
     <div class="gate-input-wrap">
       <input id="gateInput" class="gate-input" type="text" maxlength="8" placeholder="XXXXXXXX" autocomplete="off" autocorrect="off" spellcheck="false"/>
     </div>
     <div class="gate-error" id="gateError"></div>
-    <button class="gate-btn" id="gateBtn">Unlock Access →</button>
+    <button class="gate-btn" id="gateBtn">进入学习 →</button>
+    <div class="gate-footer">没有邀请码？<a class="gate-contact" href="mailto:hello@sageenglish.com">联系我们</a></div>
   </div>
   </div>
   <!-- RIGHT: Product preview -->
@@ -47,9 +49,9 @@
       <div class="gate-preview-title">The Lighthouse Keeper's Secret</div>
       <div class="gate-preview-text">Every evening, old Thomas would <span class="gpv-word">ascend</span> the spiral staircase to light the lamp. The <span class="gpv-word">solitude</span> never bothered him — he had learned to find <span class="gpv-word">solace</span> in the rhythm of the waves. But tonight, something was different. A ship had appeared on the <span class="gpv-word">horizon</span>, moving with strange <span class="gpv-word">urgency</span> toward the rocks.</div>
       <div class="gate-preview-tagline">
-        <span>📖 Read real stories</span>
-        <span>✦ Learn vocabulary in context</span>
-        <span>🔁 Spaced repetition review</span>
+        <span>📖 阅读真实故事</span>
+        <span>✦ 词汇在语境中学习</span>
+        <span>🔁 间隔重复，永久记忆</span>
       </div>
     </div>
   </div>
@@ -131,6 +133,7 @@
       </button>
     </div>
     <div class="ms-meaning" id="msMeaning"></div>
+    <div class="ms-ipa" id="msIpa"></div>
     <div class="ms-actions">
       <button class="ms-action" id="msBookmark">
         <span class="ms-action-icon" id="msBkIcon">
@@ -151,6 +154,7 @@
   <div class="wp-header">
     <div class="wp-word-col">
       <div class="wp-word" id="wpWord"></div>
+      <div class="wp-ipa" id="wpIpa"></div>
       <div class="wp-meaning" id="wpMeaning"></div>
     </div>
     <button class="wp-play-btn" id="wpPlayBtn">

@@ -77,25 +77,33 @@ function showWordPopup(word, meaning, chId, chTitle, targetEl) {
   } else {
     document.getElementById('wpWord').textContent = syllables;
     document.getElementById('wpMeaning').textContent = meaning;
+    const wpIpa = document.getElementById('wpIpa');
+    if(wpIpa) wpIpa.textContent = '';
     updatePopupBookmarkState();
     wordPopup.classList.add('show');
     positionPopup(targetEl);
   }
 
-  // Fetch real IPA and update in place
+  // Auto-play audio after popup appears (user tapped = interaction, so autoplay is allowed)
+  setTimeout(() => {
+    if(popupWord === word) playWord(word, null);
+  }, 280);
+
+  // Fetch real IPA and update in place — Chinese meaning stays, IPA goes in separate element
   fetchWordData(word).then(({ syllables: syl, ipa }) => {
     if(popupWord !== word) return; // user moved on
-    const ipaText = ipa || meaning;
     if(isMobileDevice()) {
       const msWord = document.getElementById('msWord');
-      const msMeaning = document.getElementById('msMeaning');
+      const msIpa = document.getElementById('msIpa');
+      // msMeaning stays as Chinese meaning — don't replace it
       if(msWord) msWord.textContent = syl;
-      if(msMeaning) msMeaning.textContent = ipaText;
+      if(msIpa) msIpa.textContent = ipa || '';
     } else {
       const wpWord = document.getElementById('wpWord');
-      const wpMeaning = document.getElementById('wpMeaning');
+      const wpIpa = document.getElementById('wpIpa');
+      // wpMeaning stays as Chinese meaning — don't replace it
       if(wpWord) wpWord.textContent = syl;
-      if(wpMeaning) wpMeaning.textContent = ipaText;
+      if(wpIpa) wpIpa.textContent = ipa || '';
     }
   });
 }
@@ -105,7 +113,9 @@ function _openMobileSheet(word, meaning, chId, chTitle, targetEl, syllables, ipa
   const sheet = document.getElementById('mobileSheet');
   const panel = document.getElementById('mobileSheetPanel');
   document.getElementById('msWord').textContent = syllables || word;
-  document.getElementById('msMeaning').textContent = ipaOrMeaning || meaning;
+  document.getElementById('msMeaning').textContent = meaning; // always Chinese meaning
+  const msIpa = document.getElementById('msIpa');
+  if(msIpa) msIpa.textContent = '';
   updateMobileSheetState();
   sheet.classList.add('show');
   // Position near the tapped word, just like desktop popup

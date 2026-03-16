@@ -1,3 +1,63 @@
+// ── STORY BLURBS ──────────────────────────────────────────────────────────────
+const STORY_BLURBS = {
+  'story1': '苏暖为救父亲而嫁入豪门，却没想到与冷酷总裁的合约婚姻，竟点燃了真情……',
+  'story2': '傅家少爷独宠一人，外界都说这段婚姻是交易——只有她知道，他的心意早已变了。'
+};
+
+// ── WORD MILESTONE ─────────────────────────────────────────────────────────────
+const MILESTONES = [10, 25, 50, 100, 200, 300, 500];
+const MILESTONE_KEY = 'se_milestone_v1';
+
+function getKnownCount() {
+  const allWords = allVocabList();
+  return allWords.filter(v => wordState(v.word.toLowerCase()) === 'known').length;
+}
+
+function checkWordMilestone() {
+  const known = getKnownCount();
+  if(known === 0) return;
+  let shown = [];
+  try { shown = JSON.parse(localStorage.getItem(MILESTONE_KEY) || '[]'); } catch(e) {}
+  for(const m of MILESTONES) {
+    if(known >= m && !shown.includes(m)) {
+      shown.push(m);
+      try { localStorage.setItem(MILESTONE_KEY, JSON.stringify(shown)); } catch(e) {}
+      showMilestoneModal(m, known);
+      break;
+    }
+  }
+}
+
+function showMilestoneModal(milestone, count) {
+  const messages = {
+    10:  '已经掌握了10个词！每天坚持，一个月后你将拥有300个专属词汇。',
+    25:  '25个词汇已进入你的长期记忆。这还只是开始！',
+    50:  '50个词！你已经比大多数人学得更扎实了。',
+    100: '100个词！很多人一辈子都没能做到这一点。你做到了。',
+    200: '200个词汇。你的英语阅读能力正在发生真实的改变。',
+    300: '300词。你正在成为一个真正的英文读者。',
+    500: '500个词汇永久刻入你的记忆。这是一项了不起的成就。'
+  };
+  const body = messages[milestone] || `你已掌握了 ${count} 个英语单词！继续阅读，词汇量还会继续增长。`;
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'milestone-backdrop';
+  const modal = document.createElement('div');
+  modal.className = 'milestone-modal';
+  modal.innerHTML = `
+    <span class="milestone-icon">🎉</span>
+    <div class="milestone-count">${milestone}</div>
+    <div class="milestone-title">个词已掌握</div>
+    <div class="milestone-body">${body}</div>
+    <button class="milestone-dismiss" id="milestoneDismiss">继续学习</button>`;
+  document.body.appendChild(backdrop);
+  document.body.appendChild(modal);
+  const dismiss = () => { backdrop.remove(); modal.remove(); };
+  document.getElementById('milestoneDismiss').onclick = dismiss;
+  backdrop.onclick = dismiss;
+  setTimeout(playSessionCompleteChime, 100);
+}
+
 // ── HTML BUILDERS ─────────────────────────────────────────────────────────────
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -70,10 +130,12 @@ function renderSidebar() {
 
     const header = document.createElement('div');
     header.className = 'story-header';
+    const blurb = STORY_BLURBS[sid] || '';
     header.innerHTML = `
       <div class="story-header-left">
         <div class="story-name">${esc(story.title)}</div>
         <div class="story-meta">${story.chapters.length} 章 · ${totalWords} 词${dueWords > 0 ? ` · <span style="color:var(--orange)">${dueWords} 待复习</span>` : ''}</div>
+        ${blurb ? `<div class="story-blurb">${esc(blurb)}</div>` : ''}
       </div>
       <span class="story-chevron">▼</span>`;
     header.onclick = () => {
@@ -149,6 +211,18 @@ function renderMain() {
   const srsData = srsLoad();
   const introduced = vocab.filter(v=>{ const c=srsData[v.word.toLowerCase()]; return c&&c.introduced; });
 
+  // Build chapter roadmap
+  const storyChapters = chapters.filter(c => (c.story_id || 'story1') === (ch.story_id || 'story1'));
+  const roadmapHTML = storyChapters.length > 1 ? `
+    <div class="ch-roadmap" id="chRoadmap">
+      ${storyChapters.map(c => {
+        const isActive = c.id === ch.id;
+        const isRead = isChRead(c.id);
+        return `<div class="crm-dot${isActive ? ' active' : isRead ? ' read' : ''}" data-chid="${esc(c.id)}" title="${esc(c.title)}"></div>`;
+      }).join('')}
+      <span class="crm-label">${storyChapters.findIndex(c=>c.id===ch.id)+1} / ${storyChapters.length}</span>
+    </div>` : '';
+
   main.innerHTML=`
     <div class="chapter-view">
       <div class="chapter-header">
@@ -160,6 +234,7 @@ function renderMain() {
           ${isChRead(ch.id) ? `<span class="ch-meta-pill" style="color:var(--accent)">✓ 已读</span>` : ''}
           ${streak>0 ? `<span class="streak-badge"><span class="streak-flame">🔥</span><span class="streak-days">${streak} 天</span></span>` : ''}
         </div>
+        ${roadmapHTML}
       </div>
       <div class="tabs" id="tabBar">
         <button class="tab${activeTab==='read'?' active':''}" data-t="read">阅读</button>
@@ -212,6 +287,14 @@ function renderMain() {
   updateFontControlsVisibility();
 
   renderTab(ch,vocab);
+
+  // Wire roadmap dot clicks
+  const roadmap = document.getElementById('chRoadmap');
+  if(roadmap) {
+    roadmap.querySelectorAll('.crm-dot:not(.active)').forEach(dot => {
+      dot.onclick = () => selectChapter(dot.dataset.chid);
+    });
+  }
 }
 
 function renderChNav(body, ch, vocab) {
@@ -603,9 +686,15 @@ function wireGradeButtons(vocabList, v) {
       el.className='grade-tick'; el.textContent=tick;
       document.body.appendChild(el);
       setTimeout(()=>el.remove(), 550);
-      setTimeout(()=>{ srsGrade(v.word.toLowerCase(),g); srsIdx++; srsRevealed=false; window._srsRevealed=false; window._srsGradeFn=null; renderCard(vocabList); renderSidebar(); }, 200);
+      setTimeout(()=>{
+        srsGrade(v.word.toLowerCase(),g);
+        if(g >= 1) checkWordMilestone(); // check milestone on any non-fail grade
+        srsIdx++; srsRevealed=false; window._srsRevealed=false; window._srsGradeFn=null; renderCard(vocabList); renderSidebar();
+      }, 200);
     } else {
-      srsGrade(v.word.toLowerCase(),g); srsIdx++; srsRevealed=false; window._srsRevealed=false; window._srsGradeFn=null; renderCard(vocabList); renderSidebar();
+      srsGrade(v.word.toLowerCase(),g);
+      if(g >= 1) checkWordMilestone();
+      srsIdx++; srsRevealed=false; window._srsRevealed=false; window._srsGradeFn=null; renderCard(vocabList); renderSidebar();
     }
   }
   // Register grade function for keyboard shortcuts
@@ -623,21 +712,21 @@ const ONBOARD_KEY = 'se_onboarded_v1';
 const ONBOARD_STEPS = [
   {
     target: '.story-box',
-    title: '阅读真实故事',
-    body: '高亮词汇可点击查看释义，轻触 🔊 播放发音。',
+    title: '真实故事，真实单词',
+    body: '这不是单词表——这是一个真实的故事。每个高亮的词都有中文释义和真人发音。点击任意一个试试！',
     arrow: 'arrow-top', offsetX: 20, offsetY: 12
   },
   {
     target: '[data-t="practice"]',
-    title: '练习记忆',
-    body: '看到中文释义，回想英文单词。加入复习队列后每天自动安排。',
+    title: '这才是记忆的秘密',
+    body: '加入复习后，系统会在你快要忘记时自动提醒你。科学证明：这是记住单词最有效的方法，没有之一。',
     arrow: 'arrow-top', offsetX: 0, offsetY: 8
   },
   {
-    target: '[data-t="recall"]',
-    title: '回想练习',
-    body: '看到中文释义，尝试回想英文单词，点击卡片揭示答案。',
-    arrow: 'arrow-top', offsetX: 0, offsetY: 8
+    target: '.chapter-header',
+    title: '读完一章，词汇永久记住',
+    body: '阅读 + 听发音 + 练习 = 长久记忆。不是考前临时抱佛脚，而是真正属于你的英语。开始阅读吧！',
+    arrow: 'arrow-top', offsetX: 20, offsetY: 12
   }
 ];
 
